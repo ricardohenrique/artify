@@ -12,6 +12,7 @@ Route::middleware('auth')->group(function () {
     Route::get('member/{id}', [PaintingController::class, 'member'])->name('member.profile');
     Route::get('painting/new', [PaintingController::class, 'new'])->name('item.new');
     Route::post('painting/new', [PaintingController::class, 'store'])->name('item.store');
+    Route::get('painting/{id}/edit', [PaintingController::class, 'edit'])->name('item.edit');
     Route::get('dashboard', [PaintingController::class, 'dashboard'])->name('dashboard');
 });
 

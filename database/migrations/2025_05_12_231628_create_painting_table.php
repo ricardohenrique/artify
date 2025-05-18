@@ -17,12 +17,12 @@ return new class extends Migration
                   ->constrained()
                   ->onDelete('cascade');
 
-            $table->string('title');
-            $table->string('slug')->unique();
+            $table->string('title')->nullable();
+            $table->string('slug')->unique()->nullable();
             $table->text('description')->nullable();
 
-            $table->decimal('price', 10, 2);
-            $table->string('image_path');
+            $table->decimal('price', 10, 2)->nullable();
+            $table->string('image_path')->nullable();
 
             $table->foreignId('category_id')
                   ->nullable()

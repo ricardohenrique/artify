@@ -18,6 +18,7 @@ class Painting extends Model
         'image_path',
         'category_id',
         'is_available',
+        'is_draft',
     ];
 
     /**

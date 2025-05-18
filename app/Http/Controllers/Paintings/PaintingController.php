@@ -41,36 +41,53 @@ class PaintingController extends Controller
 
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            'title' => 'required|string|max:255',
-            'description' => 'required|string',
-            'price' => 'required|numeric|min:0',
-            'category' => 'required|string',
-            'image' => 'required|image|max:2048',
-        ]);
-    
-        $path = $request->file('image')->store('paintings', 'public');
-    
+        $isDraft = $request->input('action') === 'draft';
+
+        $rules = [
+            'title' => $isDraft ? 'nullable|string|max:255' : 'required|string|max:255',
+            'description' => $isDraft ? 'nullable|string' : 'required|string',
+            'price' => $isDraft ? 'nullable|numeric|min:0' : 'required|numeric|min:0',
+            'category' => $isDraft ? 'nullable|string' : 'required|string',
+            'image' => $isDraft ? 'nullable|image|max:2048' : 'required|image|max:2048',
+        ];
+
+        $validated = $request->validate($rules);
+
+        $path = $request->hasFile('image') ? $request->file('image')->store('paintings', 'public') : null;
+
         Painting::create([
-            'title' => $validated['title'],
-            'description' => $validated['description'],
-            'price' => $validated['price'],
-            'category' => $validated['category'],
+            'title' => $validated['title'] ?? null,
+            'description' => $validated['description'] ?? null,
+            'price' => $validated['price'] ?? null,
+            'category' => $validated['category'] ?? null,
             'image' => $path,
-            'user_id' => auth()->id(), // If tied to user
+            'user_id' => auth()->id(),
+            'is_draft' => $isDraft,
         ]);
-    
-        return redirect()->route('dashboard')->with('status', 'Painting listed successfully!');
+
+        return redirect()->route('dashboard')->with('status', $isDraft ? 'Draft saved.' : 'Artwork published!');
     }
 
     public function dashboard()
     {
-        $user = auth()->user()->load('paintings'); // Eager-load paintings
-        return response()->view('dashboard', ['paintings' => $user->paintings], 200);
+        $user = auth()->user();
+        return view('dashboard', [
+            'paintings' => $user->paintings()->where('is_draft', false)->latest()->get(),
+            'drafts' => $user->paintings()->where('is_draft', true)->latest()->get(),
+        ]);
     }
 
     public function destroy(string $id)
     {
         //
+    }
+
+    public function edit(string $id)
+    {
+        $painting = Painting::where('id', $id)
+            ->where('user_id', auth()->id())
+            ->firstOrFail();
+
+        return response()->view('about-us', [], 200);
     }
 }

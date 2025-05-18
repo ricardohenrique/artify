@@ -21,7 +21,7 @@
                         <p class="mt-2">Click or drag & drop to upload your painting</p>
                     </div>
                 </div>
-                <input type="file" id="image" name="image" accept="image/*" class="d-none" required>
+                <input type="file" id="image" name="image" accept="image/*" class="d-none">
                 @error('image')
                     <div class="text-danger mt-2 small">{{ $message }}</div>
                 @enderror
@@ -31,7 +31,7 @@
             <!-- CATEGORY -->
             <div class="bg-white rounded shadow-sm p-4 mb-3">
                 <label for="category" class="form-label fw-semibold">Category</label>
-                <select name="category" class="form-select @error('category') is-invalid @enderror" required>
+                <select name="category" class="form-select @error('category') is-invalid @enderror">
                     <option value="">Select a category</option>
                     <option value="Abstract" {{ old('category') == 'Abstract' ? 'selected' : '' }}>Abstract</option>
                     <option value="Realism" {{ old('category') == 'Realism' ? 'selected' : '' }}>Realism</option>
@@ -48,7 +48,7 @@
             <div class="bg-white rounded shadow-sm p-4 mb-3">
                 <label for="title" class="form-label fw-semibold">Title</label>
                 <input type="text" name="title" class="form-control @error('title') is-invalid @enderror"
-                       placeholder="e.g. Starry Night" value="{{ old('title') }}" required>
+                       placeholder="e.g. Starry Night" value="{{ old('title') }}">
                 @error('title')
                     <div class="text-danger mt-2 small">{{ $message }}</div>
                 @enderror
@@ -58,7 +58,7 @@
             <div class="bg-white rounded shadow-sm p-4 mb-3">
                 <label for="description" class="form-label fw-semibold">Describe your item</label>
                 <textarea name="description" rows="4" class="form-control @error('description') is-invalid @enderror"
-                          placeholder="e.g. Large acrylic on canvas, signed by the artist" required>{{ old('description') }}</textarea>
+                          placeholder="e.g. Large acrylic on canvas, signed by the artist">{{ old('description') }}</textarea>
                 @error('description')
                     <div class="text-danger mt-2 small">{{ $message }}</div>
                 @enderror
@@ -70,7 +70,7 @@
                 <div class="input-group">
                     <span class="input-group-text">$</span>
                     <input type="number" step="0.01" name="price" class="form-control @error('price') is-invalid @enderror"
-                           value="{{ old('price') }}" required>
+                           value="{{ old('price') }}">
                 </div>
                 @error('price')
                     <div class="text-danger mt-2 small">{{ $message }}</div>
@@ -79,8 +79,8 @@
 
             <!-- FOOTER ACTIONS -->
             <div class="d-flex justify-content-end">
-                <button type="button" class="btn btn-outline-secondary me-2">Save draft</button>
-                <button type="submit" class="btn artify-btn">Upload</button>
+                <button type="submit" name="action" value="draft" class="btn btn-outline-secondary me-2">Save draft</button>
+                <button type="submit" name="action" value="publish" class="btn artify-btn">Upload</button>
             </div>
 
         </form>
