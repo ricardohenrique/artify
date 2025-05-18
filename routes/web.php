@@ -5,10 +5,12 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Paintings\PaintingController;
 
 Route::get('/', [PaintingController::class, 'home']);
-Route::get('about-us', [PaintingController::class, 'aboutUs']);
+Route::get('about-us', [PaintingController::class, 'about-us'])->name('about-us');
 Route::get('painting', [PaintingController::class, 'index']);
 Route::middleware('auth')->group(function () {
     Route::get('member/{id}', [PaintingController::class, 'member'])->name('member.profile');
+    Route::get('painting/new', [PaintingController::class, 'new'])->name('item.new');
+    Route::post('painting/new', [PaintingController::class, 'store'])->name('item.store');
 });
 
 // Route::get('/', function () {

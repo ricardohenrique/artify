@@ -35,11 +35,11 @@
                             </li>
                         </ul>
                     </div>
-                    <a href="#" class="btn artify-btn">Sell now</a>
+                    <a href="{{ route('item.new') }}" class="btn artify-btn">Sell now</a>
                 @else
                     <a href="{{ route('register') }}" class="btn artify-btn-outline me-2">Sign up</a>
                     <a href="{{ route('login') }}" class="btn artify-btn-outline me-2">Log in</a>
-                    <a href="#" class="btn artify-btn">Sell now</a>
+                    <a href="{{ route('item.new') }}" class="btn artify-btn">Sell now</a>
                 @endauth
             </div>
         </div>
@@ -52,7 +52,7 @@
             <a href="#" class="me-4 category-link">Impressionism</a>
             <a href="#" class="me-4 category-link">Surrealism</a>
             <a href="#" class="me-4 category-link">Expressionism</a>
-            <a href="/about-us" class="me-4 category-link">About Us</a>
+            <a href="{{ route('about-us') }}" class="me-4 category-link">About Us</a>
         </div>
     </div>
 </header>
