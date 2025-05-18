@@ -63,6 +63,12 @@ class PaintingController extends Controller
         return redirect()->route('dashboard')->with('status', 'Painting listed successfully!');
     }
 
+    public function dashboard()
+    {
+        $user = auth()->user()->load('paintings'); // Eager-load paintings
+        return response()->view('dashboard', ['paintings' => $user->paintings], 200);
+    }
+
     public function destroy(string $id)
     {
         //
