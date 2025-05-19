@@ -8,10 +8,10 @@
             </a>
 
             <!-- Search -->
-            <form class="d-flex flex-grow-1 mx-3 menu-search-bar" role="search" style="max-width: 600px;">
+            <form action="{{ route('paintings.search') }}" method="GET" class="d-flex flex-grow-1 mx-3 menu-search-bar" role="search" style="max-width: 600px;">
                 <div class="input-group flex-grow-1">
                     <span class="input-group-text bg-light"><i class="bi bi-search"></i></span>
-                    <input type="text" class="form-control border-start-0" placeholder="Search for art" aria-label="Search">
+                    <input type="text" name="q" class="form-control border-start-0" placeholder="Search for art..." aria-label="Search" value="{{ request('q') }}">
                 </div>
             </form>
 
