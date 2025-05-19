@@ -12,26 +12,11 @@ use Illuminate\Support\Facades\Auth;
 
 class PaintingController extends Controller
 {
-    public function home()
-    {
-        $data["paintings"] = Painting::all();
-        return response()->view('home', $data, 200);
-    }
 
-    public function aboutUs()
-    {
-        return response()->view('about-us', [], 200);
-    }
 
     public function index()
     {
         return Painting::all();
-    }
-
-    public function member(string $id)
-    {
-        $user = User::findOrFail($id);
-        return response()->view('member', ['user' => $user], 200);
     }
 
     public function new()
@@ -129,15 +114,6 @@ class PaintingController extends Controller
         $painting->save();
 
         return redirect()->route('dashboard')->with('status', $isDraft ? 'Draft updated.' : 'Painting updated!');
-    }
-
-    public function dashboard()
-    {
-        $user = auth()->user();
-        return view('dashboard', [
-            'paintings' => $user->paintings()->where('is_draft', false)->latest()->get(),
-            'drafts' => $user->paintings()->where('is_draft', true)->latest()->get(),
-        ]);
     }
 
     public function edit(string $id)

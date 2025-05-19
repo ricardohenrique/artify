@@ -6,9 +6,7 @@
 
 <section class="bg-light py-5">
     <div class="container" style="max-width: 800px;">
-
         <h2 class="mb-4 fw-semibold">🎨 Sell an item</h2>
-
         @if ($isEdit && $painting->images->count())
             <div class="bg-white rounded shadow-sm p-4 mb-3">
                 <div class="mt-4">
