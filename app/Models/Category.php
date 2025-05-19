@@ -20,5 +20,11 @@ class Category extends Model
     public function paintings()
     {
         return $this->hasMany(Painting::class);
+//        return $this->hasMany(Painting::class)->where('is_draft', false);
+    }
+
+    public function getRouteKeyName()
+    {
+        return 'slug';
     }
 }

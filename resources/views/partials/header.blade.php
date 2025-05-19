@@ -47,11 +47,9 @@
 
     <div class="bg-light border-top menu-category">
         <div class="container d-flex flex-wrap justify-content-start py-2">
-            <a href="#" class="me-4 category-link">Abstract</a>
-            <a href="#" class="me-4 category-link">Realism</a>
-            <a href="#" class="me-4 category-link">Impressionism</a>
-            <a href="#" class="me-4 category-link">Surrealism</a>
-            <a href="#" class="me-4 category-link">Expressionism</a>
+            @foreach ($headerCategories as $category)
+                <a href="{{ "/paintings/$category->slug" }}" class="me-4 category-link">{{ $category->name }}</a>
+            @endforeach
             <a href="{{ route('about-us') }}" class="me-4 category-link">About Us</a>
         </div>
     </div>

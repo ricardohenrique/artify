@@ -4,6 +4,7 @@ use App\Http\Controllers\AboutUsController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\PaintingImageController;
+use App\Http\Controllers\PaintingListController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Paintings\PaintingController;
@@ -20,6 +21,8 @@ Route::middleware('auth')->group(function () {
     Route::get('painting/{id}/edit', [PaintingController::class, 'edit'])->name('item.edit');
     Route::put('painting/{painting}/edit', [PaintingController::class, 'update'])->name('item.update');
     Route::delete('/painting/image/{image}', [PaintingImageController::class, 'destroy'])->name('painting.image.delete');
+
+    Route::get('paintings/{category}', [PaintingListController::class, 'paintings'])->name('paintings.list');
 });
 
 //Route::middleware('auth')->group(function () {
