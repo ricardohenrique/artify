@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Paintings\PaintingController;
 
 Route::get('/', [PaintingController::class, 'home']);
-Route::get('about-us', [PaintingController::class, 'about-us'])->name('about-us');
+Route::get('about-us', [PaintingController::class, 'aboutUs'])->name('about-us');
 Route::get('painting', [PaintingController::class, 'index']);
 
 Route::middleware('auth')->group(function () {

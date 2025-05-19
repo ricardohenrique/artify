@@ -7,9 +7,6 @@ use Illuminate\Support\Str;
 use App\Models\User;
 use App\Models\Category;
 
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Model>
- */
 class PaintingFactory extends Factory
 {
     /**
