@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\Painting;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 
 class PaintingController extends Controller
@@ -52,6 +53,7 @@ class PaintingController extends Controller
 
         $painting = Painting::create([
             'title'         => $validated['title'] ?? null,
+            'slug'          => isset($validated['title']) ? Str::slug($validated['title'] . '-' . uniqid()) : null,
             'description'   => $validated['description'] ?? null,
             'price'         => $validated['price'] ?? null,
             'category_id'   => $validated['category_id'] ?? null,
@@ -106,6 +108,7 @@ class PaintingController extends Controller
 
         // Update other fields
         $painting->title        = $validated['title'] ?? $painting->title;
+        $painting->slug         = isset($validated['title']) ? Str::slug($validated['title'] . '-' . uniqid()) : null;
         $painting->description  = $validated['description'] ?? $painting->description;
         $painting->price        = $validated['price'] ?? $painting->price;
         $painting->category_id  = $validated['category_id'] ?? $painting->category_id;
@@ -129,6 +132,17 @@ class PaintingController extends Controller
             'route' => route('item.update', $painting),
             'method' => 'PUT',
             'isEdit' => true,
+        ]);
+    }
+
+    public function show(string $categorySlug, string $paintingSlug)
+    {
+        $painting = Painting::where('slug', $paintingSlug)
+            ->with(['user', 'images', 'category'])
+            ->firstOrFail();
+
+        return view('painting.show', [
+            'painting' => $painting,
         ]);
     }
 }

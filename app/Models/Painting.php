@@ -24,7 +24,7 @@ class Painting extends Model
     /**
      * The artist who owns the painting.
      */
-    public function artist()
+    public function user()
     {
         return $this->belongsTo(User::class, 'user_id');
     }

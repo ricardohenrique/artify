@@ -12,6 +12,9 @@ use App\Http\Controllers\Paintings\PaintingController;
 Route::get('/', [HomeController::class, 'index']);
 Route::get('about-us', [AboutUsController::class, 'index'])->name('about-us');
 Route::get('painting', [PaintingController::class, 'index']);
+Route::get('paintings/{category_slug}/{painting_slug}', [PaintingController::class, 'show'])->name('paintings.show');
+Route::get('paintings/{category_slug}', [PaintingListController::class, 'paintings'])->name('paintings.list');
+Route::get('paintings/favorite/{painting_slug}', [PaintingController::class, 'favorite'])->name('paintings.favorite');
 
 Route::middleware('auth')->group(function () {
     Route::get('member/{id}', [MemberController::class, 'member'])->name('member.profile');
@@ -21,8 +24,6 @@ Route::middleware('auth')->group(function () {
     Route::get('painting/{id}/edit', [PaintingController::class, 'edit'])->name('item.edit');
     Route::put('painting/{painting}/edit', [PaintingController::class, 'update'])->name('item.update');
     Route::delete('/painting/image/{image}', [PaintingImageController::class, 'destroy'])->name('painting.image.delete');
-
-    Route::get('paintings/{category}', [PaintingListController::class, 'paintings'])->name('paintings.list');
 });
 
 //Route::middleware('auth')->group(function () {

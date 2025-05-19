@@ -7,24 +7,42 @@
         <h2 class="mb-4">Paintings in "{{ $category->name }}"</h2>
 
         <div class="row g-4">
-            @forelse ($paintings as $painting)
-                <div class="col-md-4">
-                    <div class="card h-100">
-                        @php
-                            $image = $painting->images->first();
-                            $imageUrl = $image ? asset('storage/' . $image->path) : asset('storage/placeholder.jpg');
-                        @endphp
+            @foreach ($paintings as $painting)
+                <div class="col-md-3 col-sm-6">
+                    <div class="card border-0 shadow-sm h-100 position-relative">
+                        <!-- Clickable thumbnail -->
+                        <a href="{{ route('paintings.show', [
+                            'category_slug' => $painting->category->slug,
+                            'painting_slug' => $painting->slug,
+                        ]) }}">
+                            @php
+                                $image = $painting->images->first();
+                                $imageUrl = $image ? asset('storage/' . $image->path) : asset('storage/placeholder.jpg');
+                            @endphp
+                            <img src="{{ $imageUrl }}" class="card-img-top" alt="{{ $painting->title }}" style="aspect-ratio: 3/4; object-fit: cover;">
+                        </a>
 
-                        <img src="{{ $imageUrl }}" class="card-img-top" alt="{{ $painting->title }}">
-                        <div class="card-body">
-                            <h5 class="card-title">{{ $painting->title }}</h5>
-                            <p class="card-text">${{ number_format($painting->price, 2) }}</p>
+                        <div class="card-body px-2 py-3">
+                            <div class="fw-semibold small text-muted">{{ $painting->title }}</div>
+                            <div class="text-muted small">{{ $painting->category->name ?? '' }}</div>
+
+                            <div class="mt-1 fw-semibold text-dark">
+                                ${{ number_format($painting->price, 2) }}
+                            </div>
                         </div>
+
+                        <!-- Heart button (favorites) -->
+                        <form method="POST" action="{{ route('paintings.favorite', $painting) }}"
+                              class="position-absolute top-0 end-0 m-2">
+                            @csrf
+                            <button type="submit" class="btn btn-light btn-sm rounded-circle shadow-sm"
+                                    title="Add to favorites">
+                                <i class="bi bi-heart"></i>
+                            </button>
+                        </form>
                     </div>
                 </div>
-            @empty
-                <p>No paintings found in this category.</p>
-            @endforelse
+            @endforeach
         </div>
 
         <div class="mt-4">

@@ -23,8 +23,8 @@ class Category extends Model
 //        return $this->hasMany(Painting::class)->where('is_draft', false);
     }
 
-    public function getRouteKeyName()
-    {
-        return 'slug';
-    }
+//    public function getRouteKeyName()
+//    {
+//        return 'slug';
+//    }
 }
