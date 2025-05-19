@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Paintings;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Models\Painting;
 use App\Models\User;
@@ -36,7 +37,16 @@ class PaintingController extends Controller
     public function new()
     {
         $user = Auth::user();
-        return response()->view('painting.new', ['user' => $user], 200);
+        $categories = Category::orderBy('name')->get();
+
+        return view('painting.form', [
+            'user' => $user,
+            'painting' => new Painting(),
+            'categories' => $categories,
+            'route' => route('item.store'),
+            'method' => 'POST',
+            'isEdit' => false,
+        ]);
     }
 
     public function store(Request $request)
@@ -44,11 +54,11 @@ class PaintingController extends Controller
         $isDraft = $request->input('action') === 'draft';
 
         $rules = [
-            'title' => $isDraft ? 'nullable|string|max:255' : 'required|string|max:255',
-            'description' => $isDraft ? 'nullable|string' : 'required|string',
-            'price' => $isDraft ? 'nullable|numeric|min:0' : 'required|numeric|min:0',
-            'category' => $isDraft ? 'nullable|string' : 'required|string',
-            'image' => $isDraft ? 'nullable|image|max:2048' : 'required|image|max:2048',
+            'title'         => $isDraft ? 'nullable|string|max:255' : 'required|string|max:255',
+            'description'   => $isDraft ? 'nullable|string' : 'required|string',
+            'price'         => $isDraft ? 'nullable|numeric|min:0' : 'required|numeric|min:0',
+            'category_id'   => $isDraft ? 'nullable|exists:categories,id' : 'required|exists:categories,id',
+            'image'         => $isDraft ? 'nullable|image|max:2048' : 'required|image|max:2048',
         ];
 
         $validated = $request->validate($rules);
@@ -56,16 +66,52 @@ class PaintingController extends Controller
         $path = $request->hasFile('image') ? $request->file('image')->store('paintings', 'public') : null;
 
         Painting::create([
-            'title' => $validated['title'] ?? null,
-            'description' => $validated['description'] ?? null,
-            'price' => $validated['price'] ?? null,
-            'category' => $validated['category'] ?? null,
-            'image' => $path,
-            'user_id' => auth()->id(),
-            'is_draft' => $isDraft,
+            'title'         => $validated['title'] ?? null,
+            'description'   => $validated['description'] ?? null,
+            'price'         => $validated['price'] ?? null,
+            'category_id'   => $validated['category_id'] ?? null,
+            'image'         => $path,
+            'user_id'       => auth()->id(),
+            'is_draft'      => $isDraft,
         ]);
 
         return redirect()->route('dashboard')->with('status', $isDraft ? 'Draft saved.' : 'Artwork published!');
+    }
+
+    public function update(Request $request, Painting $painting)
+    {
+        if ($painting->user_id !== auth()->id()) {
+            abort(403, 'Unauthorized action.');
+        }
+
+        $isDraft = $request->input('action') === 'draft';
+
+        $rules = [
+            'title'         => $isDraft ? 'nullable|string|max:255' : 'required|string|max:255',
+            'description'   => $isDraft ? 'nullable|string' : 'required|string',
+            'price'         => $isDraft ? 'nullable|numeric|min:0' : 'required|numeric|min:0',
+            'category_id'   => $isDraft ? 'nullable|exists:categories,id' : 'required|exists:categories,id',
+            'image'         => 'nullable|image|max:2048',
+        ];
+
+        $validated = $request->validate($rules);
+
+        // If a new image is uploaded, store it
+        if ($request->hasFile('image')) {
+            $path = $request->file('image')->store('paintings', 'public');
+            $painting->image = $path;
+        }
+
+        // Update other fields
+        $painting->title        = $validated['title'] ?? $painting->title;
+        $painting->description  = $validated['description'] ?? $painting->description;
+        $painting->price        = $validated['price'] ?? $painting->price;
+        $painting->category_id  = $validated['category_id'] ?? $painting->category_id;
+        $painting->is_draft     = $isDraft;
+
+        $painting->save();
+
+        return redirect()->route('dashboard')->with('status', $isDraft ? 'Draft updated.' : 'Painting updated!');
     }
 
     public function dashboard()
@@ -77,17 +123,19 @@ class PaintingController extends Controller
         ]);
     }
 
-    public function destroy(string $id)
-    {
-        //
-    }
-
     public function edit(string $id)
     {
         $painting = Painting::where('id', $id)
             ->where('user_id', auth()->id())
             ->firstOrFail();
+        $categories = Category::orderBy('name')->get();
 
-        return response()->view('about-us', [], 200);
+        return view('painting.form', [
+            'painting' => $painting,
+            'categories' => $categories,
+            'route' => route('item.update', $painting),
+            'method' => 'PUT',
+            'isEdit' => true,
+        ]);
     }
 }

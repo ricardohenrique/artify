@@ -13,6 +13,7 @@ Route::middleware('auth')->group(function () {
     Route::get('painting/new', [PaintingController::class, 'new'])->name('item.new');
     Route::post('painting/new', [PaintingController::class, 'store'])->name('item.store');
     Route::get('painting/{id}/edit', [PaintingController::class, 'edit'])->name('item.edit');
+    Route::put('painting/{painting}/edit', [PaintingController::class, 'update'])->name('item.update');
     Route::get('dashboard', [PaintingController::class, 'dashboard'])->name('dashboard');
 });
 
