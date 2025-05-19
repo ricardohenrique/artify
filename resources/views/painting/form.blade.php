@@ -9,6 +9,26 @@
 
         <h2 class="mb-4 fw-semibold">🎨 Sell an item</h2>
 
+        @if ($isEdit && $painting->images->count())
+            <div class="bg-white rounded shadow-sm p-4 mb-3">
+                <div class="mt-4">
+                    <label class="form-label fw-semibold">Existing Images</label>
+                    <div id="existing-images-container" class="d-flex gap-3 flex-wrap">
+                        <form action=""></form>
+                        @foreach ($painting->images as $image)
+                            <div class="position-relative existing-image-wrapper" data-image-id="{{ $image->id }}">
+                                <img src="{{ asset('storage/' . $image->path) }}" style="height: 120px; width: 120px; object-fit: cover;" class="rounded border" alt=""/>
+                                <form id="delete-image-{{ $image->id }}" action="{{ route('painting.image.delete', $image) }}" method="POST" class="position-absolute top-0 end-0 m-1 delete-existing-image-form">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button form="delete-image-{{ $image->id }}" type="submit" class="btn btn-sm btn-danger btn-close" aria-label="Remove existing image" title="Delete this image permanently"></button>
+                                </form>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+        @endif
         <form action="{{ $route }}" method="POST" enctype="multipart/form-data">
             @csrf
             @if ($method !== 'POST')
@@ -29,23 +49,6 @@
                 <!-- Preview area for NEWLY selected images -->
                 <div id="new-image-preview-container" class="d-flex gap-3 flex-wrap mt-3"></div>
 
-                @if ($isEdit && $painting->images->count())
-                    <div class="mt-4">
-                        <label class="form-label fw-semibold">Existing Images</label>
-                        <div id="existing-images-container" class="d-flex gap-3 flex-wrap">
-                            @foreach ($painting->images as $image)
-                                <div class="position-relative existing-image-wrapper" data-image-id="{{ $image->id }}">
-                                    <img src="{{ asset('storage/' . $image->path) }}" style="height: 120px; width: 120px; object-fit: cover;" class="rounded border" alt="">
-                                    <form action="{{ route('painting.image.delete', $image) }}" method="POST" class="position-absolute top-0 end-0 m-1 delete-existing-image-form">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-sm btn-danger btn-close" aria-label="Remove existing image" title="Delete this image permanently"></button>
-                                    </form>
-                                </div>
-                            @endforeach
-                        </div>
-                    </div>
-                @endif
 
                 @error('images') {{-- Check for 'images' or 'images.*' depending on your validation --}}
                 <div class="text-danger mt-2 small">{{ $message }}</div>
@@ -118,7 +121,6 @@
                     </button>
                 </div>
             </div>
-
         </form>
     </div>
 </section>
