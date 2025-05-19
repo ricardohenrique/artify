@@ -53,7 +53,11 @@
                             <button type="submit" class="btn artify-btn">Log in</button>
                         </div>
                     </form>
-
+                    <div class="text-center mt-4">
+                        <a href="{{ route('google.redirect') }}" class="btn btn-outline-dark w-100">
+                            <i class="bi bi-google me-2"></i> Log in with Google
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>

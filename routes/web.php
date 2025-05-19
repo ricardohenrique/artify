@@ -8,6 +8,7 @@ use App\Http\Controllers\PaintingListController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Paintings\PaintingController;
+use App\Http\Controllers\GoogleController;
 
 Route::get('/', [HomeController::class, 'index']);
 Route::get('about-us', [AboutUsController::class, 'index'])->name('about-us');
@@ -17,6 +18,9 @@ Route::get('paintings/search', [PaintingController::class, 'search'])->name('pai
 Route::get('paintings/{category_slug}/{painting_slug}', [PaintingController::class, 'show'])->name('paintings.show');
 Route::get('paintings/{category_slug}', [PaintingListController::class, 'paintings'])->name('paintings.list');
 Route::get('paintings/favorite/{painting_slug}', [PaintingController::class, 'favorite'])->name('paintings.favorite');
+
+Route::get('auth/google', [GoogleController::class, 'redirect'])->name('google.redirect');
+Route::get('/auth/google/callback', [GoogleController::class, 'callback'])->name('google.callback');
 
 Route::middleware('auth')->group(function () {
     Route::get('member/{id}', [MemberController::class, 'member'])->name('member.profile');
