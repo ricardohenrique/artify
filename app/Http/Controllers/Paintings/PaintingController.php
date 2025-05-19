@@ -44,7 +44,6 @@ class PaintingController extends Controller
             'description'   => $isDraft ? 'nullable|string' : 'required|string',
             'price'         => $isDraft ? 'nullable|numeric|min:0' : 'required|numeric|min:0',
             'category_id'   => $isDraft ? 'nullable|exists:categories,id' : 'required|exists:categories,id',
-//            'image'         => $isDraft ? 'nullable|image|max:2048' : 'required|image|max:2048',
             'images'        => $isDraft ? 'nullable|array|max:5' : 'required|image|max:2048',
             'images.*'      => 'image|mimes:jpg,jpeg,png|max:2048',
         ];
@@ -87,7 +86,8 @@ class PaintingController extends Controller
             'description'   => $isDraft ? 'nullable|string' : 'required|string',
             'price'         => $isDraft ? 'nullable|numeric|min:0' : 'required|numeric|min:0',
             'category_id'   => $isDraft ? 'nullable|exists:categories,id' : 'required|exists:categories,id',
-            'image'         => 'nullable|image|max:2048',
+            'images'        => $isDraft ? 'nullable|array|max:5' : 'image|max:2048',
+            'images.*'      => 'image|mimes:jpg,jpeg,png|max:2048',
         ];
 
         $validated = $request->validate($rules);
