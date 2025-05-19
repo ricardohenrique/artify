@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PaintingImageController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Paintings\PaintingController;
@@ -14,6 +15,7 @@ Route::middleware('auth')->group(function () {
     Route::post('painting/new', [PaintingController::class, 'store'])->name('item.store');
     Route::get('painting/{id}/edit', [PaintingController::class, 'edit'])->name('item.edit');
     Route::put('painting/{painting}/edit', [PaintingController::class, 'update'])->name('item.update');
+    Route::delete('/painting/image/{image}', [PaintingImageController::class, 'destroy'])->name('painting.image.delete');
     Route::get('dashboard', [PaintingController::class, 'dashboard'])->name('dashboard');
 });
 

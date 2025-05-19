@@ -45,7 +45,12 @@ Artify is a Laravel-based web application designed to [briefly describe your pro
    php artisan db:seed
    ```
 
-6. Start the local server:
+6. (Optional) Storage Link:
+```bash
+   php artisan storage:link
+   ```
+
+7. Start the local server:
 ```bash
    php artisan serve
    ```

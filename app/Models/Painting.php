@@ -37,6 +37,11 @@ class Painting extends Model
         return $this->belongsTo(Category::class);
     }
 
+    public function images()
+    {
+        return $this->hasMany(PaintingImage::class);
+    }
+
     public function getRouteKeyName()
     {
         return 'id';

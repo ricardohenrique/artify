@@ -58,22 +58,31 @@ class PaintingController extends Controller
             'description'   => $isDraft ? 'nullable|string' : 'required|string',
             'price'         => $isDraft ? 'nullable|numeric|min:0' : 'required|numeric|min:0',
             'category_id'   => $isDraft ? 'nullable|exists:categories,id' : 'required|exists:categories,id',
-            'image'         => $isDraft ? 'nullable|image|max:2048' : 'required|image|max:2048',
+//            'image'         => $isDraft ? 'nullable|image|max:2048' : 'required|image|max:2048',
+            'images'        => $isDraft ? 'nullable|array|max:5' : 'required|image|max:2048',
+            'images.*'      => 'image|mimes:jpg,jpeg,png|max:2048',
         ];
 
         $validated = $request->validate($rules);
 
-        $path = $request->hasFile('image') ? $request->file('image')->store('paintings', 'public') : null;
-
-        Painting::create([
+        $painting = Painting::create([
             'title'         => $validated['title'] ?? null,
             'description'   => $validated['description'] ?? null,
             'price'         => $validated['price'] ?? null,
             'category_id'   => $validated['category_id'] ?? null,
-            'image'         => $path,
             'user_id'       => auth()->id(),
             'is_draft'      => $isDraft,
         ]);
+
+        if ($request->hasFile('images')) {
+            if ( ($painting->images()->count() + count($request->file('images'))) > 5) {
+                return back()->withErrors(['images' => 'You can upload a maximum of 5 images in total.'])->withInput();
+            }
+            foreach ($request->file('images') as $image) {
+                $path = $image->store('paintings', 'public');
+                $painting->images()->create(['path' => $path]);
+            }
+        }
 
         return redirect()->route('dashboard')->with('status', $isDraft ? 'Draft saved.' : 'Artwork published!');
     }
@@ -96,10 +105,18 @@ class PaintingController extends Controller
 
         $validated = $request->validate($rules);
 
+        $currentImageCount = $painting->images()->count();
+        $newImageCount = $request->hasFile('images') ? count($request->file('images')) : 0;
+        if (($currentImageCount + $newImageCount) > 5) {
+            return back()->withErrors(['images' => 'You can upload a maximum of 5 images in total.'])->withInput();
+        }
+
         // If a new image is uploaded, store it
-        if ($request->hasFile('image')) {
-            $path = $request->file('image')->store('paintings', 'public');
-            $painting->image = $path;
+        if ($request->hasFile('images')) {
+            foreach ($request->file('images') as $imageFile) {
+                $path = $imageFile->store('paintings', 'public');
+                $painting->images()->create(['path' => $path]);
+            }
         }
 
         // Update other fields
