@@ -64,4 +64,20 @@ class User extends Authenticatable
     public function favorites() {
         return $this->belongsToMany(Painting::class, 'favorites')->withTimestamps();
     }
+
+    public function conversationsAsBuyer()
+    {
+        return $this->hasMany(Conversation::class, 'buyer_id');
+    }
+
+    public function conversationsAsSeller()
+    {
+        return $this->hasMany(Conversation::class, 'seller_id');
+    }
+
+    public function allConversations()
+    {
+        return Conversation::where('buyer_id', $this->id)
+            ->orWhere('seller_id', $this->id);
+    }
 }

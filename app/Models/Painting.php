@@ -46,6 +46,11 @@ class Painting extends Model
         return $this->belongsToMany(User::class, 'favorites')->withTimestamps();
     }
 
+    public function conversations()
+    {
+        return $this->hasMany(Conversation::class);
+    }
+
     public function getRouteKeyName()
     {
         return 'id';

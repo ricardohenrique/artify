@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AboutUsController;
 use App\Http\Controllers\FacebookController;
 use App\Http\Controllers\HomeController;
@@ -7,11 +8,11 @@ use App\Http\Controllers\MemberController;
 use App\Http\Controllers\PaintingImageController;
 use App\Http\Controllers\PaintingListController;
 use App\Http\Controllers\ProfileController;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Paintings\PaintingController;
 use App\Http\Controllers\GoogleController;
 use App\Http\Controllers\FollowController;
 use App\Http\Controllers\FavoriteController;
+use App\Http\Controllers\MessageController;
+use App\Http\Controllers\Paintings\PaintingController;
 
 Route::get('/', [HomeController::class, 'index']);
 Route::get('/about-us', [AboutUsController::class, 'index'])->name('about-us');
@@ -31,7 +32,7 @@ Route::get('/auth/facebook/callback', [FacebookController::class, 'callback'])->
 Route::middleware('auth')->group(function () {
     Route::get('/member/{id}', [MemberController::class, 'member'])->name('member.profile');
     Route::get('/member/{id}/favorites', [MemberController::class, 'favorites'])->name('member.favorites');
-    Route::get('/member/{id}/messages', [MemberController::class, 'messages'])->name('member.messages');
+    Route::get('/member/{id}/messages', [MessageController::class, 'index'])->name('member.messages');
     Route::get('/dashboard', [MemberController::class, 'dashboard'])->name('dashboard');
     Route::get('/painting/new', [PaintingController::class, 'new'])->name('item.new');
     Route::post('/painting/new', [PaintingController::class, 'store'])->name('item.store');
@@ -41,6 +42,10 @@ Route::middleware('auth')->group(function () {
 
     Route::post('/users/{user}/follow', [FollowController::class, 'toggle'])->name('users.follow');
     Route::post('/paintings/{painting}/favorite', [FavoriteController::class, 'toggle'])->name('paintings.favorite');
+
+    Route::get('/messages', [MessageController::class, 'index'])->name('messages.index');
+    // Route::get('/messages/{conversation}', [MessageController::class, 'show'])->name('messages.show');
+    Route::post('/messages/send/{painting}', [MessageController::class, 'store'])->name('messages.store');
 });
 
 //Route::middleware('auth')->group(function () {
