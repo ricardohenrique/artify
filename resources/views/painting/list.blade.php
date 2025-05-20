@@ -8,6 +8,7 @@
 
         <div class="row g-4">
             @foreach ($paintings as $painting)
+            @php $hasLikes = $painting->favorited_by_count > 0; @endphp
                 <div class="col-md-3 col-sm-6">
                     <div class="card border-0 shadow-sm h-100 position-relative">
                         <div class="position-relative">
@@ -28,19 +29,19 @@
                                     @csrf
                                     <button type="submit" class="btn btn-sm p-0 border-0 bg-transparent d-flex align-items-center" title="Toggle favorite">
                                         @if(auth()->user()->favorites->contains($painting->id))
-                                            <i class="bi bi-heart-fill me-1 text-danger"></i>
+                                            <i class="bi bi-heart-fill text-danger {{ $hasLikes ? 'me-1' : '' }}"></i>
                                         @else
-                                            <i class="bi bi-heart me-1 text-danger"></i>
+                                            <i class="bi bi-heart text-danger {{ $hasLikes ? 'me-1' : '' }}"></i>
                                         @endif
-
-                                        @if ($painting->favorited_by_count > 0)
+                                    
+                                        @if ($hasLikes)
                                             <span class="small fw-semibold">{{ $painting->favorited_by_count }}</span>
                                         @endif
                                     </button>
                                 </form>
                             @else
                                 <a href="#" class="text-decoration-none text-dark position-absolute top-0 end-0 m-2 bg-white px-2 py-1 rounded-pill d-flex align-items-center shadow-sm requires-auth">
-                                    <i class="bi bi-heart me-1 text-danger"></i>
+                                    <i class="bi bi-heart {{ $hasLikes ? 'me-1' : '' }} text-danger"></i>
                                     @if ($painting->favorited_by_count > 0)
                                         <span class="small fw-semibold">{{ $painting->favorited_by_count }}</span>
                                     @endif
