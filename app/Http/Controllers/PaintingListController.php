@@ -10,7 +10,11 @@ class PaintingListController extends Controller
     {
         $category = Category::where('slug', $categorySlug)->firstOrFail();
 
-        $paintings = $category->paintings()->with('images')->latest()->paginate(12);
+        $paintings = $category->paintings()
+        ->withCount('favoritedBy')
+        ->with('images')
+        ->latest()
+        ->paginate(12);
 
         return view('painting.list', [
             'category' => $category,

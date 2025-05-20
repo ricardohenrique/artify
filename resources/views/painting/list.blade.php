@@ -10,17 +10,43 @@
             @foreach ($paintings as $painting)
                 <div class="col-md-3 col-sm-6">
                     <div class="card border-0 shadow-sm h-100 position-relative">
-                        <!-- Clickable thumbnail -->
-                        <a href="{{ route('paintings.show', [
-                            'category_slug' => $painting->category->slug,
-                            'painting_slug' => $painting->slug,
-                        ]) }}">
-                            @php
-                                $image = $painting->images->first();
-                                $imageUrl = $image ? asset('storage/' . $image->path) : asset('storage/placeholder.jpg');
-                            @endphp
-                            <img src="{{ $imageUrl }}" class="card-img-top" alt="{{ $painting->title }}" style="aspect-ratio: 3/4; object-fit: cover;">
-                        </a>
+                        <div class="position-relative">
+                            <a href="{{ route('paintings.show', [
+                                'category_slug' => $painting->category->slug,
+                                'painting_slug' => $painting->slug,
+                            ]) }}">
+                                @php
+                                    $image = $painting->images->first();
+                                    $imageUrl = $image ? asset('storage/' . $image->path) : asset('storage/placeholder.jpg');
+                                @endphp
+                                <img src="{{ $imageUrl }}" class="card-img-top" alt="{{ $painting->title }}" style="aspect-ratio: 3/4; object-fit: cover;">
+                            </a>
+                            @auth
+                                <form method="POST" action="{{ route('paintings.favorite', $painting) }}"
+                                    class="position-absolute top-0 end-0 m-2 bg-white px-2 py-1 rounded-pill d-flex align-items-center shadow-sm"
+                                    style="border: none;">
+                                    @csrf
+                                    <button type="submit" class="btn btn-sm p-0 border-0 bg-transparent d-flex align-items-center" title="Toggle favorite">
+                                        @if(auth()->user()->favorites->contains($painting->id))
+                                            <i class="bi bi-heart-fill me-1 text-danger"></i>
+                                        @else
+                                            <i class="bi bi-heart me-1 text-danger"></i>
+                                        @endif
+
+                                        @if ($painting->favorited_by_count > 0)
+                                            <span class="small fw-semibold">{{ $painting->favorited_by_count }}</span>
+                                        @endif
+                                    </button>
+                                </form>
+                            @else
+                                <a href="#" class="text-decoration-none text-dark position-absolute top-0 end-0 m-2 bg-white px-2 py-1 rounded-pill d-flex align-items-center shadow-sm requires-auth">
+                                    <i class="bi bi-heart me-1 text-danger"></i>
+                                    @if ($painting->favorited_by_count > 0)
+                                        <span class="small fw-semibold">{{ $painting->favorited_by_count }}</span>
+                                    @endif
+                                </a>
+                            @endauth
+                        </div>
 
                         <div class="card-body px-2 py-3">
                             <div class="fw-semibold small text-muted">{{ $painting->title }}</div>
@@ -30,16 +56,6 @@
                                 ${{ number_format($painting->price, 2) }}
                             </div>
                         </div>
-
-                        <!-- Heart button (favorites) -->
-                        <form method="POST" action="{{ route('paintings.favorite', $painting) }}"
-                              class="position-absolute top-0 end-0 m-2">
-                            @csrf
-                            <button type="submit" class="btn btn-light btn-sm rounded-circle shadow-sm"
-                                    title="Add to favorites">
-                                <i class="bi bi-heart"></i>
-                            </button>
-                        </form>
                     </div>
                 </div>
             @endforeach

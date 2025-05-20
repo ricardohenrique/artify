@@ -25,6 +25,7 @@ class PaintingController extends Controller
         $query = $request->input('q');
 
         $paintings = Painting::with(['images', 'category'])
+            ->withCount('favoritedBy')
             ->where('title', 'like', '%' . $query . '%')
             ->orWhere('description', 'like', '%' . $query . '%')
             ->latest()
