@@ -60,4 +60,8 @@ class User extends Authenticatable
     public function followers() {
         return $this->belongsToMany(User::class, 'followers', 'user_id', 'follower_id')->withTimestamps();
     }
+
+    public function favorites() {
+        return $this->belongsToMany(Painting::class, 'favorites')->withTimestamps();
+    }
 }

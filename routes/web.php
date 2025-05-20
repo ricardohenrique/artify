@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Paintings\PaintingController;
 use App\Http\Controllers\GoogleController;
 use App\Http\Controllers\FollowController;
+use App\Http\Controllers\FavoriteController;
 
 Route::get('/', [HomeController::class, 'index']);
 Route::get('/about-us', [AboutUsController::class, 'index'])->name('about-us');
@@ -37,6 +38,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/painting/image/{image}', [PaintingImageController::class, 'destroy'])->name('painting.image.delete');
 
     Route::post('/users/{user}/follow', [FollowController::class, 'toggle'])->name('users.follow');
+    Route::post('/paintings/{painting}/favorite', [FavoriteController::class, 'toggle'])->name('paintings.favorite');
 });
 
 //Route::middleware('auth')->group(function () {

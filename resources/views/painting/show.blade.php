@@ -56,12 +56,29 @@
                         <a href="#" class="btn btn-outline-primary">Ask Seller</a>
                     </div>
 
-                    <form method="POST" action="{{ route('paintings.favorite', $painting) }}">
+                    {{-- <form method="POST" action="{{ route('paintings.favorite', $painting) }}">
                         @csrf
                         <button type="submit" class="btn btn-outline-danger w-100">
                             <i class="bi bi-heart"></i> Add to Favorites
                         </button>
-                    </form>
+                    </form> --}}
+
+                    @guest
+                        <a href="#" class="btn btn-outline-danger requires-auth w-100">
+                            <i class="bi bi-heart"></i> Add to Favorites
+                        </a>
+                    @else
+                        <form method="POST" action="{{ route('paintings.favorite', $painting) }}">
+                            @csrf
+                            <button type="submit" class="btn btn-outline-danger w-100">
+                                @if(auth()->user()->favorites->contains($painting->id))
+                                    <i class="bi bi-heart-fill"></i> Favorited
+                                @else
+                                    <i class="bi bi-heart"></i> Add to Favorites
+                                @endif
+                            </button>
+                        </form>
+                    @endguest
                 </div>
 
                 <!-- Creator Info -->
@@ -88,7 +105,7 @@
                     </div>
 
                     @guest
-                        <a href="#" class="btn btn-outline-primary requires-authw-100">Follow</a>
+                        <a href="#" class="btn btn-outline-primary requires-auth w-100">Follow</a>
                     @else
                         <form method="POST" action="{{ route('users.follow', $painting->user) }}">
                             @csrf
