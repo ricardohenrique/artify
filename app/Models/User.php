@@ -50,4 +50,14 @@ class User extends Authenticatable
     {
         return $this->hasMany(Painting::class);
     }
+
+    // Users followed by this user
+    public function following() {
+        return $this->belongsToMany(User::class, 'followers', 'follower_id', 'user_id')->withTimestamps();
+    }
+
+    // Followers of this user
+    public function followers() {
+        return $this->belongsToMany(User::class, 'followers', 'user_id', 'follower_id')->withTimestamps();
+    }
 }

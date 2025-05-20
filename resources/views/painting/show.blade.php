@@ -87,12 +87,40 @@
                         <i class="bi bi-clock me-1"></i> Last seen 3 weeks ago
                     </div>
 
-                    <a href="#" class="btn btn-outline-primary w-100">Follow</a>
+                    @guest
+                        <a href="#" class="btn btn-outline-primary requires-authw-100">Follow</a>
+                    @else
+                        <form method="POST" action="{{ route('users.follow', $painting->user) }}">
+                            @csrf
+                            <button type="submit" class="btn btn-outline-primary w-100">
+                                @if(auth()->user()->following->contains($painting->user->id))
+                                    Following
+                                @else
+                                    Follow
+                                @endif
+                            </button>
+                        </form>
+                    @endguest
                 </div>
             </div>
         </div>
     </section>
-    <script>
+    <!-- Login Modal -->
+    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="loginModalLabel">Please log in</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+            <p>You need to be logged in to continue.</p>
+            <a href="{{ route('login') }}" class="btn btn-primary w-100">Log In</a>
+            </div>
+        </div>
+        </div>
+    </div>
+    {{-- <script>
         document.addEventListener('DOMContentLoaded', function () {
             const mainImage = document.getElementById('main-image');
             const thumbnails = document.querySelectorAll('.thumb-image');
@@ -100,6 +128,30 @@
             thumbnails.forEach(thumb => {
                 thumb.addEventListener('click', function () {
                     mainImage.src = this.src;
+                });
+            });
+        });
+    </script> --}}
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Thumbnail swapping
+            const mainImage = document.getElementById('main-image');
+            const thumbnails = document.querySelectorAll('.thumb-image');
+    
+            thumbnails.forEach(thumb => {
+                thumb.addEventListener('click', function () {
+                    mainImage.src = this.src;
+                });
+            });
+    
+            // Guest user protection
+            const guestOnlyButtons = document.querySelectorAll('.requires-auth');
+    
+            guestOnlyButtons.forEach(button => {
+                button.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const loginModal = new bootstrap.Modal(document.getElementById('loginModal'));
+                    loginModal.show();
                 });
             });
         });

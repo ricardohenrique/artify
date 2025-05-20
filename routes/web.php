@@ -10,15 +10,16 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Paintings\PaintingController;
 use App\Http\Controllers\GoogleController;
+use App\Http\Controllers\FollowController;
 
 Route::get('/', [HomeController::class, 'index']);
-Route::get('about-us', [AboutUsController::class, 'index'])->name('about-us');
-Route::get('painting', [PaintingController::class, 'index']);
+Route::get('/about-us', [AboutUsController::class, 'index'])->name('about-us');
+Route::get('/painting', [PaintingController::class, 'index']);
 
-Route::get('paintings/search', [PaintingController::class, 'search'])->name('paintings.search');
-Route::get('paintings/{category_slug}/{painting_slug}', [PaintingController::class, 'show'])->name('paintings.show');
-Route::get('paintings/{category_slug}', [PaintingListController::class, 'paintings'])->name('paintings.list');
-Route::get('paintings/favorite/{painting_slug}', [PaintingController::class, 'favorite'])->name('paintings.favorite');
+Route::get('/paintings/search', [PaintingController::class, 'search'])->name('paintings.search');
+Route::get('/paintings/{category_slug}/{painting_slug}', [PaintingController::class, 'show'])->name('paintings.show');
+Route::get('/paintings/{category_slug}', [PaintingListController::class, 'paintings'])->name('paintings.list');
+Route::get('/paintings/favorite/{painting_slug}', [PaintingController::class, 'favorite'])->name('paintings.favorite');
 
 Route::get('auth/google', [GoogleController::class, 'redirect'])->name('google.redirect');
 Route::get('/auth/google/callback', [GoogleController::class, 'callback'])->name('google.callback');
@@ -27,13 +28,15 @@ Route::get('/auth/facebook', [FacebookController::class, 'redirect'])->name('fac
 Route::get('/auth/facebook/callback', [FacebookController::class, 'callback'])->name('facebook.callback');
 
 Route::middleware('auth')->group(function () {
-    Route::get('member/{id}', [MemberController::class, 'member'])->name('member.profile');
-    Route::get('dashboard', [MemberController::class, 'dashboard'])->name('dashboard');
-    Route::get('painting/new', [PaintingController::class, 'new'])->name('item.new');
-    Route::post('painting/new', [PaintingController::class, 'store'])->name('item.store');
-    Route::get('painting/{id}/edit', [PaintingController::class, 'edit'])->name('item.edit');
-    Route::put('painting/{painting}/edit', [PaintingController::class, 'update'])->name('item.update');
+    Route::get('/member/{id}', [MemberController::class, 'member'])->name('member.profile');
+    Route::get('/dashboard', [MemberController::class, 'dashboard'])->name('dashboard');
+    Route::get('/painting/new', [PaintingController::class, 'new'])->name('item.new');
+    Route::post('/painting/new', [PaintingController::class, 'store'])->name('item.store');
+    Route::get('/painting/{id}/edit', [PaintingController::class, 'edit'])->name('item.edit');
+    Route::put('/painting/{painting}/edit', [PaintingController::class, 'update'])->name('item.update');
     Route::delete('/painting/image/{image}', [PaintingImageController::class, 'destroy'])->name('painting.image.delete');
+
+    Route::post('/users/{user}/follow', [FollowController::class, 'toggle'])->name('users.follow');
 });
 
 //Route::middleware('auth')->group(function () {
