@@ -6,6 +6,19 @@ body {
     height: 40px;
 }
 
+.btn-icon-header {
+    width: 36px;
+    height: 36px;
+}
+
+.btn-icon-header i {
+    font-size: 1rem; /* Slightly smaller than fs-5 */
+}
+
+.btn-icon-header:hover {
+    background-color: #f0f0f0;
+}
+
 .menu-search-bar input{
     background-color: #f8f9fa;
 }

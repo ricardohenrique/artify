@@ -18,6 +18,19 @@
             <!-- Buttons -->
             <div class="d-flex align-items-center">
                 @auth
+                    <!-- Favorites Icon -->
+                    <a href="{{ route('member.favorites', Auth::id()) }}"
+                        class="btn btn-light btn-icon btn-icon-header p-2 m-1 d-flex align-items-center justify-content-center"
+                        title="Favorites">
+                        <i class="bi bi-heart fs-5 text-dark"></i>
+                    </a>
+
+                    <!-- Messages Icon -->
+                    <a href="{{ route('member.messages', Auth::id()) }}"
+                        class="btn btn-light btn-icon btn-icon-header p-2 m-1 d-flex align-items-center justify-content-center"
+                        title="Messages">
+                        <i class="bi bi-chat-dots fs-5 text-dark"></i>
+                    </a>
                     <!-- User Dropdown -->
                     <div class="dropdown">
                         <button class="btn btn-outline-dark dropdown-toggle me-2" type="button" id="userMenu" data-bs-toggle="dropdown" aria-expanded="false">

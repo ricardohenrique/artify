@@ -30,6 +30,8 @@ Route::get('/auth/facebook/callback', [FacebookController::class, 'callback'])->
 
 Route::middleware('auth')->group(function () {
     Route::get('/member/{id}', [MemberController::class, 'member'])->name('member.profile');
+    Route::get('/member/{id}/favorites', [MemberController::class, 'favorites'])->name('member.favorites');
+    Route::get('/member/{id}/messages', [MemberController::class, 'messages'])->name('member.messages');
     Route::get('/dashboard', [MemberController::class, 'dashboard'])->name('dashboard');
     Route::get('/painting/new', [PaintingController::class, 'new'])->name('item.new');
     Route::post('/painting/new', [PaintingController::class, 'store'])->name('item.store');

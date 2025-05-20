@@ -37,4 +37,20 @@ class MemberController extends Controller
 
         return Redirect::route('profile.edit')->with('status', 'profile-updated');
     }
+
+    public function favorites(string $id)
+    {
+        $user = User::findOrFail($id);
+
+        $favorites = $user->favorites()
+            ->with(['images', 'category'])
+            ->withCount('favoritedBy')
+            ->latest()
+            ->paginate(12);
+
+        return view('member.favorites', [
+            'user' => $user,
+            'favorites' => $favorites,
+        ]);
+    }
 }
