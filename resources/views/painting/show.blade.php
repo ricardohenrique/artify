@@ -14,7 +14,7 @@
             
                 @if ($mainImage)
                     <!-- Main image -->
-                    <div class="mb-3">
+                    <div class="mb-3 position-relative">
                         <img 
                             id="main-image"
                             src="{{ asset('storage/' . $mainImage->path) }}"
@@ -22,6 +22,10 @@
                             class="img-fluid rounded border"
                             style="height: 500px; width: 100%; object-fit: contain; background-color: #f8f9fa;"
                         >
+                        <div class="position-absolute bottom-0 end-0 m-3 bg-white px-3 py-1 rounded-pill d-flex align-items-center shadow-sm">
+                            <i class="bi bi-heart me-1 text-danger"></i>
+                            <span class="fw-semibold">{{ $painting->favorited_by_count }}</span>
+                        </div>
                     </div>
             
                     <!-- Thumbnails -->
@@ -55,13 +59,6 @@
                         <a href="#" class="btn btn-outline-primary">Make an Offer</a>
                         <a href="#" class="btn btn-outline-primary">Ask Seller</a>
                     </div>
-
-                    {{-- <form method="POST" action="{{ route('paintings.favorite', $painting) }}">
-                        @csrf
-                        <button type="submit" class="btn btn-outline-danger w-100">
-                            <i class="bi bi-heart"></i> Add to Favorites
-                        </button>
-                    </form> --}}
 
                     @guest
                         <a href="#" class="btn btn-outline-danger requires-auth w-100">
@@ -137,18 +134,6 @@
         </div>
         </div>
     </div>
-    {{-- <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const mainImage = document.getElementById('main-image');
-            const thumbnails = document.querySelectorAll('.thumb-image');
-    
-            thumbnails.forEach(thumb => {
-                thumb.addEventListener('click', function () {
-                    mainImage.src = this.src;
-                });
-            });
-        });
-    </script> --}}
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             // Thumbnail swapping

@@ -155,6 +155,7 @@ class PaintingController extends Controller
     {
         $painting = Painting::where('slug', $paintingSlug)
             ->with(['user', 'images', 'category'])
+            ->withCount('favoritedBy')
             ->firstOrFail();
 
         return view('painting.show', [
