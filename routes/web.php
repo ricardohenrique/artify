@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AboutUsController;
+use App\Http\Controllers\FacebookController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\PaintingImageController;
@@ -21,6 +22,9 @@ Route::get('paintings/favorite/{painting_slug}', [PaintingController::class, 'fa
 
 Route::get('auth/google', [GoogleController::class, 'redirect'])->name('google.redirect');
 Route::get('/auth/google/callback', [GoogleController::class, 'callback'])->name('google.callback');
+
+Route::get('/auth/facebook', [FacebookController::class, 'redirect'])->name('facebook.redirect');
+Route::get('/auth/facebook/callback', [FacebookController::class, 'callback'])->name('facebook.callback');
 
 Route::middleware('auth')->group(function () {
     Route::get('member/{id}', [MemberController::class, 'member'])->name('member.profile');
