@@ -17,5 +17,6 @@ class DatabaseSeeder extends Seeder
         $this->call(PaintingSeeder::class);
         $this->call(FavoriteSeeder::class);
         $this->call(FollowerSeeder::class);
+        $this->call(PaintingImagesSeeder::class);
     }
 }
