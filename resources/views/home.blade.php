@@ -22,22 +22,26 @@
     </div>
 </section>
 
-<!-- Product Grid -->
+<!-- Most Liked -->
+<section class="py-5 bg-white">
+    <div class="container">
+        <h2 class="mb-4">Most Liked</h2>
+        <div class="row g-4">
+            @foreach($mostLiked as $painting)
+                @include('components.painting-card', ['painting' => $painting])
+            @endforeach
+        </div>
+    </div>
+</section>
+
+<!-- Most Recent -->
 <section class="py-5 bg-light">
     <div class="container">
-        <h2 class="mb-4">Featured Artworks</h2>
+        <h2 class="mb-4">Most Recent</h2>
         <div class="row g-4">
-            @forelse($paintings as $painting)
-                <div class="col-md-4">
-                    <div class="product-card p-3">
-                        <img src="https://t3.ftcdn.net/jpg/02/73/22/74/360_F_273227473_N0WRQuX3uZCJJxlHKYZF44uaJAkh2xLG.jpg" class="img-fluid mb-2" alt="{{ $painting->title }}">
-                        <h5 class="mb-1">{{ $painting->title }}</h5>
-                        <p class="text-muted">${{ number_format($painting->price, 2) }}</p>
-                    </div>
-                </div>
-            @empty
-                <p>No artworks available at the moment.</p>
-            @endforelse
+            @foreach($mostRecent as $painting)
+                @include('components.painting-card', ['painting' => $painting])
+            @endforeach
         </div>
     </div>
 </section>
