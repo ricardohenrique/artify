@@ -14,7 +14,7 @@ class PaintingListController extends Controller
         ->withCount('favoritedBy')
         ->with('images')
         ->latest()
-        ->paginate(12);
+        ->paginate(4);
 
         return view('painting.list', [
             'category' => $category,

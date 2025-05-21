@@ -12,8 +12,10 @@
             @endforeach
         </div>
 
-        <div class="mt-4">
-            {{ $paintings->links() }}
-        </div>
+        @if ($paintings->hasPages())
+            <div class="mt-4 d-flex justify-content-center">
+                {{ $paintings->links() }}
+            </div>
+        @endif
     </section>
 @endsection
