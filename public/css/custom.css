@@ -125,3 +125,20 @@ body {
     border-top-color: #ec4625;
     /* background-color: #ccc; */
 }
+
+/* PAGINATOR */
+.page-item.active .page-link {
+    background-color: #ff6a00;
+    border-color: #ff6a00;
+    color: #fff;
+}
+
+.page-link {
+    color: #ff6a00;
+}
+
+.page-link:hover {
+    background-color: #fff2e6;
+    border-color: #ff6a00;
+    color: #ff6a00;
+}
