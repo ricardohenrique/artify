@@ -74,4 +74,23 @@ class MessageController extends Controller
 
         return redirect()->route('messages.index', ['conversation' => $conversation->id]);
     }
+
+    public function ask(Painting $painting)
+    {
+        $user = auth()->user();
+        $seller = $painting->user;
+
+        // Prevent asking oneself
+        if ($user->id === $seller->id) {
+            return redirect()->back()->with('error', 'You cannot message yourself.');
+        }
+
+        $conversation = Conversation::firstOrCreate([
+            'painting_id' => $painting->id,
+            'buyer_id' => $user->id,
+            'seller_id' => $seller->id,
+        ]);
+
+        return redirect()->route('messages.index', ['conversation' => $conversation->id]);
+    }
 }

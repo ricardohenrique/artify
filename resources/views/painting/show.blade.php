@@ -57,25 +57,29 @@
                     <div class="d-grid gap-2 mb-3">
                         <a href="#" class="btn btn-primary">Buy Now</a>
                         <a href="#" class="btn btn-outline-primary">Make an Offer</a>
-                        <a href="#" class="btn btn-outline-primary">Ask Seller</a>
+                    
+                        @guest
+                            <a href="#" class="btn btn-outline-primary requires-auth">Ask Seller</a>
+                            <a href="#" class="btn btn-outline-danger requires-auth">
+                                <i class="bi bi-heart"></i> Add to Favorites
+                            </a>
+                        @else
+                            <form method="POST" action="{{ route('messages.ask', $painting) }}">
+                                @csrf
+                                <button type="submit" class="btn btn-outline-primary w-100">Ask Seller</button>
+                            </form>
+                            <form method="POST" action="{{ route('paintings.favorite', $painting) }}">
+                                @csrf
+                                <button type="submit" class="btn btn-outline-danger w-100">
+                                    @if(auth()->user()->favorites->contains($painting->id))
+                                        <i class="bi bi-heart-fill"></i> Favorited
+                                    @else
+                                        <i class="bi bi-heart"></i> Add to Favorites
+                                    @endif
+                                </button>
+                            </form>
+                        @endguest
                     </div>
-
-                    @guest
-                        <a href="#" class="btn btn-outline-danger requires-auth w-100">
-                            <i class="bi bi-heart"></i> Add to Favorites
-                        </a>
-                    @else
-                        <form method="POST" action="{{ route('paintings.favorite', $painting) }}">
-                            @csrf
-                            <button type="submit" class="btn btn-outline-danger w-100">
-                                @if(auth()->user()->favorites->contains($painting->id))
-                                    <i class="bi bi-heart-fill"></i> Favorited
-                                @else
-                                    <i class="bi bi-heart"></i> Add to Favorites
-                                @endif
-                            </button>
-                        </form>
-                    @endguest
                 </div>
 
                 <!-- Creator Info -->
