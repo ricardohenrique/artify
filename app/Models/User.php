@@ -21,6 +21,12 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'username',
+        'bio',
+        'location',
+        'profile_image',
+        'website_url',
+        'user_type_id',
     ];
 
     /**
@@ -79,5 +85,20 @@ class User extends Authenticatable
     {
         return Conversation::where('buyer_id', $this->id)
             ->orWhere('seller_id', $this->id);
+    }
+
+    public function userType()
+    {
+        return $this->belongsTo(UserType::class);
+    }
+
+    public function isArtist()
+    {
+        return $this->user_type_id === 3;
+    }
+
+        public function isAdmin()
+    {
+        return $this->user_type_id === 1;
     }
 }

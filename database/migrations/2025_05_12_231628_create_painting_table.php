@@ -13,9 +13,10 @@ return new class extends Migration
     {
         Schema::create('paintings', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id') // the artist
+            $table->foreignId('user_id')
                   ->constrained()
                   ->onDelete('cascade');
+            $table->boolean('is_draft')->default(true);
 
             $table->string('title')->nullable();
             $table->string('slug')->unique()->nullable();

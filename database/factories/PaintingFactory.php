@@ -19,13 +19,14 @@ class PaintingFactory extends Factory
         $title = $this->faker->sentence(3);
 
         return [
-            'user_id' => User::factory(),
+            'user_id' => User::inRandomOrder()->value('id'),
+            'is_draft' => true,
             'title' => $title,
             'slug' => Str::slug($title . '-' . uniqid()),
             'description' => $this->faker->paragraph(),
             'price' => $this->faker->randomFloat(2, 50, 2000),
             'image_path' => 'paintings/' . $this->faker->uuid() . '.jpg',
-            'category_id' => null,
+            'category_id' => Category::inRandomOrder()->value('id'),
             'is_available' => $this->faker->boolean(90),
         ];
     }

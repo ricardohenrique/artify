@@ -11,8 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('paintings', function (Blueprint $table) {
-            $table->boolean('is_draft')->default(true)->after('user_id');
+        Schema::create('user_types', function (Blueprint $table) {
+            $table->id();
+            $table->string('name')->unique();
+            $table->timestamps();
         });
     }
 
@@ -21,8 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('paintings', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('user_types');
     }
 };

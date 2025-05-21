@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('facebook_id')->nullable()->unique();
+            $table->foreignId('user_type_id')->nullable()->constrained('user_types');
         });
     }
 
@@ -21,5 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::table('users', function (Blueprint $table) {
+            //
+        });
     }
 };
