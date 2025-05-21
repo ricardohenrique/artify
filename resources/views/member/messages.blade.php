@@ -33,14 +33,23 @@
         <div class="col-md-8">
             @if($selectedConversation)
                 <h5 class="mb-3">{{ $selectedConversation->painting->title }}</h5>
-                <div class="border rounded p-3 bg-light mb-3" style="max-height: 400px; overflow-y: auto;">
+
+                <div class="border rounded p-3 bg-white mb-3" style="height: 500px; overflow-y: auto;">
                     @foreach ($selectedConversation->messages->sortBy('created_at') as $message)
-                        <div class="mb-2">
-                            <strong>
-                                {{ $message->sender?->name ?? 'System' }}:
-                            </strong>
-                            <div>{{ $message->content }}</div>
-                            <div class="text-muted small">{{ $message->created_at->diffForHumans() }}</div>
+                        @php
+                            $isOwn = $message->sender_id === auth()->id();
+                            $isSystem = is_null($message->sender_id);
+                        @endphp
+
+                        <div class="d-flex mb-3 {{ $isOwn ? 'justify-content-end' : 'justify-content-start' }}">
+                            <div class="px-3 py-2 rounded {{ $isSystem ? 'bg-secondary text-white' : ($isOwn ? 'bg-primary text-white' : 'bg-light') }}"
+                                style="max-width: 70%;">
+                                @if($isSystem)
+                                    <small class="d-block text-uppercase fw-bold">System</small>
+                                @endif
+                                <div>{{ $message->content }}</div>
+                                <div class="text-muted small text-end mt-1">{{ $message->created_at->diffForHumans() }}</div>
+                            </div>
                         </div>
                     @endforeach
                 </div>
