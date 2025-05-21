@@ -12,7 +12,7 @@ class MemberController extends Controller
 
     public function member(string $id)
     {
-        $user = User::findOrFail($id);
+        $user = User::withCount(['followers', 'following'])->findOrFail($id);
         return response()->view('member', ['user' => $user], 200);
     }
 

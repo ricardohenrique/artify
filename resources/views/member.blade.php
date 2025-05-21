@@ -5,45 +5,76 @@
 @section('content')
 <section class="py-5 bg-light">
     <div class="container">
-        <div class="row align-items-center mb-4">
-            <!-- Avatar -->
-            <div class="col-auto">
-                <div class="rounded-circle bg-secondary" style="width: 80px; height: 80px; background-image: url('https://ui-avatars.com/api/?name={{ urlencode($user->name) }}&background=ff6a00&color=fff'); background-size: cover;"></div>
+        <!-- Profile Header -->
+        <div class="d-flex align-items-center justify-content-between mb-4">
+            <div class="d-flex align-items-center">
+                <!-- Avatar -->
+                <div class="me-3">
+                    <div class="rounded-circle bg-secondary" style="width: 80px; height: 80px; background-image: url('https://ui-avatars.com/api/?name={{ urlencode($user->name) }}&background=ff6a00&color=fff'); background-size: cover;"></div>
+                </div>
+
+                <!-- User Info -->
+                <div>
+                    <h3 class="mb-1">
+                        {{ $user->name }}
+                        <small class="text-muted ms-2">@ {{ $user->username }}</small>
+                    </h3>
+
+                    <div class="mb-2 text-muted small">
+                        <i class="bi bi-geo-alt-fill me-1"></i>
+                        {{ $user->location ?? 'Location not set' }}
+                    </div>
+
+                    <div class="mb-1 text-muted small">
+                        <i class="bi bi-clock me-1"></i>
+                        Last seen {{ $user->updated_at->diffForHumans() }}
+                    </div>
+
+                    <div class="text-muted small">
+                        <i class="bi bi-people me-1"></i>
+                        <a href="#" class="text-decoration-none">{{ $user->followers_count }} followers</a>,
+                        <a href="#" class="text-decoration-none">{{ $user->following_count }} following</a>
+                    </div>
+                </div>
             </div>
 
-            <!-- User Info -->
-            <div class="col">
-                <h2 class="mb-0">{{ $user->name }}</h2>
-                <p class="text-muted mb-1">Joined {{ $user->created_at->diffForHumans() }}</p>
-                <span class="badge bg-success">Verified Member</span>
-            </div>
+            <!-- (Optional) Edit button for owner -->
+            @auth
+                @if(Auth::id() === $user->id)
+                    <a href="{{ route('member.edit', $user->id) }}" class="btn btn-outline-secondary">
+                        <i class="bi bi-pencil"></i> Edit profile
+                    </a>
+                @endif
+            @endauth
         </div>
 
         <!-- Profile Details -->
         <div class="row">
+            <!-- About -->
             <div class="col-md-6 mb-4">
                 <div class="p-3 bg-white rounded shadow-sm">
                     <h5>About</h5>
-                    <p>{{ $user->bio ?? 'This user hasn’t added a bio yet.' }}</p>
+                    <p class="mb-1">{{ $user->bio ?? 'This user hasn’t added a bio yet.' }}</p>
+                    @if($user->website_url)
+                        <p class="mb-0 text-muted">
+                            <i class="bi bi-link-45deg me-1"></i>
+                            <a href="{{ $user->website_url }}" target="_blank">{{ $user->website_url }}</a>
+                        </p>
+                    @endif
                 </div>
             </div>
 
+            <!-- Verified Info -->
             <div class="col-md-6 mb-4">
                 <div class="p-3 bg-white rounded shadow-sm">
-                    <h5>Contact</h5>
-                    <ul class="list-unstyled mb-0">
-                        <li><strong>Email:</strong> {{ $user->email }}</li>
-                        {{-- Add other contact fields if needed --}}
+                    <h5>Verified Info</h5>
+                    <ul class="list-unstyled mb-0 text-muted small">
+                        <li><i class="bi bi-check-circle-fill text-success me-1"></i>Email verified</li>
+                        {{-- Add Google/Facebook if applicable --}}
                     </ul>
                 </div>
             </div>
         </div>
-
-        <!-- Listings (optional section for future) -->
-        {{-- <div class="mt-5">
-            <h4>{{ $user->name }}'s Listings</h4>
-            <p>Coming soon: display their posted artworks here.</p>
-        </div> --}}
     </div>
 </section>
 @endsection

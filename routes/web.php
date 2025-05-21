@@ -31,6 +31,7 @@ Route::get('/auth/facebook/callback', [FacebookController::class, 'callback'])->
 
 Route::middleware('auth')->group(function () {
     Route::get('/member/{id}', [MemberController::class, 'member'])->name('member.profile');
+    Route::get('/member/{id}/edit', [MemberController::class, 'edit'])->name('member.edit');
     Route::get('/member/{id}/favorites', [MemberController::class, 'favorites'])->name('member.favorites');
     Route::get('/member/{id}/messages', [MessageController::class, 'index'])->name('member.messages');
     Route::get('/dashboard', [MemberController::class, 'dashboard'])->name('dashboard');
