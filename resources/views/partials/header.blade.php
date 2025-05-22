@@ -59,11 +59,11 @@
     </div>
 
     <div class="bg-light border-top menu-category">
-        <div class="container d-flex flex-wrap justify-content-start py-2">
+        <div class="container d-flex flex-wrap justify-content-start ">
             @foreach ($headerCategories as $category)
-                <a href="{{ "/paintings/$category->slug" }}" class="me-4 category-link">{{ $category->name }}</a>
+                <a href="{{ "/paintings/$category->slug" }}" class="me-4 py-3 category-link">{{ $category->name }}</a>
             @endforeach
-            <a href="{{ route('about-us') }}" class="me-4 category-link">About Us</a>
+            <a href="{{ route('about-us') }}" class="me-4 py-3 category-link">About Us</a>
         </div>
     </div>
 </header>
