@@ -9,6 +9,10 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
     <!-- Custom CSS -->
     <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
 </head>
 <body>
 
@@ -43,7 +47,7 @@
         document.addEventListener('DOMContentLoaded', function () {
             // Guest user protection
             const guestOnlyButtons = document.querySelectorAll('.requires-auth');
-    
+
             guestOnlyButtons.forEach(button => {
                 button.addEventListener('click', function (e) {
                     e.preventDefault();

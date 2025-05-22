@@ -1,7 +1,15 @@
 /*----------------------------General----------------------------*/
 body {
     padding-top: 105px;
+    /*font-family: 'Lexend', sans-serif;*/
+    font-family: "Open Sans", sans-serif;
+    /*font-family: "Montserrat", sans-serif;*/
+    font-weight: 400;
 }
+
+/*body a, body p, body span{*/
+/*    font-weight: 300;*/
+/*}*/
 
 .logo {
     height: 40px;
@@ -44,7 +52,7 @@ body {
 /* Base link style */
 .menu-category .category-link {
     position: relative;
-    font-weight: 500;
+    /*font-weight: 500;*/
     color: #333;
     text-decoration: none;
     padding: 10px 5px;
@@ -58,7 +66,7 @@ body {
     position: absolute;
     top: 0;
     left: 0;
-    height: 5px;
+    height: 1px;
     width: 0%;
     background: linear-gradient(90deg, #ff7c5c, #ff4e9b);
     transition: width 0.15s ease;
@@ -356,5 +364,39 @@ body {
     background-color: #fff2e6;
     border-color: #ff6a00;
     color: #ff6a00;
+}
+/*-----------------------------------------------------------------*/
+
+/*----------------------------Footer----------------------------*/
+.footer-section {
+    font-size: 14px;
+}
+
+.footer-link {
+    color: #6c757d;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.footer-link:hover {
+    color: #ff4e9b;
+}
+
+.footer-section h6 {
+    color: #333;
+}
+
+/* Social icons */
+.footer-section .bi {
+    color: #6c757d;
+    transition: color 0.2s ease;
+}
+
+.footer-section .bi:hover {
+    color: #ff4e9b;
+}
+
+.footer-section hr {
+    border-color: #dee2e6;
 }
 /*-----------------------------------------------------------------*/

@@ -60,10 +60,12 @@
 
     <div class="bg-light border-top menu-category">
         <div class="container d-flex flex-wrap justify-content-start ">
+            <a href="" class="me-4 py-3 category-link">Explore</a>
             @foreach ($headerCategories as $category)
                 <a href="{{ "/paintings/$category->slug" }}" class="me-4 py-3 category-link">{{ $category->name }}</a>
             @endforeach
             <a href="{{ route('about-us') }}" class="me-4 py-3 category-link">About Us</a>
+            <a href="" class="me-4 py-3 category-link">Artists</a>
         </div>
     </div>
 </header>
