@@ -109,6 +109,7 @@ body {
     border-radius: 0px;
     padding: 20px 15px;
     font-weight: 300;
+    padding-left: 0px;
 }
 
 .menu-search-bar input:focus{

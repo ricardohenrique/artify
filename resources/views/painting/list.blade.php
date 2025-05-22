@@ -4,7 +4,10 @@
 
 @section('content')
     <section class="container py-5">
-        <h2 class="mb-4">Paintings in "{{ $category->name }}"</h2>
+        <x-page-heading 
+            title="Independent artists, :highlight paintings" 
+            :highlight="$category->name" 
+        />
 
         <div class="row g-4">
             @foreach ($paintings as $painting)

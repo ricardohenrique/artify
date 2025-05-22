@@ -4,7 +4,7 @@
 
 @section('content')
     <section class="container py-5">
-        <h2 class="mb-4">Your Favorite Paintings</h2>
+        <x-page-heading title="Your Favorite Paintings" />
 
         @if($favorites->count())
             <div class="row g-4">

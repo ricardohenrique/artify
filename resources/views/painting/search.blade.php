@@ -4,7 +4,11 @@
 
 @section('content')
 <section class="container py-5">
-    <h2 class="mb-4">Search results for: <em>{{ $query }}</em></h2>
+    <x-page-heading 
+        title="Search results for: :highlight" 
+        :highlight="$query" 
+        :emphasize="true" 
+    />
 
     @if ($paintings->count())
         <div class="row g-4">
