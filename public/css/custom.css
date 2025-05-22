@@ -1,3 +1,4 @@
+/*----------------------------General----------------------------*/
 body {
     padding-top: 105px;
 }
@@ -5,73 +6,6 @@ body {
 .logo {
     height: 40px;
 }
-
-.btn-icon-header {
-    width: 36px;
-    height: 36px;
-}
-
-.btn-icon-header i {
-    font-size: 1rem; /* Slightly smaller than fs-5 */
-}
-
-.btn-icon-header:hover {
-    background-color: #f0f0f0;
-}
-
-.menu-search-bar input{
-    background-color: #f8f9fa;
-}
-
-.menu-search-bar input:focus{
-    background-color: #f8f9fa;
-    box-shadow: none;
-    border-color:#dee2e6;
-}
-
-.hero-sell {
-    background: url('/background-home-01.jpeg') no-repeat center center;
-    background-size: cover;
-    min-height: 500px;
-    padding: 60px 0;
-    /* color: #fff; */
-    position: relative;
-}
-
-.hero-sell .bg-white {
-    z-index: 2;
-    position: relative;
-}
-
-.hero-sell::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background: rgb(2 2 2 / 8%);
-    z-index: 1;
-}
-
-.hero-sell .text-center a{
-    color: #ec4625;
-    text-decoration: none;
-}
-
-.product-card {
-    border: 1px solid #eee;
-    border-radius: 10px;
-    overflow: hidden;
-    transition: transform 0.2s;
-}
-
-.product-card:hover {
-    transform: scale(1.02);
-}
-
-.bg-light a:hover {
-    text-decoration: underline;
-}
-
 
 /* Gradient button style */
 .artify-btn {
@@ -103,7 +37,9 @@ body {
     background-color: #D4145A;
     color: white !important;
 }
+/*-----------------------------------------------------------------*/
 
+/*----------------------------Header----------------------------*/
 /* Category links */
 .menu-category .container{
     padding: 0px 0px!important;
@@ -126,7 +62,237 @@ body {
     /* background-color: #ccc; */
 }
 
-/* PAGINATOR */
+.btn-icon-header {
+    width: 36px;
+    height: 36px;
+}
+
+.btn-icon-header i {
+    font-size: 1rem; /* Slightly smaller than fs-5 */
+}
+
+.btn-icon-header:hover {
+    background-color: #f0f0f0;
+}
+
+.menu-search-bar input{
+    background-color: #f8f9fa;
+}
+
+.menu-search-bar input:focus{
+    background-color: #f8f9fa;
+    box-shadow: none;
+    border-color:#dee2e6;
+}
+/*-----------------------------------------------------------------*/
+
+/*----------------------------Hero Section----------------------------*/
+.hero-sell {
+    background: url('/background-home-01.jpeg') no-repeat center center;
+    background-size: cover;
+    min-height: 500px;
+    padding: 60px 0;
+    /* color: #fff; */
+    position: relative;
+}
+
+.hero-sell .bg-white {
+    z-index: 2;
+    position: relative;
+}
+
+.hero-sell::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgb(2 2 2 / 8%);
+    z-index: 1;
+}
+
+.hero-sell .text-center a{
+    color: #ec4625;
+    text-decoration: none;
+}
+/*-----------------------------------------------------------------*/
+
+/*----------------------------Featured Artists Section-------------------------------------*/
+/* Background tone slightly softer than pure white */
+.bg-light-subtle {
+    background-color: #f4f5f7;
+}
+
+/* Card styling */
+.artist-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.artist-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.06);
+}
+
+/* Avatar with light border and slight lift */
+.avatar-img {
+    border: 3px solid #ff4e9b33;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+/* Button with gradient border */
+.gradient-outline-btn {
+    border: 2px solid transparent;
+    color: #ff4e9b;
+    background: none;
+    font-weight: 500;
+    padding: 6px 14px;
+    border-radius: 30px;
+    /*background-image: linear-gradient(white, white), linear-gradient(135deg, #ff7c5c, #ff4e9b);*/
+    background-origin: border-box;
+    background-clip: content-box, border-box;
+    transition: all 0.3s ease;
+}
+
+.gradient-outline-btn:hover {
+    /*background-color: #ff4e9b;*/
+    /*color: white;*/
+    /*border-color: #ff4e9b;*/
+}
+
+/*-----------------------------------------------------------------*/
+
+/*----------------------------how it works Section----------------------------*/
+/* Gradient background and spacing */
+.how-it-works-section {
+    background: linear-gradient(135deg, #ff7c5c 0%, #ff4e9b 100%);
+    color: #fff;
+    overflow: hidden;
+}
+
+.how-it-works-section h2 {
+    color: #fff;
+}
+
+.how-step {
+    background: #fff;
+    color: #333;
+    border-radius: 16px;
+    padding: 2rem 1.5rem;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+    position: relative;
+    transition: transform 0.3s ease;
+}
+
+.how-step:hover {
+    transform: translateY(-5px);
+}
+
+/* Step number circle */
+.step-number {
+    position: absolute;
+    top: -20px;
+    left: 20px;
+    background: linear-gradient(135deg, #ff7c5c, #ff4e9b);
+    color: white;
+    font-weight: bold;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(255, 78, 155, 0.3);
+    font-size: 14px;
+}
+
+/* Icon styling */
+.icon-wrapper {
+    margin-bottom: 1rem;
+    color: #ff4e9b;
+}
+
+.icon-wrapper i {
+    transition: transform 0.3s;
+}
+
+.how-step:hover .icon-wrapper i {
+    transform: scale(1.2);
+}
+
+/* Mobile responsiveness (optional tweak) */
+@media (max-width: 767px) {
+    .step-number {
+        left: 50%;
+        transform: translateX(-50%);
+        top: -18px;
+    }
+}
+/*-----------------------------------------------------------------*/
+
+/* -----------------------------------------------------------------Testimonials Section Styling */
+.testimonial-card {
+    position: relative;
+    background-color: #ffffff;
+    border-left: 4px solid #ff4e9b1a;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.testimonial-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.06);
+}
+
+.testimonial-card .quote-deco {
+    position: absolute;
+    top: -12px;
+    left: -8px;
+    font-size: 3rem;
+    color: #ff4e9b10;
+    z-index: 0;
+}
+/*-----------------------------------------------------------------*/
+/* -----------------------------------------------------------------Categories Section Styling */
+.category-tile {
+    background-color: #f8f9fa;
+    border: 1px solid transparent;
+    color: #333;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border-radius: 16px;
+}
+
+.category-tile:hover {
+    border-color: #ff4e9b66;
+    background: #fff;
+    box-shadow: 0 6px 18px rgba(255, 78, 155, 0.1);
+    transform: translateY(-4px);
+    color: #ff4e9b;
+}
+
+/* Typography Consistency */
+.testimonials-section h2,
+.categories-section h2 {
+    color: #333;
+}
+/*-----------------------------------------------------------------*/
+
+/*----------------------------Dashboard card----------------------------*/
+.product-card {
+    border: 1px solid #eee;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.2s;
+}
+
+.product-card:hover {
+    transform: scale(1.02);
+}
+/*-----------------------------------------------------------------*/
+
+/*.bg-light a:hover {*/
+/*    text-decoration: underline;*/
+/*}*/
+
+/*----------------------------Paginator----------------------------*/
 .page-item.active .page-link {
     background-color: #ff6a00;
     border-color: #ff6a00;
@@ -142,3 +308,4 @@ body {
     border-color: #ff6a00;
     color: #ff6a00;
 }
+/*-----------------------------------------------------------------*/
