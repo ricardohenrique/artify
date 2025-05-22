@@ -38,12 +38,24 @@
                 </div>
             </div>
 
-            <!-- (Optional) Edit button for owner -->
             @auth
                 @if(Auth::id() === $user->id)
+                    <!-- Edit Button -->
                     <a href="{{ route('member.edit', $user->id) }}" class="btn btn-outline-secondary">
                         <i class="bi bi-pencil"></i> Edit profile
                     </a>
+                @else
+                    <!-- Follow/Unfollow Button -->
+                    <form action="{{ route('users.follow', $user->id) }}" method="POST" class="d-inline">
+                        @csrf
+                        <button type="submit" class="btn btn-outline-primary">
+                            @if(auth()->user()->following->contains($user->id))
+                                <i class="bi bi-person-check"></i> Following
+                            @else
+                                <i class="bi bi-person-plus"></i> Follow
+                            @endif
+                        </button>
+                    </form>
                 @endif
             @endauth
         </div>

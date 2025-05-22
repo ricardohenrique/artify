@@ -89,7 +89,7 @@ body {
 }
 
 .btn-icon-header i {
-    font-size: 1rem; /* Slightly smaller than fs-5 */
+    font-size: 1rem;
 }
 
 .btn-icon-header:hover {
