@@ -411,4 +411,23 @@ body {
 .footer-section hr {
     border-color: #dee2e6;
 }
+
+/* Larger icons */
+.footer-section .bi {
+    color: #6c757d;
+    transition: color 0.2s ease;
+}
+
+.footer-section .bi:hover {
+    color: #ff4e9b;
+}
+
+.footer-section .developer-credit a {
+    color: #ff4e9b;
+    text-decoration: none;
+}
+
+.footer-section .developer-credit a:hover {
+    color: #ec4625;
+}
 /*-----------------------------------------------------------------*/

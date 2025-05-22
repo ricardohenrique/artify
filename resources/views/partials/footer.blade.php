@@ -1,8 +1,9 @@
 <footer class="footer-section bg-white border-top pt-5">
     <div class="container">
-        <div class="row row-cols-1 row-cols-md-4 text-start gy-4">
+        <!-- Footer link columns (centered) -->
+        <div class="row justify-content-center text-center text-md-start gy-4 mb-4">
             <!-- Column 1 -->
-            <div class="col">
+            <div class="col-10 col-md-3">
                 <h6 class="fw-bold mb-3">Artify</h6>
                 <ul class="list-unstyled">
                     <li><a href="#" class="footer-link">About Us</a></li>
@@ -13,7 +14,7 @@
             </div>
 
             <!-- Column 2 -->
-            <div class="col">
+            <div class="col-10 col-md-3">
                 <h6 class="fw-bold mb-3">Discover</h6>
                 <ul class="list-unstyled">
                     <li><a href="#" class="footer-link">How It Works</a></li>
@@ -24,7 +25,7 @@
             </div>
 
             <!-- Column 3 -->
-            <div class="col">
+            <div class="col-10 col-md-3">
                 <h6 class="fw-bold mb-3">Support</h6>
                 <ul class="list-unstyled">
                     <li><a href="#" class="footer-link">Help Center</a></li>
@@ -33,17 +34,27 @@
                     <li><a href="#" class="footer-link">Trust & Safety</a></li>
                 </ul>
             </div>
+        </div>
 
-            <!-- Column 4 -->
-            <div class="col text-md-end text-center">
-                <div class="mb-3">
-                    <a href="#" class="me-2"><i class="bi bi-facebook fs-5"></i></a>
-                    <a href="#" class="me-2"><i class="bi bi-instagram fs-5"></i></a>
-                    <a href="#"><i class="bi bi-linkedin fs-5"></i></a>
-                </div>
-                <div class="developer-credit small mt-2">
-                    <span class="text-muted">Like the platform?</span>
-                    <a href="/contact" class="footer-link fw-semibold">Contact Us</a>
+        <!-- Social + Contact (tighter & centered) -->
+        <div class="row justify-content-center text-center mb-4">
+            <div class="col-12">
+                <div class="d-flex flex-column flex-md-row align-items-center justify-content-center gap-3">
+                    <!-- Social Icons -->
+                    <div class="social-icons">
+                        <a href="#" class="me-2"><i class="bi bi-facebook fs-3"></i></a>
+                        <a href="#" class="me-2"><i class="bi bi-instagram fs-3"></i></a>
+                        <a href="#"><i class="bi bi-linkedin fs-3"></i></a>
+                    </div>
+
+                    <!-- Divider or spacing (optional) -->
+                    <span class="text-muted d-none d-md-inline">|</span>
+
+                    <!-- Developer Contact -->
+                    <div class="developer-credit small">
+                        <span class="text-muted">Like the platform?</span>
+                        <a href="/contact" class="footer-link fw-semibold ms-1">Contact Us</a>
+                    </div>
                 </div>
             </div>
         </div>
