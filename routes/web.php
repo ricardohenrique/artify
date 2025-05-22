@@ -46,7 +46,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/messages', [MessageController::class, 'index'])->name('messages.index');
     // Route::get('/messages/{conversation}', [MessageController::class, 'show'])->name('messages.show');
-    Route::post('/messages/send/{painting}', [MessageController::class, 'store'])->name('messages.store');
+    Route::post('/messages/send', [MessageController::class, 'store'])->name('messages.store');
     Route::post('/paintings/{painting}/ask', [MessageController::class, 'ask'])->name('messages.ask');
 });
 

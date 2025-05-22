@@ -54,8 +54,9 @@
                     @endforeach
                 </div>
 
-                <form action="{{ route('messages.store', $selectedConversation->painting) }}" method="POST">
+                <form action="{{ route('messages.store') }}" method="POST">
                     @csrf
+                    <input type="hidden" name="conversation_id" value="{{ $selectedConversation->id }}">
                     <div class="input-group">
                         <input type="text" name="content" class="form-control" placeholder="Write a message..." required>
                         <button class="btn btn-primary" type="submit">Send</button>
@@ -66,5 +67,5 @@
             @endif
         </div>
     </div>
-</div>
+</section>
 @endsection
