@@ -19,6 +19,7 @@ Route::get('/about-us', [AboutUsController::class, 'index'])->name('about-us');
 Route::get('/painting', [PaintingController::class, 'index']);
 
 Route::get('/paintings/search', [PaintingController::class, 'search'])->name('paintings.search');
+Route::get('/paintings/explore', [PaintingListController::class, 'explore'])->name('paintings.explore');
 Route::get('/paintings/{category_slug}/{painting_slug}', [PaintingController::class, 'show'])->name('paintings.show');
 Route::get('/paintings/{category_slug}', [PaintingListController::class, 'paintings'])->name('paintings.list');
 Route::get('/paintings/favorite/{painting_slug}', [PaintingController::class, 'favorite'])->name('paintings.favorite');

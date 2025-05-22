@@ -9,6 +9,72 @@
             :highlight="$category->name" 
         />
 
+        <!-- Filter Bar -->
+        <div class="filter-bar d-flex flex-wrap align-items-center justify-content-between gap-3 py-3 border-top border-bottom mb-4">
+            <!-- Filter buttons -->
+            <div class="d-flex flex-wrap align-items-center gap-2">
+                <!-- Category Filter -->
+                <div class="filter-chip dropdown">
+                    <button class="btn filter-btn dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                        Category
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a class="dropdown-item"
+                            href="{{ route('paintings.explore') }}">All</a>
+                        </li>
+                        @foreach ($categories as $cat)
+                            <li>
+                                <a class="dropdown-item {{ $cat->id === $category->id ? 'active' : '' }}"
+                                    href="{{ route('paintings.list', $cat->slug) }}">
+                                    {{ $cat->name }}
+                                </a>
+                            </li>
+                        @endforeach
+                    </ul>
+                </div>
+
+                <div class="filter-chip dropdown">
+                    <button class="btn filter-btn dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                        Price
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">Under $100</a></li>
+                        <li><a class="dropdown-item" href="#">$100 - $500</a></li>
+                        <li><a class="dropdown-item" href="#">Above $500</a></li>
+                    </ul>
+                </div>
+
+                <div class="filter-chip dropdown">
+                    <button class="btn filter-btn dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                        Size
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">Small</a></li>
+                        <li><a class="dropdown-item" href="#">Medium</a></li>
+                        <li><a class="dropdown-item" href="#">Large</a></li>
+                    </ul>
+                </div>
+
+                <!-- Active filters badge -->
+                @if($category)
+                    <span class="active-filter">{{ $category->name }} ✕</span>
+                @endif
+            </div>
+
+            <!-- Sort Dropdown -->
+            <div class="dropdown ms-auto">
+                <button class="btn filter-btn dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                    Sort by
+                </button>
+                <ul class="dropdown-menu dropdown-menu-end">
+                    <li><a class="dropdown-item {{ $selectedSort === 'newest' ? 'active' : '' }}" href="?sort=newest">Newest</a></li>
+                    <li><a class="dropdown-item {{ $selectedSort === 'cheap' ? 'active' : '' }}" href="?sort=cheap">Price: Low to High</a></li>
+                    <li><a class="dropdown-item {{ $selectedSort === 'liked' ? 'active' : '' }}" href="?sort=liked">Most Liked</a></li>
+                </ul>
+            </div>
+        </div>
+
         <div class="row g-4">
             @foreach ($paintings as $painting)
                 @include('components.painting-card', ['painting' => $painting])
@@ -26,4 +92,45 @@
             </div>
         @endif
     </section>
+    <style>
+        /* Filter bar container */
+        .filter-bar {
+            border-color: #e9ecef;
+            background-color: #fff;
+            border-radius: 12px;
+            padding: 1rem 1.5rem;
+        }
+
+        /* Filter button styling */
+        .filter-btn {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: 500;
+            padding: 6px 16px;
+            transition: background 0.2s ease;
+        }
+
+        .filter-btn:hover {
+            background: #ffedf3;
+            border-color: #ff4e9b;
+            color: #ff4e9b;
+        }
+
+        /* Active filter badge */
+        .active-filter {
+            background: #e9ecef;
+            border-radius: 20px;
+            padding: 4px 12px;
+            font-size: 13px;
+            margin-left: 0.5rem;
+        }
+
+        /* Optional: custom dropdown menu spacing */
+        .dropdown-menu {
+            font-size: 14px;
+            border-radius: 8px;
+        }
+    </style>
 @endsection
