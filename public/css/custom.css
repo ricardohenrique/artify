@@ -96,8 +96,19 @@ body {
     background-color: #f0f0f0;
 }
 
+.menu-search-bar span{
+    border: 0px;
+    border-radius: 0px;
+    padding: 10px 30px;
+    font-size: 20px;
+}
 .menu-search-bar input{
     background-color: #f8f9fa;
+    font-size: 20px;
+    border: 0px;
+    border-radius: 0px;
+    padding: 20px 15px;
+    font-weight: 300;
 }
 
 .menu-search-bar input:focus{

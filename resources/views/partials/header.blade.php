@@ -2,7 +2,7 @@
 <header class="fixed-top bg-white border-bottom shadow-sm">
     <div class="container">
         <!-- Top Row -->
-        <div class="d-flex flex-wrap align-items-center justify-content-between py-2">
+        <div class="d-flex flex-wrap align-items-center justify-content-between">
             <a class="navbar-brand d-flex align-items-center me-3" href="/">
                 <img src="{{ asset('artify-logo.png') }}" alt="Artify Logo" class="logo me-2" style="height: 40px;">
             </a>
