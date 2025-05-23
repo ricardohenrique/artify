@@ -45,16 +45,16 @@
                     </ul>
                 </div>
 
-                <div class="filter-chip dropdown">
-                    <button class="btn filter-btn dropdown-toggle" type="button" data-bs-toggle="dropdown">
-                        Size
-                    </button>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Small</a></li>
-                        <li><a class="dropdown-item" href="#">Medium</a></li>
-                        <li><a class="dropdown-item" href="#">Large</a></li>
-                    </ul>
-                </div>
+{{--                <div class="filter-chip dropdown">--}}
+{{--                    <button class="btn filter-btn dropdown-toggle" type="button" data-bs-toggle="dropdown">--}}
+{{--                        Size--}}
+{{--                    </button>--}}
+{{--                    <ul class="dropdown-menu">--}}
+{{--                        <li><a class="dropdown-item" href="#">Small</a></li>--}}
+{{--                        <li><a class="dropdown-item" href="#">Medium</a></li>--}}
+{{--                        <li><a class="dropdown-item" href="#">Large</a></li>--}}
+{{--                    </ul>--}}
+{{--                </div>--}}
 
                 @php
                     $query = request()->query();
@@ -111,9 +111,16 @@
         </div>
 
         <div class="row g-4">
-            @foreach ($paintings as $painting)
+            @forelse ($paintings as $painting)
                 @include('components.painting-card', ['painting' => $painting])
-            @endforeach
+            @empty
+                <div class="col-12 text-center py-5">
+                    <i class="bi bi-emoji-frown" style="font-size: 3rem; color: #ff6a00;"></i>
+                    <h5 class="fw-semibold mt-3 mb-1">No paintings found</h5>
+                    <p class="text-muted">Try adjusting your filters or exploring other categories.</p>
+                    <a href="{{ route('paintings.explore') }}" class="btn btn-outline-primary mt-2">View All Paintings</a>
+                </div>
+            @endforelse
         </div>
 
         @if ($paintings->hasPages())
