@@ -14,14 +14,17 @@ use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\Paintings\PaintingController;
 
+Route::controller(PaintingController::class)->prefix('paintings')->group(function () {
+    Route::get('/', 'index');
+});
+
 Route::get('/', [HomeController::class, 'index']);
 Route::get('/about-us', [AboutUsController::class, 'index'])->name('about-us');
-Route::get('/painting', [PaintingController::class, 'index']);
 
-Route::get('/paintings/search', [PaintingController::class, 'search'])->name('paintings.search');
-Route::get('/paintings/explore', [PaintingListController::class, 'explore'])->name('paintings.explore');
-Route::get('/paintings/{category_slug}/{painting_slug}', [PaintingController::class, 'show'])->name('paintings.show');
-Route::get('/paintings/{category_slug}', [PaintingListController::class, 'paintings'])->name('paintings.list');
+Route::get('/independent-artists-paintings/independent-artwork', [PaintingListController::class, 'explore'])->name('paintings.explore');
+Route::get('/independent-artists-paintings/search', [PaintingListController::class, 'search'])->name('paintings.search');
+Route::get('/independent-artists-paintings/{category_slug}', [PaintingListController::class, 'explore'])->name('paintings.list');
+Route::get('/independent-artists-paintings/{category_slug}/{painting_slug}', [PaintingController::class, 'show'])->name('paintings.show');
 Route::get('/paintings/favorite/{painting_slug}', [PaintingController::class, 'favorite'])->name('paintings.favorite');
 
 Route::get('auth/google', [GoogleController::class, 'redirect'])->name('google.redirect');

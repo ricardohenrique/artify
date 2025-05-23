@@ -20,23 +20,6 @@ class PaintingController extends Controller
         return Painting::all();
     }
 
-    public function search(Request $request)
-    {
-        $query = $request->input('q');
-
-        $paintings = Painting::with(['images', 'category'])
-            ->withCount('favoritedBy')
-            ->where('title', 'like', '%' . $query . '%')
-            ->orWhere('description', 'like', '%' . $query . '%')
-            ->latest()
-            ->paginate(12);
-    
-        return view('painting.search', [
-            'paintings' => $paintings,
-            'query' => $query,
-        ]);
-    }
-
     public function new()
     {
         $user = Auth::user();

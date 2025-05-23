@@ -3,24 +3,28 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Painting;
 use Illuminate\Http\Request;
 
 class PaintingListController extends Controller
 {
-    public function paintings(Request $request, string $categorySlug)
+    public function explore(Request $request, string $categorySlug = null)
     {
-        $category = Category::where('slug', $categorySlug)->firstOrFail();
         $categories = Category::withCount('paintings')
-        ->orderByDesc('paintings_count')
-        ->get();
+            ->orderByDesc('paintings_count')
+            ->get();
 
-        $sort = $request->input('sort', 'newest'); // default sort
+        $sort = $request->input('sort', 'newest');
 
-        $query = $category->paintings()
-            ->with(['images'])
+        // Use all paintings if no category is selected
+        $query = Painting::with(['images', 'category'])
             ->withCount('favoritedBy');
 
-        // Apply sorting
+        if ($categorySlug) {
+            $category = Category::where('slug', $categorySlug)->firstOrFail();
+            $query->where('category_id', $category->id);
+        }
+
         switch ($sort) {
             case 'liked':
                 $query->orderByDesc('favorited_by_count');
@@ -36,11 +40,34 @@ class PaintingListController extends Controller
 
         $paintings = $query->paginate(8)->withQueryString();
 
+        if(!isset($category)) {
+            $category = new Category([
+                'name' => 'independent artwork',
+            ]);
+        }
+
         return view('painting.list', [
             'category' => $category,
             'categories' => $categories,
             'paintings' => $paintings,
             'selectedSort' => $sort,
+        ]);
+    }
+
+    public function search(Request $request)
+    {
+        $query = $request->input('q');
+
+        $paintings = Painting::with(['images', 'category'])
+            ->withCount('favoritedBy')
+            ->where('title', 'like', '%' . $query . '%')
+            ->orWhere('description', 'like', '%' . $query . '%')
+            ->latest()
+            ->paginate(12);
+
+        return view('painting.search', [
+            'paintings' => $paintings,
+            'query' => $query,
         ]);
     }
 }
