@@ -15,6 +15,7 @@ class PaintingListController extends Controller
             ->get();
 
         $sort = $request->input('sort', 'newest');
+        $price = $request->input('price');
 
         // Use all paintings if no category is selected
         $query = Painting::with(['images', 'category'])
@@ -23,6 +24,12 @@ class PaintingListController extends Controller
         if ($categorySlug) {
             $category = Category::where('slug', $categorySlug)->firstOrFail();
             $query->where('category_id', $category->id);
+        }
+
+        // Apply price filter if present
+        if ($price && str_starts_with($price, 'between-')) {
+            [$from, $to] = explode('-', str_replace('between-', '', $price));
+            $query->whereBetween('price', [(float)$from, (float)$to]);
         }
 
         switch ($sort) {

@@ -4,9 +4,9 @@
 
 @section('content')
     <section class="container py-5">
-        <x-page-heading 
-            title="Independent artists, :highlight paintings" 
-            :highlight="$category->name" 
+        <x-page-heading
+            title="Independent artists, :highlight paintings"
+            :highlight="$category->name"
         />
 
         <!-- Filter Bar -->
@@ -39,9 +39,9 @@
                         Price
                     </button>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Under $100</a></li>
-                        <li><a class="dropdown-item" href="#">$100 - $500</a></li>
-                        <li><a class="dropdown-item" href="#">Above $500</a></li>
+                        <li><a class="dropdown-item" href="{{ request()->fullUrlWithQuery(['price' => 'between-0-100']) }}">Under $100</a></li>
+                        <li><a class="dropdown-item" href="{{ request()->fullUrlWithQuery(['price' => 'between-100-500']) }}">$100 - $500</a></li>
+                        <li><a class="dropdown-item" href="{{ request()->fullUrlWithQuery(['price' => 'between-500-5000']) }}">Above $500</a></li>
                     </ul>
                 </div>
 
@@ -56,9 +56,29 @@
                     </ul>
                 </div>
 
-                <!-- Active filters badge -->
-                @if($category)
-                    <span class="active-filter">{{ $category->name }} ✕</span>
+                @php
+                    $query = request()->query();
+                @endphp
+
+                @if($category && $categories->contains('id', $category->id))
+                    <span class="active-filter">
+                        {{ $category->name }}
+                        <a href="{{ route('paintings.explore') }}?{{ http_build_query(Arr::except($query, ['price', 'sort'])) }}" class="ms-1 text-decoration-none">✕</a>
+                    </span>
+                @endif
+
+                @if(request('price'))
+                    <span class="active-filter">
+                        Price: {{ ucwords(str_replace('-', ' ', request('price'))) }}
+                        <a href="{{ url()->current() }}?{{ http_build_query(Arr::except($query, ['price'])) }}" class="ms-1 text-decoration-none">✕</a>
+                    </span>
+                @endif
+
+                @if(request('sort'))
+                    <span class="active-filter">
+                        Sort: {{ ucwords(str_replace('-', ' ', request('sort'))) }}
+                        <a href="{{ url()->current() }}?{{ http_build_query(Arr::except($query, ['sort'])) }}" class="ms-1 text-decoration-none">✕</a>
+                    </span>
                 @endif
             </div>
 
@@ -68,9 +88,24 @@
                     Sort by
                 </button>
                 <ul class="dropdown-menu dropdown-menu-end">
-                    <li><a class="dropdown-item {{ $selectedSort === 'newest' ? 'active' : '' }}" href="?sort=newest">Newest</a></li>
-                    <li><a class="dropdown-item {{ $selectedSort === 'cheap' ? 'active' : '' }}" href="?sort=cheap">Price: Low to High</a></li>
-                    <li><a class="dropdown-item {{ $selectedSort === 'liked' ? 'active' : '' }}" href="?sort=liked">Most Liked</a></li>
+                    <li>
+                        <a class="dropdown-item {{ $selectedSort === 'newest' ? 'active' : '' }}"
+                           href="{{ request()->fullUrlWithQuery(['sort' => 'newest']) }}">
+                            Newest
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item {{ $selectedSort === 'cheap' ? 'active' : '' }}"
+                           href="{{ request()->fullUrlWithQuery(['sort' => 'cheap']) }}">
+                            Price: Low to High
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item {{ $selectedSort === 'liked' ? 'active' : '' }}"
+                           href="{{ request()->fullUrlWithQuery(['sort' => 'liked']) }}">
+                            Most Liked
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>
