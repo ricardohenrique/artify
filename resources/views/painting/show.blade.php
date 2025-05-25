@@ -84,41 +84,30 @@
 
                 <!-- Creator Info -->
                 <div class="border rounded p-4 bg-white shadow-sm">
-                    <div class="d-flex align-items-center mb-3">
-                        <img 
-                            src="https://ui-avatars.com/api/?name={{ urlencode($painting->user->name) }}&background=ff6a00&color=fff" 
-                            class="rounded-circle me-3" 
-                            alt="Avatar"
-                            style="width: 50px; height: 50px;"
-                        >
-                        <div>
-                            <div class="fw-semibold">{{ $painting->user->name }}</div>
-                            <div class="text-muted small">No reviews yet</div>
+                    <a href="{{ route('artist.index', $painting->user->slug) }}" class="text-decoration-none text-dark">
+                        <div class="d-flex align-items-center mb-3">
+                            <img 
+                                src="https://ui-avatars.com/api/?name={{ urlencode($painting->user->name) }}&background=ff6a00&color=fff" 
+                                class="rounded-circle me-3" 
+                                alt="Avatar"
+                                style="width: 50px; height: 50px;"
+                            >
+                            <div>
+                                <div class="fw-semibold">{{ $painting->user->name }}</div>
+                                <div class="text-muted small">No reviews yet</div>
+                            </div>
                         </div>
-                    </div>
+                
+                        <div class="mb-2 text-muted small">
+                            <i class="bi bi-geo-alt me-1"></i> {{ $painting->user->location ?? 'Unknown' }}
+                        </div>
+                
+                        <div class="mb-3 text-muted small">
+                            <i class="bi bi-clock me-1"></i> Last seen 3 weeks ago
+                        </div>
+                    </a>
 
-                    <div class="mb-2 text-muted small">
-                        <i class="bi bi-geo-alt me-1"></i> {{ $painting->user->location ?? 'Unknown' }}
-                    </div>
-
-                    <div class="mb-3 text-muted small">
-                        <i class="bi bi-clock me-1"></i> Last seen 3 weeks ago
-                    </div>
-
-                    @guest
-                        <a href="#" class="btn btn-outline-primary requires-auth w-100">Follow</a>
-                    @else
-                        <form method="POST" action="{{ route('users.follow', $painting->user) }}">
-                            @csrf
-                            <button type="submit" class="btn btn-outline-primary w-100">
-                                @if(auth()->user()->following->contains($painting->user->id))
-                                    Following
-                                @else
-                                    Follow
-                                @endif
-                            </button>
-                        </form>
-                    @endguest
+                    <x-follow-button :user="$painting->user" class="w-100" />
                 </div>
             </div>
         </div>

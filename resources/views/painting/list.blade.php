@@ -45,17 +45,6 @@
                     </ul>
                 </div>
 
-{{--                <div class="filter-chip dropdown">--}}
-{{--                    <button class="btn filter-btn dropdown-toggle" type="button" data-bs-toggle="dropdown">--}}
-{{--                        Size--}}
-{{--                    </button>--}}
-{{--                    <ul class="dropdown-menu">--}}
-{{--                        <li><a class="dropdown-item" href="#">Small</a></li>--}}
-{{--                        <li><a class="dropdown-item" href="#">Medium</a></li>--}}
-{{--                        <li><a class="dropdown-item" href="#">Large</a></li>--}}
-{{--                    </ul>--}}
-{{--                </div>--}}
-
                 @php
                     $query = request()->query();
                 @endphp
