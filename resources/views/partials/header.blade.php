@@ -65,7 +65,7 @@
                 <a href="{{ "/independent-artists-paintings/$category->slug" }}" class="me-4 py-3 category-link">{{ $category->name }}</a>
             @endforeach
             <a href="{{ route('about-us') }}" class="me-4 py-3 category-link">About Us</a>
-            <a href="" class="me-4 py-3 category-link">Artists</a>
+            <a href="{{ route('artist.index') }}" class="me-4 py-3 category-link">Artists</a>
         </div>
     </div>
 </header>

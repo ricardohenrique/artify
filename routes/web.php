@@ -26,7 +26,8 @@ Route::get('/independent-artists-paintings/independent-artwork', [PaintingListCo
 Route::get('/independent-artists-paintings/search', [PaintingListController::class, 'search'])->name('paintings.search');
 Route::get('/independent-artists-paintings/{category_slug}', [PaintingListController::class, 'explore'])->name('paintings.list');
 Route::get('/independent-artists-paintings/{category_slug}/{painting_slug}', [PaintingController::class, 'show'])->name('paintings.show');
-Route::get('/independent-artists/{artist_slug}', [ArtistController::class, 'index'])->name('artist.index');
+Route::get('/independent-artists', [ArtistController::class, 'index'])->name('artist.index');
+Route::get('/independent-artists/{artist_slug}', [ArtistController::class, 'show'])->name('artist.show');
 Route::get('/paintings/favorite/{painting_slug}', [PaintingController::class, 'favorite'])->name('paintings.favorite');
 
 Route::get('auth/google', [GoogleController::class, 'redirect'])->name('google.redirect');

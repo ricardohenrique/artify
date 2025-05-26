@@ -11,11 +11,11 @@
                 @php
                     $mainImage = $painting->images->first();
                 @endphp
-            
+
                 @if ($mainImage)
                     <!-- Main image -->
                     <div class="mb-3 position-relative">
-                        <img 
+                        <img
                             id="main-image"
                             src="{{ asset('storage/' . $mainImage->path) }}"
                             alt="{{ $painting->title }}"
@@ -27,7 +27,7 @@
                             <span class="fw-semibold">{{ $painting->favorited_by_count }}</span>
                         </div>
                     </div>
-            
+
                     <!-- Thumbnails -->
                     @if ($painting->images->count() > 1)
                         <div class="d-flex gap-2 flex-wrap">
@@ -57,7 +57,7 @@
                     <div class="d-grid gap-2 mb-3">
                         <a href="#" class="btn btn-primary">Buy Now</a>
                         <a href="#" class="btn btn-outline-primary">Make an Offer</a>
-                    
+
                         @guest
                             <a href="#" class="btn btn-outline-primary requires-auth">Ask Seller</a>
                             <a href="#" class="btn btn-outline-danger requires-auth">
@@ -84,11 +84,11 @@
 
                 <!-- Creator Info -->
                 <div class="border rounded p-4 bg-white shadow-sm">
-                    <a href="{{ route('artist.index', $painting->user->slug) }}" class="text-decoration-none text-dark">
+                    <a href="{{ route('artist.show', $painting->user->slug) }}" class="text-decoration-none text-dark">
                         <div class="d-flex align-items-center mb-3">
-                            <img 
-                                src="https://ui-avatars.com/api/?name={{ urlencode($painting->user->name) }}&background=ff6a00&color=fff" 
-                                class="rounded-circle me-3" 
+                            <img
+                                src="https://ui-avatars.com/api/?name={{ urlencode($painting->user->name) }}&background=ff6a00&color=fff"
+                                class="rounded-circle me-3"
                                 alt="Avatar"
                                 style="width: 50px; height: 50px;"
                             >
@@ -97,11 +97,11 @@
                                 <div class="text-muted small">No reviews yet</div>
                             </div>
                         </div>
-                
+
                         <div class="mb-2 text-muted small">
                             <i class="bi bi-geo-alt me-1"></i> {{ $painting->user->location ?? 'Unknown' }}
                         </div>
-                
+
                         <div class="mb-3 text-muted small">
                             <i class="bi bi-clock me-1"></i> Last seen 3 weeks ago
                         </div>
@@ -117,7 +117,7 @@
             // Thumbnail swapping
             const mainImage = document.getElementById('main-image');
             const thumbnails = document.querySelectorAll('.thumb-image');
-    
+
             thumbnails.forEach(thumb => {
                 thumb.addEventListener('click', function () {
                     mainImage.src = this.src;
