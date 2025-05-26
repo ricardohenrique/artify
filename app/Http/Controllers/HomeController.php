@@ -5,14 +5,18 @@ namespace App\Http\Controllers;
 use App\Models\Painting;
 use App\Models\Category;
 use App\Services\PaintingService;
+use App\Services\CategoryService;
 
 class HomeController extends Controller
 {
     protected PaintingService $paintingService;
 
-    public function __construct(PaintingService $paintingService)
+    protected CategoryService $categoryService;
+
+    public function __construct(PaintingService $paintingService, CategoryService $categoryService)
     {
         $this->paintingService = $paintingService;
+        $this->categoryService = $categoryService;
     }
 
     public function index()
@@ -36,10 +40,7 @@ class HomeController extends Controller
             (object)[ 'author' => 'Andre, Brazil', 'content' => 'I sold my first piece last week. The platform is beautiful and simple!' ],
         ]);
 
-        $categories = Category::withCount('paintings')
-                ->orderByDesc('paintings_count')
-                ->take(8)
-                ->get();
+        $categories = $this->categoryService->getCategoryWithPaintingCount(8);
 
         return view('home', [
             'mostLiked' => $mostLiked,

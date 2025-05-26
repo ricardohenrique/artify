@@ -62,7 +62,7 @@
         <div class="container d-flex flex-wrap justify-content-start ">
             <a href="{{ route('paintings.explore') }}" class="me-4 py-3 category-link">Explore</a>
             @foreach ($headerCategories as $category)
-                <a href="{{ "/independent-artists-paintings/$category->slug" }}" class="me-4 py-3 category-link">{{ $category->name }}</a>
+                <a href="{{ route('paintings.list', $category->slug) }}" class="me-4 py-3 category-link">{{ $category->name }}</a>
             @endforeach
             <a href="{{ route('about-us') }}" class="me-4 py-3 category-link">About Us</a>
             <a href="{{ route('artist.index') }}" class="me-4 py-3 category-link">Artists</a>

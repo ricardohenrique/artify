@@ -92,7 +92,7 @@
         <div class="row g-3 text-center">
             @foreach($categories as $category)
                 <div class="col-6 col-md-3">
-                    <a href="{{ "/paintings/$category->slug" }}" class="category-tile d-block p-4 h-100 rounded-4">
+                    <a href="{{ route('paintings.list', $category->slug) }}" class="category-tile d-block p-4 h-100 rounded-4">
                         <div class="fw-semibold">{{ $category->name }}</div>
                     </a>
                 </div>
