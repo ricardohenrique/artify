@@ -4,22 +4,22 @@ namespace App\Http\Controllers;
 
 use App\Models\Painting;
 use App\Models\Category;
+use App\Services\PaintingService;
 
 class HomeController extends Controller
 {
+    protected PaintingService $paintingService;
+
+    public function __construct(PaintingService $paintingService)
+    {
+        $this->paintingService = $paintingService;
+    }
+
     public function index()
     {
-        $mostLiked = Painting::with(['images', 'category', 'favoritedBy'])
-            ->withCount('favoritedBy')
-            ->orderByDesc('favorited_by_count')
-            ->limit(4)
-            ->get();
+        $mostLiked = $this->paintingService->getMostLikedPaintings(4);
 
-        $mostRecent = Painting::with(['images', 'category', 'favoritedBy'])
-            ->withCount('favoritedBy')
-            ->latest()
-            ->limit(4)
-            ->get();
+        $mostRecent = $this->paintingService->getMostRecentPaintings(4);
 
         // Mock Featured Artists
         $featuredArtists = collect([

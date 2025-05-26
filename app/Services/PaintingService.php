@@ -25,4 +25,14 @@ class PaintingService
     {
         $this->paintingRepository->toggleFavorite($user, $painting);
     }
+
+    public function getMostLikedPaintings(int $quantity)
+    {
+        return $this->paintingRepository->getMostLikedPaintings($quantity);
+    }
+
+    public function getMostRecentPaintings(int $quantity)
+    {
+        return $this->paintingRepository->getMostRecentPaintings($quantity);
+    }
 }

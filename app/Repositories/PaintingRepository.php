@@ -25,4 +25,22 @@ class PaintingRepository
             $user->favorites()->attach($painting->id);
         }
     }
+
+    public function getMostLikedPaintings(int $quantity)
+    {
+        return Painting::with(['images', 'category', 'favoritedBy'])
+        ->withCount('favoritedBy')
+        ->orderByDesc('favorited_by_count')
+        ->limit($quantity)
+        ->get();
+    }
+
+    public function getMostRecentPaintings(int $quantity)
+    {
+        return Painting::with(['images', 'category', 'favoritedBy'])
+        ->withCount('favoritedBy')
+        ->latest()
+        ->limit($quantity)
+        ->get();
+    }
 }
