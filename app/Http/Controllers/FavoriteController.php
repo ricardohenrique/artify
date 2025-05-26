@@ -3,9 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use App\Services\ArtistService;
 use App\Services\PaintingService;
-use Illuminate\Http\Request;
 use App\Models\Painting;
 
 class FavoriteController extends Controller

@@ -2,24 +2,29 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Services\UserService;
 use App\Models\User;
 
 class FollowController extends Controller
 {
+    protected UserService $userService;
+
+    public function __construct(UserService $userService)
+    {
+        $this->userService = $userService;
+    }
+
+
     public function toggle(User $user)
     {
+        /** @var User $authUser */
         $authUser = auth()->user();
-        
+
         if ($authUser->id === $user->id) {
             return back()->with('error', 'You cannot follow yourself.');
         }
 
-        if ($authUser->following()->where('user_id', $user->id)->exists()) {
-            $authUser->following()->detach($user->id);
-        } else {
-            $authUser->following()->attach($user->id);
-        }
+        $this->userService->toggleFollow($authUser, $user);
 
         return back();
     }
