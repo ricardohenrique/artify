@@ -13,7 +13,7 @@
                 <img src="{{ $imageUrl }}" class="card-img-top" alt="{{ $painting->title }}" style="aspect-ratio: 3/4; object-fit: cover;">
             </a>
 
-            @auth
+            {{-- @auth
                 <form method="POST" action="{{ route('paintings.favorite', $painting) }}"
                       class="position-absolute top-0 end-0 m-2 bg-white px-2 py-1 rounded-pill d-flex align-items-center shadow-sm"
                       style="border: none;">
@@ -37,7 +37,8 @@
                         <span class="small fw-semibold">{{ $painting->favorited_by_count }}</span>
                     @endif
                 </a>
-            @endauth
+            @endauth --}}
+            <livewire:like-button :painting="$painting" />
         </div>
 
         <div class="card-body px-2 py-3">
