@@ -4,18 +4,24 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Painting;
+use App\Repositories\PaintingRepository;
+use App\Services\ArtistService;
 use Illuminate\Http\Request;
 
 class ArtistController extends Controller
 {
+    protected ArtistService $artistService;
+    protected PaintingRepository $paintingService;
+
+    public function __construct(ArtistService $artistService, PaintingRepository $paintingService)
+    {
+        $this->artistService = $artistService;
+        $this->paintingService = $paintingService;
+    }
+
     public function index()
     {
-        $artists = User::withCount(['paintings', 'followers'])
-//            ->whereHas('paintings', function ($query) {
-////                $query->where('is_draft', false);
-//            })
-            ->latest()
-            ->paginate(12); // paginate to keep it clean
+        $artists = $this->artistService->getArtistsForListing();
 
         return view('artist.list', [
             'artists' => $artists,
@@ -24,14 +30,8 @@ class ArtistController extends Controller
 
     public function show(string $artistSlug)
     {
-        $artist = User::where('slug', $artistSlug)->firstOrFail();
-
-        $paintings = Painting::with(['images', 'category'])
-            ->withCount('favoritedBy')
-            ->where('user_id', $artist->id)
-            // ->where('is_draft', false)
-            ->latest()
-            ->paginate(8);
+        $artist = $this->artistService->getArtistBySlug($artistSlug);
+        $paintings = $this->paintingService->getPaintingsByArtistId($artist->id);
 
         return view('artist.show', [
             'artist' => $artist,
