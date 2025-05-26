@@ -107,7 +107,8 @@
                         </div>
                     </a>
 
-                    <x-follow-button :user="$painting->user" class="w-100" />
+                    {{-- <x-follow-button :user="$painting->user" class="w-100" /> --}}
+                    <livewire:follow-button :user="$painting->user" buttonClass="w-100" />
                 </div>
             </div>
         </div>

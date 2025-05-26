@@ -25,7 +25,8 @@
                             </div>
                         </a>
                         <div class="px-3 pb-3">
-                            <x-follow-button :user="$artist" class="w-100" />
+                            {{-- <x-follow-button :user="$artist" class="w-100" /> --}}
+                            <livewire:follow-button :user="$artist" buttonClass="w-100" />
                         </div>
                     </div>
                 </div>

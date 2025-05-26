@@ -11,7 +11,8 @@
             <h1 class="display-4 fw-bold">{{ $artist->name }}</h1>
             <p class="lead">Born in {{ $artist->birth_year ?? '19XX' }} - {{ $artist->location ?? 'Unknown' }}</p>
 
-            <x-follow-button :user="$artist" class="rounded-pill px-4 btn-outline-light" />
+            {{-- <x-follow-button :user="$artist" class="rounded-pill px-4 btn-outline-light" /> --}}
+            <livewire:follow-button :user="$artist" buttonClass="rounded-pill px-4 btn-outline-light" />
         </div>
     </div>
 </section>
