@@ -6,14 +6,15 @@ use App\Models\User;
 use App\Models\Painting;
 use App\Repositories\PaintingRepository;
 use App\Services\ArtistService;
+use App\Services\PaintingService;
 use Illuminate\Http\Request;
 
 class ArtistController extends Controller
 {
     protected ArtistService $artistService;
-    protected PaintingRepository $paintingService;
+    protected PaintingService $paintingService;
 
-    public function __construct(ArtistService $artistService, PaintingRepository $paintingService)
+    public function __construct(ArtistService $artistService, PaintingService $paintingService)
     {
         $this->artistService = $artistService;
         $this->paintingService = $paintingService;

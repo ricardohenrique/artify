@@ -2,7 +2,10 @@
 
 namespace App\Services;
 
+use App\Models\Painting;
+use App\Models\User;
 use App\Repositories\PaintingRepository;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class PaintingService
 {
@@ -13,8 +16,13 @@ class PaintingService
         $this->paintingRepository = $paintingRepository;
     }
 
-    public function getPaintingsByArtistId(int $artistId, $perPage = 12)
+    public function getPaintingsByArtistId(int $artistId, $perPage = 12): LengthAwarePaginator
     {
         return $this->paintingRepository->getPaintingsByArtistId($artistId, $perPage);
+    }
+
+    public function toggleFavorite(User $user, Painting $painting): void
+    {
+        $this->paintingRepository->toggleFavorite($user, $painting);
     }
 }
