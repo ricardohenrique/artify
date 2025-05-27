@@ -14,7 +14,7 @@
             @endif
         </button>
     @else
-        <a href="{{ route('login') }}"
+        <a href=""
            class="text-decoration-none text-dark position-absolute top-0 end-0 m-2 bg-white px-2 py-1 rounded-pill d-flex align-items-center shadow-sm requires-auth">
             <i class="bi bi-heart {{ $painting->favorited_by_count ? 'me-1' : '' }} text-danger"></i>
             @if ($painting->favorited_by_count > 0)
