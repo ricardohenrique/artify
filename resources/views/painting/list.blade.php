@@ -113,14 +113,7 @@
         </div>
 
         @if ($paintings->hasPages())
-            <div class="mt-5 text-center">
-                <div class="text-muted mb-2">
-                    Showing <strong>{{ $paintings->firstItem() }}</strong> to <strong>{{ $paintings->lastItem() }}</strong> of <strong>{{ $paintings->total() }}</strong> results
-                </div>
-                <div class="d-inline-block">
-                    {{ $paintings->links() }}
-                </div>
-            </div>
+            <x-pagination-custom :items="$paintings" />
         @endif
     </section>
     <style>

@@ -13,6 +13,7 @@ class LikeButton extends Component
     public Painting $painting;
     public bool     $isFavorited    = false;
     public bool     $hasLikes       = false;
+
     public ?int     $favoriteCount  = 0;
 
     public function mount(Painting $painting)
