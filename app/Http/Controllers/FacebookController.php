@@ -17,11 +17,13 @@ class FacebookController extends Controller
     public function callback()
     {
         $facebookUser = Socialite::driver('facebook')->stateless()->user();
+        $name = $facebookUser->getName();
 
         $user = User::updateOrCreate(
             ['email' => $facebookUser->getEmail()],
             [
-                'name' => $facebookUser->getName(),
+                'name' => $name,
+                'slug' => Str::slug($name . '-' . uniqid()),
                 'facebook_id' => $facebookUser->getId(),
                 'email_verified_at' => now(),
                 'password' => bcrypt(Str::random(16)),

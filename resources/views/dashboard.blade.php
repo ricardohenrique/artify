@@ -27,6 +27,7 @@
                                     <h5 class="mb-1">{{ $painting->title }}</h5>
                                     <p class="text-muted mb-0">${{ number_format($painting->price, 2) }}</p>
                                     <small class="text-muted">{{ ucfirst($painting->category->name) }}</small>
+                                    <span class="badge text-bg-info">Published</span>
                                 </div>
                             </a>
                         </div>

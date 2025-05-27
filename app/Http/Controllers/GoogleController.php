@@ -27,6 +27,7 @@ class GoogleController extends Controller
                 'slug' => Str::slug($name . '-' . uniqid()),
                 'google_id' => $googleUser->getId(),
                 'email_verified_at' => now(),
+                'user_type' => 2,
             ]
         );
 

@@ -17,7 +17,8 @@ body {
 
 /* Gradient button style */
 .artify-btn {
-    background: linear-gradient(to right, #FF6A00, #D4145A);
+    /* background: linear-gradient(to right, #FF6A00, #D4145A); */
+    background: linear-gradient(to right, #ff5c00ad, #6a00b7db);
     border: none;
     color: white !important;
     padding: 0.5rem 1rem;
