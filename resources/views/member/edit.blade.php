@@ -86,9 +86,9 @@
                             <h5 class="mb-3 fw-semibold">🔒 Privacy Settings</h5>
 
                             <div class="form-check form-switch mb-3">
-                                <input class="form-check-input" type="checkbox" role="switch" id="public_profile" name="public_profile"
-                                    {{ old('public_profile', $user->public_profile ?? true) ? 'checked' : '' }}>
-                                <label class="form-check-label" for="public_profile">Make profile public</label>
+                                <input class="form-check-input" type="checkbox" role="switch" id="is_public" name="is_public"
+                                    {{ old('is_public', $user->is_public ?? true) ? 'checked' : '' }}>
+                                <label class="form-check-label" for="is_public">Make profile public</label>
                             </div>
 
                             <div class="form-check form-switch mb-3">

@@ -26,6 +26,7 @@ class User extends Authenticatable
         'username',
         'bio',
         'location',
+        'is_public',
         'profile_image',
         'website_url',
         'user_type_id',
@@ -105,5 +106,10 @@ class User extends Authenticatable
     public function isAdmin()
     {
         return $this->user_type_id === 1;
+    }
+
+    public function isPublic()
+    {
+        return $this->is_public;
     }
 }

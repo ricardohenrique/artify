@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('location')->nullable();
             $table->string('profile_image')->nullable();
             $table->string('website_url')->nullable();
+            $table->boolean('is_public')->default(true);
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password')->nullable();
             $table->string('google_id')->nullable()->unique();

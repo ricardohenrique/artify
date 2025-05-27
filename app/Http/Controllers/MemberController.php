@@ -45,8 +45,10 @@ class MemberController extends Controller
             'bio' => 'nullable|string|max:1000',
             'location' => 'nullable|string|max:255',
             'website_url' => 'nullable|url|max:255',
+            'is_public' => 'boolean',
             // 'profile_image' => 'nullable|image|max:2048',
         ]);
+        $validated['is_public'] = $request->has('is_public');
     
         // Optional image handling
         // if ($request->hasFile('profile_image')) {
