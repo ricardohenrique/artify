@@ -1,7 +1,8 @@
 <div>
     @auth
+        {{$positionTop}}
         <button wire:click="toggleFavorite"
-                class="position-absolute top-0 end-0 m-2 bg-white px-2 py-1 rounded-pill d-flex align-items-center shadow-sm btn btn-sm p-0 border-0"
+                class="position-absolute end-0 m-2 bg-white px-2 py-1 rounded-pill d-flex align-items-center shadow-sm btn btn-sm p-0 border-0 {{ $positionTop ? 'top-0' : 'bottom-0' }}"
                 title="Toggle favorite">
             @if ($isFavorited)
                 <i class="bi bi-heart-fill text-danger {{ $hasLikes ? 'me-1' : '' }}"></i>
@@ -15,7 +16,7 @@
         </button>
     @else
         <a href=""
-           class="text-decoration-none text-dark position-absolute top-0 end-0 m-2 bg-white px-2 py-1 rounded-pill d-flex align-items-center shadow-sm requires-auth">
+           class="text-decoration-none text-dark position-absolute top-0 end-0 m-2 bg-white px-2 py-1 rounded-pill d-flex align-items-center shadow-sm requires-auth {{ $buttonClass }}">
             <i class="bi bi-heart {{ $painting->favorited_by_count ? 'me-1' : '' }} text-danger"></i>
             @if ($painting->favorited_by_count > 0)
                 <span class="small fw-semibold">{{ $favoriteCount }}</span>

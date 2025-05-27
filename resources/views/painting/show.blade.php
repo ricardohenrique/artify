@@ -22,10 +22,11 @@
                             class="img-fluid rounded border"
                             style="height: 500px; width: 100%; object-fit: contain; background-color: #f8f9fa;"
                         >
-                        <div class="position-absolute bottom-0 end-0 m-3 bg-white px-3 py-1 rounded-pill d-flex align-items-center shadow-sm">
-                            <i class="bi bi-heart me-1 text-danger"></i>
-                            <span class="fw-semibold">{{ $painting->favorited_by_count }}</span>
-                        </div>
+                        <livewire:like-button :painting="$painting" positionTop=0 />
+{{--                        <div class="position-absolute bottom-0 end-0 m-3 bg-white px-3 py-1 rounded-pill d-flex align-items-center shadow-sm">--}}
+{{--                            <i class="bi bi-heart me-1 text-danger"></i>--}}
+{{--                            <span class="fw-semibold">{{ $painting->favorited_by_count }}</span>--}}
+{{--                        </div>--}}
                     </div>
 
                     <!-- Thumbnails -->

@@ -1,4 +1,3 @@
-@php $hasLikes = $painting->favorited_by_count > 0; @endphp
 <div class="col-md-3 col-sm-6">
     <div class="card border-0 shadow-sm h-100 position-relative">
         <div class="position-relative">
