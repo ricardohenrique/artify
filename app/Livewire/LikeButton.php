@@ -15,8 +15,9 @@ class LikeButton extends Component
     public bool     $hasLikes       = false;
     public ?int     $favoriteCount  = 0;
 
-    public function mount()
+    public function mount(Painting $painting)
     {
+        $this->painting = $painting;
         $this->updateLikeState();
     }
 
@@ -27,29 +28,30 @@ class LikeButton extends Component
 
     public function toggleFavorite()
     {
+        if (!Auth::check()) {
+            return;
+        }
+
         /** @var User $user */
         $user = Auth::user();
-
         $this->paintingService()->toggleFavorite($user, $this->painting);
-        $this->painting->refresh();
+        $this->painting->loadCount('favoritedBy');
         $this->updateLikeState();
     }
 
     public function render()
     {
-        $data = [
-            'hasLikes' => $this->hasLikes,
-            'isFavorited' => $this->isFavorited,
-            'favoriteCount' => $this->favoriteCount
-        ];
-
-        return view('livewire.like-button', $data);
+        return view('livewire.like-button');
     }
 
     protected function updateLikeState(): void
     {
-        $this->isFavorited = Auth::check() && Auth::user()->favorites->contains($this->painting->id);
+        if (Auth::check()) {
+            $this->isFavorited = Auth::user()->favorites->contains($this->painting->id);
+        } else {
+            $this->isFavorited = false;
+        }
         $this->hasLikes = $this->painting->favorited_by_count > 0;
-        $this->favoriteCount = $this->painting->favorited_by_count;
+        $this->favoriteCount = $this->painting->favorited_by_count ?? 0;
     }
 }
