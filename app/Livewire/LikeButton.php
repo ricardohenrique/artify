@@ -11,6 +11,11 @@ use Livewire\Component;
 class LikeButton extends Component
 {
     public Painting $painting;
+
+    protected $listeners = [
+        'favorite-toggled' => 'handleExternalToggle',
+    ];
+
     public bool     $isFavorited    = false;
     public bool     $hasLikes       = false;
 
@@ -18,9 +23,20 @@ class LikeButton extends Component
 
     public bool $positionTop = true;
 
+    public string $buttonType = 'icon';
+
     public function mount(Painting $painting)
     {
         $this->painting = $painting;
+        $this->updateLikeState();
+    }
+
+    public function handleExternalToggle(int $paintingId)
+    {
+        if ($paintingId !== $this->painting->id) return;
+
+        // Painting was updated elsewhere, so refresh locally
+        $this->painting->loadCount('favoritedBy');
         $this->updateLikeState();
     }
 
@@ -40,6 +56,9 @@ class LikeButton extends Component
         $this->paintingService()->toggleFavorite($user, $this->painting);
         $this->painting->loadCount('favoritedBy');
         $this->updateLikeState();
+
+        // ✅ Broadcast to all like buttons for the same painting
+        $this->dispatch('favorite-toggled', paintingId: $this->painting->id);
     }
 
     public function render()

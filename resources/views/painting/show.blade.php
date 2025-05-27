@@ -23,10 +23,6 @@
                             style="height: 500px; width: 100%; object-fit: contain; background-color: #f8f9fa;"
                         >
                         <livewire:like-button :painting="$painting" positionTop=0 />
-{{--                        <div class="position-absolute bottom-0 end-0 m-3 bg-white px-3 py-1 rounded-pill d-flex align-items-center shadow-sm">--}}
-{{--                            <i class="bi bi-heart me-1 text-danger"></i>--}}
-{{--                            <span class="fw-semibold">{{ $painting->favorited_by_count }}</span>--}}
-{{--                        </div>--}}
                     </div>
 
                     <!-- Thumbnails -->
@@ -69,16 +65,7 @@
                                 @csrf
                                 <button type="submit" class="btn btn-outline-primary w-100">Ask Seller</button>
                             </form>
-                            <form method="POST" action="{{ route('paintings.favorite', $painting) }}">
-                                @csrf
-                                <button type="submit" class="btn btn-outline-danger w-100">
-                                    @if(auth()->user()->favorites->contains($painting->id))
-                                        <i class="bi bi-heart-fill"></i> Favorited
-                                    @else
-                                        <i class="bi bi-heart"></i> Add to Favorites
-                                    @endif
-                                </button>
-                            </form>
+                            <livewire:like-button :painting="$painting" buttonType="button" />
                         @endguest
                     </div>
                 </div>
@@ -108,7 +95,6 @@
                         </div>
                     </a>
 
-                    {{-- <x-follow-button :user="$painting->user" class="w-100" /> --}}
                     <livewire:follow-button :user="$painting->user" buttonClass="w-100" />
                 </div>
             </div>
