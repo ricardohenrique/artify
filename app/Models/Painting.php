@@ -42,7 +42,8 @@ class Painting extends Model
         return $this->hasMany(PaintingImage::class);
     }
 
-    public function favoritedBy() {
+    public function favoritedBy()
+    {
         return $this->belongsToMany(User::class, 'favorites')->withTimestamps();
     }
 

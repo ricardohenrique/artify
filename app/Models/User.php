@@ -10,7 +10,8 @@ use Illuminate\Notifications\Notifiable;
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable;
+    use HasFactory;
+    use Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -59,16 +60,19 @@ class User extends Authenticatable
     }
 
     // Users followed by this user
-    public function following() {
+    public function following()
+    {
         return $this->belongsToMany(User::class, 'followers', 'follower_id', 'user_id')->withTimestamps();
     }
 
     // Followers of this user
-    public function followers() {
+    public function followers()
+    {
         return $this->belongsToMany(User::class, 'followers', 'user_id', 'follower_id')->withTimestamps();
     }
 
-    public function favorites() {
+    public function favorites()
+    {
         return $this->belongsToMany(Painting::class, 'favorites')->withTimestamps();
     }
 
@@ -98,7 +102,7 @@ class User extends Authenticatable
         return $this->user_type_id === 3;
     }
 
-        public function isAdmin()
+    public function isAdmin()
     {
         return $this->user_type_id === 1;
     }

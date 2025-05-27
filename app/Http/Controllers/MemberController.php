@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\Redirect;
 
 class MemberController extends Controller
 {
-
     public function member(string $id)
     {
         $user = User::withCount(['followers', 'following'])->findOrFail($id);

@@ -47,7 +47,7 @@ class PaintingListController extends Controller
 
         $paintings = $query->paginate(8)->withQueryString();
 
-        if(!isset($category)) {
+        if (!isset($category)) {
             $category = new Category([
                 'name' => 'independent artwork',
             ]);

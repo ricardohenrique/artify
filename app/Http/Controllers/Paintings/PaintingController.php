@@ -10,11 +10,8 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
-
 class PaintingController extends Controller
 {
-
-
     public function index()
     {
         return Painting::all();
@@ -61,7 +58,7 @@ class PaintingController extends Controller
         ]);
 
         if ($request->hasFile('images')) {
-            if ( ($painting->images()->count() + count($request->file('images'))) > 5) {
+            if (($painting->images()->count() + count($request->file('images'))) > 5) {
                 return back()->withErrors(['images' => 'You can upload a maximum of 5 images in total.'])->withInput();
             }
             foreach ($request->file('images') as $image) {

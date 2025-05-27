@@ -33,7 +33,9 @@ class LikeButton extends Component
 
     public function handleExternalToggle(int $paintingId)
     {
-        if ($paintingId !== $this->painting->id) return;
+        if ($paintingId !== $this->painting->id) {
+            return;
+        }
 
         // Painting was updated elsewhere, so refresh locally
         $this->painting->loadCount('favoritedBy');

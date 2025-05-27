@@ -15,7 +15,7 @@ class MessageController extends Controller
 
         $conversations = Conversation::where('buyer_id', $user->id)
             ->orWhere('seller_id', $user->id)
-            ->with(['painting', 'messages' => fn($q) => $q->latest()->limit(1)])
+            ->with(['painting', 'messages' => fn ($q) => $q->latest()->limit(1)])
             ->latest('updated_at')
             ->get();
 

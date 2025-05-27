@@ -34,7 +34,7 @@ class FollowButton extends Component
         $authUser = Auth::user();
 
         $isFollowing = false;
-        if ($authUser){
+        if ($authUser) {
             $isFollowing = $authUser->following->contains($this->user->id);
         }
 
