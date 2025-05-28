@@ -38,25 +38,18 @@ class MemberController extends Controller
         if ($user->id !== auth()->id()) {
             abort(403);
         }
-    
+
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'username' => 'nullable|string|max:255|unique:users,username,' . $user->id,
             'bio' => 'nullable|string|max:1000',
             'location' => 'nullable|string|max:255',
             'website_url' => 'nullable|url|max:255',
-            'is_public' => 'boolean',
-            // 'profile_image' => 'nullable|image|max:2048',
         ]);
-        $validated['is_public'] = $request->has('is_public');
-    
-        // Optional image handling
-        // if ($request->hasFile('profile_image')) {
-        //     $validated['profile_image'] = $request->file('profile_image')->store('avatars', 'public');
-        // }
-    
+        $validated['is_public'] = $request->boolean('is_public');
+
         $user->update($validated);
-    
+
         return redirect()->route('member.edit', $user->id)->with('status', 'Profile updated!');
     }
 
