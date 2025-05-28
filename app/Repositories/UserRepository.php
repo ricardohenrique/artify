@@ -16,4 +16,9 @@ class UserRepository
             $user->following()->attach($followedUser->id);
         }
     }
+
+    public function getUserById(string $id)
+    {
+        return User::withCount(['followers', 'following'])->findOrFail($id);
+    }
 }

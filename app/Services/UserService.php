@@ -18,4 +18,9 @@ class UserService
     {
         $this->userRepository->toggleFollow($user, $followedUser);
     }
+
+    public function getUserById(string $id)
+    {
+        return $this->userRepository->getUserById($id);
+    }
 }

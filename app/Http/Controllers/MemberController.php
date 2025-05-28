@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Services\UserService;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
@@ -10,9 +11,15 @@ use Illuminate\Support\Facades\Redirect;
 
 class MemberController extends Controller
 {
+    protected UserService $userService;
+    public function __construct(UserService $userService)
+    {
+        $this->userService = $userService;
+    }
+
     public function member(string $id)
     {
-        $user = User::withCount(['followers', 'following'])->findOrFail($id);
+        $user = $this->userService->getUserById($id);
         return response()->view('member', ['user' => $user], 200);
     }
 
