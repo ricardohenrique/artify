@@ -82,7 +82,37 @@ p.mb-4 {
 
 /* Related section spacing */
 section.container.pb-5 {
-    margin-top: 3rem;
+    /* margin-top: 3rem; */
 }
 
 /*------------------------ End Artify Styling ------------------------*/
+
+/*------------------------ Related Paintings Section ------------------------*/
+
+.related-paintings-section {
+    /* margin-top: 4rem; */
+    position: relative;
+}
+
+.related-paintings-section .section-divider {
+    height: 2px;
+    width: 100%;
+    /* margin: 0 auto 1.5rem; */
+    background: var(--artify-gradient);
+    border-radius: 10px;
+    margin-bottom: 1rem;
+}
+
+.related-paintings-section .related-title {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--artify-dark);
+    /* position: relative; */
+    /* z-index: 2; */
+    margin-left: 0;
+}
+
+/* Optional spacing for layout consistency */
+.related-paintings-section .row {
+    margin-top: 1rem;
+}

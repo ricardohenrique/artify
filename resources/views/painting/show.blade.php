@@ -149,8 +149,9 @@
         </div>
     </section>
     @if ($relatedPaintings->count())
-        <section class="container pb-5">
-            <h4 class="mb-4 fw-semibold">More from this artist</h4>
+        <section class="container pb-5 related-paintings-section">
+            <div class="section-divider"></div>
+            <h4 class="related-title mb-2">More from this artist</h4>
 
             <div class="row g-4">
                 @foreach ($relatedPaintings as $related)
