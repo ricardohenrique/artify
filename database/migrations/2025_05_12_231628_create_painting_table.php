@@ -23,14 +23,18 @@ return new class extends Migration
             $table->text('description')->nullable();
 
             $table->decimal('price', 10, 2)->nullable();
-            $table->string('image_path')->nullable();
+            $table->string('material')->nullable();
+            $table->year('year_created')->nullable();
+            $table->string('dimensions')->nullable();
+            $table->boolean('framed')->nullable();
+            $table->enum('orientation', ['portrait', 'landscape', 'square'])->nullable();
 
             $table->foreignId('category_id')
                   ->nullable()
                   ->constrained()
                   ->nullOnDelete();
 
-            $table->boolean('is_available')->default(true);
+            $table->enum('availability', ['for_sale', 'sold', 'reserved'])->default('for_sale');
             $table->timestamps();
             $table->softDeletes();
         });

@@ -25,9 +25,13 @@ class PaintingFactory extends Factory
             'slug' => Str::slug($title . '-' . uniqid()),
             'description' => $this->faker->paragraph(),
             'price' => $this->faker->randomFloat(2, 50, 2000),
-            'image_path' => 'paintings/' . $this->faker->uuid() . '.jpg',
+            'material' => $this->faker->randomElement(['Oil on canvas', 'Acrylic', 'Watercolor', 'Mixed media']),
+            'year_created' => $this->faker->year(),
+            'dimensions' => $this->faker->randomElement(['30x40 cm', '50x70 cm', '60x90 cm']),
+            'framed' => $this->faker->boolean(),
+            'orientation' => $this->faker->randomElement(['portrait', 'landscape', 'square']),
             'category_id' => Category::inRandomOrder()->value('id'),
-            'is_available' => $this->faker->boolean(90),
+            'availability' => $this->faker->randomElement(['for_sale', 'sold', 'reserved']),
         ];
     }
 }

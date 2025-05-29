@@ -11,14 +11,18 @@ class Painting extends Model
 
     protected $fillable = [
         'user_id',
+        'is_draft',
         'title',
         'slug',
         'description',
         'price',
-        'image_path',
+        'material',
+        'year_created',
+        'dimensions',
+        'framed',
+        'orientation',
         'category_id',
-        'is_available',
-        'is_draft',
+        'availability',
     ];
 
     /**
@@ -55,5 +59,15 @@ class Painting extends Model
     public function getRouteKeyName()
     {
         return 'id';
+    }
+
+    public function colors()
+    {
+        return $this->belongsToMany(Color::class);
+    }
+
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class);
     }
 }
