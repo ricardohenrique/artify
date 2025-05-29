@@ -8,7 +8,7 @@
 
         <!-- Welcome Box -->
         <div class="p-5 bg-white shadow rounded mb-4">
-            <h1 class="h3 mb-3">Welcome back, {{ Auth::user()->name }}!</h1>
+            <h1 class="h3 mb-3">Welcome, {{ Auth::user()->name }}!</h1>
             <p class="mb-0">You're logged in to your dashboard.</p>
         </div>
 
