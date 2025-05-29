@@ -28,13 +28,18 @@
                             @enderror
                         </div>
 
-                        <!-- Password -->
+                        <!-- Password with show toggle -->
                         <div class="mb-3">
                             <label for="password" class="form-label">Password</label>
-                            <input id="password" type="password" name="password"
-                                   class="form-control @error('password') is-invalid @enderror" required>
+                            <div class="input-group">
+                                <input id="password" type="password" name="password"
+                                    class="form-control @error('password') is-invalid @enderror" required>
+                                <button class="btn btn-outline-secondary" type="button" id="togglePassword">
+                                    <i class="bi bi-eye"></i>
+                                </button>
+                            </div>
                             @error('password')
-                                <div class="invalid-feedback">{{ $message }}</div>
+                                <div class="invalid-feedback d-block">{{ $message }}</div>
                             @enderror
                         </div>
 
@@ -68,4 +73,20 @@
         </div>
     </div>
 </section>
+<script>
+    document.getElementById('togglePassword').addEventListener('click', function () {
+        const passwordField = document.getElementById('password');
+        const icon = this.querySelector('i');
+
+        if (passwordField.type === 'password') {
+            passwordField.type = 'text';
+            icon.classList.remove('bi-eye');
+            icon.classList.add('bi-eye-slash');
+        } else {
+            passwordField.type = 'password';
+            icon.classList.remove('bi-eye-slash');
+            icon.classList.add('bi-eye');
+        }
+    });
+</script>
 @endsection
