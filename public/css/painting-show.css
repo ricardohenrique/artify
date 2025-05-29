@@ -1,0 +1,88 @@
+/*------------------------ Artify Detailed Page Styling ------------------------*/
+
+.bg-white {
+    background-color: #fff;
+    border-radius: var(--artify-radius-lg);
+}
+
+.shadow-sm {
+    box-shadow: var(--artify-shadow) !important;
+}
+
+/* Main Image Styling */
+#main-image {
+    border-radius: 20px;
+    background-color: var(--artify-bg-light);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+/* Thumbnails */
+.thumb-image {
+    border-radius: 10px;
+    border: 2px solid transparent;
+    transition: border-color 0.3s ease;
+}
+
+.thumb-image:hover {
+    border-color: var(--artify-primary);
+}
+
+/* Artwork Detail Section */
+dl.row dt {
+    font-weight: 600;
+    color: var(--artify-dark);
+}
+
+dl.row dd {
+    color: var(--artify-muted);
+}
+
+/* Color badges */
+.badge.border {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 0.25rem;
+    border: 1px solid #ccc;
+}
+
+/* Tag styling */
+.badge.bg-secondary {
+    background-color: #f1f3f5 !important;
+    color: var(--artify-dark);
+    font-weight: 500;
+    border-radius: 20px;
+    padding: 0.4em 0.75em;
+}
+
+/* Price highlight */
+.text-primary {
+    color: var(--artify-primary) !important;
+}
+
+/* Artist avatar styling */
+.rounded-circle {
+    border: 3px solid color-mix(in srgb, var(--artify-primary) 20%, transparent);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+/* Headings */
+h5.fw-semibold,
+h4.fw-semibold {
+    color: var(--artify-dark);
+}
+
+/* Description */
+p.mb-4 {
+    color: #555;
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+/* Related section spacing */
+section.container.pb-5 {
+    margin-top: 3rem;
+}
+
+/*------------------------ End Artify Styling ------------------------*/

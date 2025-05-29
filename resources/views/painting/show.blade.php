@@ -2,6 +2,10 @@
 
 @section('title', $painting->title)
 
+@section('style')
+<link href="{{ asset('css/painting-show.css') }}" rel="stylesheet">
+@endsection
+
 @section('content')
     <section class="container py-5">
         <div class="row g-5">
@@ -38,6 +42,50 @@
                     @endif
                 @else
                     <img src="{{ asset('images/placeholder.jpg') }}" class="img-fluid rounded border" alt="No image">
+                @endif
+                @if ($painting->orientation || $painting->material || $painting->dimensions || $painting->year_created || $painting->availability || $painting->colors->count() || $painting->tags->count())
+                    <div class="mt-4 p-4 bg-white border rounded shadow-sm">
+                        <h5 class="fw-semibold mb-3">Artwork Details</h5>
+                        <dl class="row mb-0 text-muted">
+                            @if ($painting->material)
+                                <dt class="col-sm-4">Material</dt>
+                                <dd class="col-sm-8">{{ $painting->material }}</dd>
+                            @endif
+                            @if ($painting->dimensions)
+                                <dt class="col-sm-4">Dimensions</dt>
+                                <dd class="col-sm-8">{{ $painting->dimensions }}</dd>
+                            @endif
+                            @if ($painting->orientation)
+                                <dt class="col-sm-4">Orientation</dt>
+                                <dd class="col-sm-8 text-capitalize">{{ $painting->orientation }}</dd>
+                            @endif
+                            @if ($painting->year_created)
+                                <dt class="col-sm-4">Year</dt>
+                                <dd class="col-sm-8">{{ $painting->year_created }}</dd>
+                            @endif
+                            @if ($painting->availability)
+                                <dt class="col-sm-4">Availability</dt>
+                                <dd class="col-sm-8 text-capitalize">{{ str_replace('_', ' ', $painting->availability) }}</dd>
+                            @endif
+                            @if ($painting->colors->count())
+                                <dt class="col-sm-4">Colors</dt>
+                                <dd class="col-sm-8">
+                                    @foreach ($painting->colors as $color)
+                                        <span class="badge border" style="background-color: {{ $color->hex_code }};">&nbsp;</span>
+                                        <span class="me-2">{{ $color->name }}</span>
+                                    @endforeach
+                                </dd>
+                            @endif
+                            @if ($painting->tags->count())
+                                <dt class="col-sm-4">Tags</dt>
+                                <dd class="col-sm-8">
+                                    @foreach ($painting->tags as $tag)
+                                        <span class="badge bg-secondary me-1">#{{ $tag->name }}</span>
+                                    @endforeach
+                                </dd>
+                            @endif
+                        </dl>
+                    </div>
                 @endif
             </div>
 
@@ -100,6 +148,17 @@
             </div>
         </div>
     </section>
+    @if ($relatedPaintings->count())
+        <section class="container pb-5">
+            <h4 class="mb-4 fw-semibold">More from this artist</h4>
+
+            <div class="row g-4">
+                @foreach ($relatedPaintings as $related)
+                    @include('components.painting-card', ['painting' => $related])
+                @endforeach
+            </div>
+        </section>
+    @endif
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             // Thumbnail swapping

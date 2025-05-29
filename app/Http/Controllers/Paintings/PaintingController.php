@@ -135,12 +135,20 @@ class PaintingController extends Controller
     public function show(string $categorySlug, string $paintingSlug)
     {
         $painting = Painting::where('slug', $paintingSlug)
-            ->with(['user', 'images', 'category'])
+            ->with(['user', 'images', 'category', 'colors', 'tags'])
             ->withCount('favoritedBy')
             ->firstOrFail();
 
+        $relatedPaintings = Painting::where('user_id', $painting->user_id)
+            ->where('id', '!=', $painting->id)
+            // ->where('is_draft', false)
+            ->latest()
+            ->take(4)
+            ->get();
+
         return view('painting.show', [
             'painting' => $painting,
+            'relatedPaintings' => $relatedPaintings,
         ]);
     }
 }

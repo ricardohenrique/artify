@@ -1,51 +1,105 @@
+:root {
+    /* Brand Colors */
+    --artify-primary: #ff4e9b;
+    --artify-primary-light: #ff7c5c;
+    --artify-accent: #ec4625;
+    --artify-outline: #ff4e9b66;
+
+    /* Gradient */
+    --artify-gradient: linear-gradient(135deg, var(--artify-primary-light), var(--artify-primary));
+
+    /* Neutral Colors */
+    --artify-dark: #333;
+    --artify-muted: #6c757d;
+    --artify-bg-light: #f8f9fa;
+    --artify-bg-subtle: #f4f5f7;
+    --artify-border: #dee2e6;
+
+    /* Typography */
+    --artify-font-main: "Open Sans", sans-serif;
+
+    /* Spacing / Radius / Shadow */
+    --artify-radius-sm: 8px;
+    --artify-radius-lg: 16px;
+    --artify-radius-xl: 24px;
+    --artify-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+}
+
 /*----------------------------General----------------------------*/
 body {
     padding-top: 105px;
-    /*font-family: 'Lexend', sans-serif;*/
     font-family: "Open Sans", sans-serif;
-    /*font-family: "Montserrat", sans-serif;*/
     font-weight: 400;
 }
 
-/*body a, body p, body span{*/
-/*    font-weight: 300;*/
-/*}*/
 
 .logo {
     height: 40px;
 }
 
-/* Gradient button style */
+/* button */
 .artify-btn {
-    /* background: linear-gradient(to right, #FF6A00, #D4145A); */
-    background: linear-gradient(to right, #ff5c00ad, #6a00b7db);
+    background: var(--artify-gradient);
     border: none;
     color: white !important;
     padding: 0.5rem 1rem;
-    border-radius: 8px;
+    border-radius: var(--artify-radius-sm);
     font-weight: 600;
     transition: background 0.3s ease;
 }
 
-.artify-btn:hover {
-    opacity: 0.9;
-}
-
-/* Gradient outline button style */
 .artify-btn-outline {
-    border: 1px solid #D4145A;
-    color: #D4145A !important;
+    border: 1px solid var(--artify-primary);
+    color: var(--artify-primary) !important;
     background-color: transparent;
     padding: 0.5rem 1rem;
-    border-radius: 8px;
+    border-radius: var(--artify-radius-sm);
     font-weight: 600;
     transition: all 0.3s ease;
 }
 
 .artify-btn-outline:hover {
-    background-color: #D4145A;
+    background-color: var(--artify-primary);
     color: white !important;
 }
+
+/* Button enhancements */
+.btn-primary {
+    background: var(--artify-gradient);
+    border: none;
+    font-weight: 600;
+    transition: background 0.3s ease;
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, var(--artify-primary), var(--artify-primary-light));
+}
+
+.btn-outline-primary {
+    border: 1px solid var(--artify-primary);
+    color: var(--artify-primary);
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.btn-outline-primary:hover {
+    background-color: var(--artify-primary);
+    color: white;
+    border-color: var(--artify-primary);
+}
+
+.btn-outline-danger {
+    border: 1px solid var(--artify-accent);
+    color: var(--artify-accent);
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.btn-outline-danger:hover {
+    background-color: var(--artify-accent);
+    color: white;
+}
+
 /*-----------------------------------------------------------------*/
 
 /*----------------------------Header----------------------------*/
@@ -69,7 +123,7 @@ body {
     left: 0;
     height: 1px;
     width: 0%;
-    background: linear-gradient(90deg, #ff7c5c, #ff4e9b);
+    background: linear-gradient(90deg, var(--artify-primary-light), var(--artify-primary));
     transition: width 0.15s ease;
     border-radius: 2px;
 }
@@ -81,7 +135,7 @@ body {
 
 /* Optional: color change on hover */
 .menu-category .category-link:hover {
-    color: #ec4625;
+    color: var(--artify-accent);
 }
 
 .btn-icon-header {
@@ -159,7 +213,7 @@ body {
 
 /* CTA Button */
 .hero-cta-btn {
-    background: linear-gradient(135deg, #ff7c5c, #ff4e9b);
+    background: var(--artify-gradient);
     border: none;
     color: white;
     font-weight: 600;
@@ -169,7 +223,7 @@ body {
 }
 
 .hero-cta-btn:hover {
-    background: linear-gradient(135deg, #ff4e9b, #ff7c5c);
+    background: linear-gradient(135deg, var(--artify-primary), var(--artify-primary-light));
     color: white;
 }
 
@@ -204,8 +258,8 @@ body {
 
 /* Avatar with light border and slight lift */
 .avatar-img {
-    border: 3px solid #ff4e9b33;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    border: 3px solid color-mix(in srgb, var(--artify-primary) 20%, transparent);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
 }
 
 /* Button with gradient border */
@@ -391,8 +445,9 @@ body {
     transition: color 0.2s ease;
 }
 
-.footer-link:hover {
-    color: #ff4e9b;
+.footer-link:hover,
+.footer-section .bi:hover {
+    color: var(--artify-primary);
 }
 
 .footer-section h6 {
@@ -405,10 +460,6 @@ body {
     transition: color 0.2s ease;
 }
 
-.footer-section .bi:hover {
-    color: #ff4e9b;
-}
-
 .footer-section hr {
     border-color: #dee2e6;
 }
@@ -419,16 +470,15 @@ body {
     transition: color 0.2s ease;
 }
 
-.footer-section .bi:hover {
-    color: #ff4e9b;
-}
-
 .footer-section .developer-credit a {
     color: #ff4e9b;
     text-decoration: none;
 }
 
 .footer-section .developer-credit a:hover {
-    color: #ec4625;
+    color: var(--artify-accent);
 }
 /*-----------------------------------------------------------------*/
+
+
+@import 'painting-show';
