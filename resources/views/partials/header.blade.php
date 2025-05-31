@@ -4,7 +4,7 @@
         <!-- Top Row -->
         <div class="d-flex flex-wrap align-items-center justify-content-between">
             <a class="navbar-brand d-flex align-items-center me-3" href="/">
-                <img src="{{ asset('artify-logo.png') }}" alt="Artify Logo" class="logo me-2" style="height: 40px;">
+                <img src="{{ asset('artify-logo-opt.png') }}" alt="Artify Logo" class="logo me-2" style="height: 40px;">
             </a>
 
             <!-- Search -->
@@ -39,6 +39,7 @@
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userMenu">
                             <li><a class="dropdown-item" href="{{ route('dashboard') }}">Dashboard</a></li>
                             <li><a class="dropdown-item" href="{{ route('member.profile', Auth::user()->id) }}">My Profile</a></li>
+                            <li><a class="dropdown-item" href="{{ route('member.edit', Auth::user()->id) }}">Account Settings</a></li>
                             <li><hr class="dropdown-divider"></li>
                             <li>
                                 <form method="POST" action="{{ route('logout') }}">
