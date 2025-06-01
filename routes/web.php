@@ -40,6 +40,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/member/{id}', [MemberController::class, 'member'])->name('member.profile');
     Route::get('/member/{id}/edit', [MemberController::class, 'edit'])->name('member.edit');
     Route::get('/member/{id}/profile', [MemberController::class, 'profile'])->name('member.profile');
+    Route::get('/member/{id}/account-settings', [MemberController::class, 'accountSettings'])->name('member.accountSettings');
     Route::put('/member/{id}', [MemberController::class, 'update'])->name('member.update');
     Route::get('/member/{id}/favorites', [MemberController::class, 'favorites'])->name('member.favorites');
     Route::get('/member/{id}/messages', [MessageController::class, 'index'])->name('member.messages');

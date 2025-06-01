@@ -52,8 +52,27 @@ class MemberController extends Controller
             'favorites',
         ])
         ->findOrFail($id);
-        
+
         return view('user.profile', compact('user'));
+    }
+
+
+    public function accountSettings(string $id)
+    {
+        $user = User::with([
+            'favorites.images', // to display painting images
+            'favorites.user',   // to show painting owner
+            'followers',
+            'following',
+        ])
+        ->withCount([
+            'followers',
+            'following',
+            'favorites',
+        ])
+        ->findOrFail($id);
+        
+        return view('user.account-settings', compact('user'));
     }
 
     public function update(Request $request, string $id): RedirectResponse
@@ -75,7 +94,7 @@ class MemberController extends Controller
 
         $user->update($validated);
 
-        return redirect()->route('member.edit', $user->id)->with('status', 'Profile updated!');
+        return redirect()->route('member.accountSettings', $user->id)->with('status', 'Profile updated!');
     }
 
     public function favorites(string $id)
