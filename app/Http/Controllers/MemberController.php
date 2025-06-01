@@ -38,6 +38,24 @@ class MemberController extends Controller
         return view('member.edit', compact('user'));
     }
 
+    public function profile(string $id)
+    {
+        $user = User::with([
+            'favorites.images', // to display painting images
+            'favorites.user',   // to show painting owner
+            'followers',
+            'following',
+        ])
+        ->withCount([
+            'followers',
+            'following',
+            'favorites',
+        ])
+        ->findOrFail($id);
+        
+        return view('user.profile', compact('user'));
+    }
+
     public function update(Request $request, string $id): RedirectResponse
     {
         $user = User::findOrFail($id);
