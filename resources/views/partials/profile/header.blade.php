@@ -29,10 +29,31 @@
 </div>
 <div class="bg-white border-top border-bottom py-2 mb-4">
     <div class="container d-flex gap-4 align-items-center">
-        <a href="{{ route('member.profile', Auth::user()->id) }}" class="fw-semibold text-dark text-decoration-none">Profile</a>
-        <a href="{{ route('member.accountSettings', Auth::user()->id) }}" class="text-muted text-decoration-none">Account settings</a>
-        <a href="{{ route('member.profile', Auth::user()->id) }}" class="text-muted text-decoration-none">Privacy Center</a>
-        <a href="{{ route('member.profile', Auth::user()->id) }}" class="text-muted text-decoration-none">Orders</a>
-        <a href="{{ route('member.profile', Auth::user()->id) }}" class="text-muted text-decoration-none">Messages</a>
+
+        <a href="{{ route('member.profile', Auth::user()->id) }}"
+           class="text-decoration-none {{ request()->routeIs('member.profile') ? 'fw-semibold text-dark' : 'text-muted' }}">
+            Profile
+        </a>
+
+        <a href="{{ route('member.settings', Auth::user()->id) }}"
+           class="text-decoration-none {{ request()->routeIs('member.settings') ? 'fw-semibold text-dark' : 'text-muted' }}">
+            Account settings
+        </a>
+
+        <a href="{{ route('member.privacy', Auth::user()->id) }}"
+           class="text-decoration-none {{ request()->routeIs('member.privacy') ? 'fw-semibold text-dark' : 'text-muted' }}">
+            Privacy Center
+        </a>
+
+        <a href="{{ route('member.orders', Auth::user()->id) }}"
+           class="text-decoration-none {{ request()->routeIs('member.orders') ? 'fw-semibold text-dark' : 'text-muted' }}">
+            Orders
+        </a>
+
+        <a href="{{ route('member.messages', Auth::user()->id) }}"
+           class="text-decoration-none {{ request()->routeIs('member.messages') ? 'fw-semibold text-dark' : 'text-muted' }}">
+            Messages
+        </a>
+
     </div>
 </div>

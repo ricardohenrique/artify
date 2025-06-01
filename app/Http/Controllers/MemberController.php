@@ -57,7 +57,7 @@ class MemberController extends Controller
     }
 
 
-    public function accountSettings(string $id)
+    public function settings(string $id)
     {
         $user = User::with([
             'favorites.images', // to display painting images

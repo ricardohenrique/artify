@@ -152,7 +152,7 @@
         }
 
         /* Optional: custom dropdown menu spacing */
-        .dropdown-menu {
+        .filter-bar .dropdown-menu {
             font-size: 14px;
             border-radius: 8px;
         }
