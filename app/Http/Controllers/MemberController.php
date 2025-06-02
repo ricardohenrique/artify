@@ -71,7 +71,7 @@ class MemberController extends Controller
             'favorites',
         ])
         ->findOrFail($id);
-        
+
         return view('user.account-settings', compact('user'));
     }
 
@@ -94,7 +94,7 @@ class MemberController extends Controller
 
         $user->update($validated);
 
-        return redirect()->route('member.accountSettings', $user->id)->with('status', 'Profile updated!');
+        return redirect()->route('member.settings', $user->id)->with('status', 'Profile updated!');
     }
 
     public function favorites(string $id)
