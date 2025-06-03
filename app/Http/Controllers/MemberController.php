@@ -164,4 +164,26 @@ class MemberController extends Controller
             'favorites' => $favorites,
         ]);
     }
+
+    public function orders(string $id)
+    {
+        $user = User::with([
+            'favorites.images',
+            'favorites.user',
+            'followers',
+            'following',
+        ])
+        ->withCount([
+            'followers',
+            'following',
+            'favorites',
+        ])
+        ->findOrFail($id);
+
+        if ($user->id !== auth()->id()) {
+            return view('config.forbidden');
+        }
+
+        return view('user.orders', compact('user'));
+    }
 }
