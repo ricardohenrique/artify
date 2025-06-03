@@ -44,6 +44,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/member/{id}/privacy-center', [MemberController::class, 'privacy'])->name('member.privacy');
     Route::get('/member/{id}/orders', [MemberController::class, 'orders'])->name('member.orders');
     Route::put('/member/{id}', [MemberController::class, 'update'])->name('member.update');
+    Route::put('/member/{id}/updatePrivacy', [MemberController::class, 'updatePrivacy'])->name('member.updatePrivacy');
     Route::get('/member/{id}/favorites', [MemberController::class, 'favorites'])->name('member.favorites');
     Route::get('/member/{id}/messages', [MessageController::class, 'index'])->name('member.messages');
     Route::get('/dashboard', [MemberController::class, 'dashboard'])->name('dashboard');

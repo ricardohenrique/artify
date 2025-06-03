@@ -78,7 +78,7 @@
                     </div>
 
                     {{-- Section: Privacy Settings --}}
-                    <div class="bg-white rounded shadow-sm p-4 mb-4">
+                    {{-- <div class="bg-white rounded shadow-sm p-4 mb-4">
                         <h5 class="mb-3 fw-semibold">🔒 Privacy Settings</h5>
 
                         <div class="form-check form-switch mb-3">
@@ -92,7 +92,7 @@
                                    value="1" {{ old('show_email', $user->show_email ?? false) ? 'checked' : '' }}>
                             <label class="form-check-label" for="show_email">Show email on profile</label>
                         </div>
-                    </div>
+                    </div> --}}
 
                     {{-- Save Button --}}
                     <div class="text-end">

@@ -75,6 +75,24 @@ class MemberController extends Controller
         return view('user.account-settings', compact('user'));
     }
 
+    public function privacy(string $id)
+    {
+        $user = User::with([
+            'favorites.images', // to display painting images
+            'favorites.user',   // to show painting owner
+            'followers',
+            'following',
+        ])
+        ->withCount([
+            'followers',
+            'following',
+            'favorites',
+        ])
+        ->findOrFail($id);
+
+        return view('user.privacy-center', compact('user'));
+    }
+
     public function update(Request $request, string $id): RedirectResponse
     {
         $user = User::findOrFail($id);
@@ -90,11 +108,26 @@ class MemberController extends Controller
             'location' => 'nullable|string|max:255',
             'website_url' => 'nullable|url|max:255',
         ]);
-        $validated['is_public'] = $request->boolean('is_public');
+        // $validated['is_public'] = $request->boolean('is_public');
 
         $user->update($validated);
 
         return redirect()->route('member.settings', $user->id)->with('status', 'Profile updated!');
+    }
+
+    public function updatePrivacy(Request $request, string $id): RedirectResponse
+    {
+        $user = User::findOrFail($id);
+
+        if ($user->id !== auth()->id()) {
+            abort(403);
+        }
+
+        $validated['is_public'] = $request->boolean('is_public');
+
+        $user->update($validated);
+
+        return redirect()->route('member.privacy', $user->id)->with('status', 'Profile updated!');
     }
 
     public function favorites(string $id)
