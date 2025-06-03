@@ -1,0 +1,84 @@
+@extends('layouts.app')
+
+@section('title', 'Your Profile')
+
+@section('content')
+<section class="bg-light py-5">
+    <div class="container">
+        @include('partials.profile.header')
+
+        <div class="row">
+            @include('partials.profile.sidebar')
+            
+            <div class="col-md-9">
+                <div class="bg-white rounded shadow-sm p-4 mb-4">
+                    <div class="row">
+                        <!-- Left Sidebar: Conversations -->
+                        <div class="col-md-4 border-end">
+                            <h5 class="mb-3">Inbox</h5>
+                
+                            <div class="list-group">
+                                @foreach ($conversations as $conv)
+                                    <a href="{{ route('messages.index', ['conversation' => $conv->id]) }}"
+                                       class="list-group-item list-group-item-action {{ optional($selectedConversation)->id === $conv->id ? 'active' : '' }}">
+                                        <div class="d-flex justify-content-between">
+                                            <div>
+                                                <strong>{{ $conv->painting->title }}</strong>
+                                                <div class="small text-muted">
+                                                    {{ $conv->messages->first()?->content ? Str::limit($conv->messages->first()->content, 40) : 'No messages yet' }}
+                                                </div>
+                                            </div>
+                                            <small class="text-muted">
+                                                {{ optional($conv->messages->first())->created_at?->diffForHumans() }}
+                                            </small>
+                                        </div>
+                                    </a>
+                                @endforeach
+                            </div>
+                        </div>
+                
+                        <!-- Center Pane: Conversation View -->
+                        <div class="col-md-8">
+                            @if($selectedConversation)
+                                <h5 class="mb-3">{{ $selectedConversation->painting->title }}</h5>
+                
+                                <div class="border rounded p-3 bg-white mb-3" style="height: 500px; overflow-y: auto;">
+                                    @foreach ($selectedConversation->messages->sortBy('created_at') as $message)
+                                        @php
+                                            $isOwn = $message->sender_id === auth()->id();
+                                            $isSystem = is_null($message->sender_id);
+                                        @endphp
+                
+                                        <div class="d-flex mb-3 {{ $isOwn ? 'justify-content-end' : 'justify-content-start' }}">
+                                            <div class="px-3 py-2 rounded {{ $isSystem ? 'bg-secondary text-white' : ($isOwn ? 'bg-primary text-white' : 'bg-light') }}"
+                                                style="max-width: 70%;">
+                                                @if($isSystem)
+                                                    <small class="d-block text-uppercase fw-bold">System</small>
+                                                @endif
+                                                <div>{{ $message->content }}</div>
+                                                <div class="text-muted small text-end mt-1">{{ $message->created_at->diffForHumans() }}</div>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                </div>
+                
+                                <form action="{{ route('messages.store') }}" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="conversation_id" value="{{ $selectedConversation->id }}">
+                                    <div class="input-group">
+                                        <input type="text" name="content" class="form-control" placeholder="Write a message..." required>
+                                        <button class="btn btn-primary" type="submit">Send</button>
+                                    </div>
+                                </form>
+                            @else
+                                <div class="text-muted">Select a conversation to view messages.</div>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+@endsection

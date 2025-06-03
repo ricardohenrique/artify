@@ -21,7 +21,7 @@
 
     @auth
         @if(Auth::id() === $user->id)
-            <a href="{{ route('member.edit', $user->id) }}" class="btn btn-outline-secondary">
+            <a href="{{ route('member.settings', Auth::user()->id) }}" class="btn btn-outline-secondary">
                 <i class="bi bi-pencil me-1"></i>Edit profile
             </a>
         @endif

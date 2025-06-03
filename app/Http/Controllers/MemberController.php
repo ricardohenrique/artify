@@ -20,6 +20,9 @@ class MemberController extends Controller
     public function member(string $id)
     {
         $user = $this->userService->getUserById($id);
+        if ($user->id !== auth()->id()) {
+            abort(403);
+        }
         return response()->view('member', ['user' => $user], 200);
     }
 
@@ -52,6 +55,10 @@ class MemberController extends Controller
             'favorites',
         ])
         ->findOrFail($id);
+
+        if ($user->id !== auth()->id()) {
+            return view('config.forbidden');
+        }
 
         return view('user.profile', compact('user'));
     }

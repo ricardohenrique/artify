@@ -19,7 +19,7 @@ Route::controller(PaintingController::class)->prefix('paintings')->group(functio
     Route::get('/', 'index');
 });
 
-Route::get('/', [HomeController::class, 'index']);
+Route::get('/', [HomeController::class, 'index'])->name('index');
 Route::get('/about-us', [AboutUsController::class, 'index'])->name('about-us');
 
 Route::get('/independent-artists-paintings/independent-artwork', [PaintingListController::class, 'explore'])->name('paintings.explore');

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Conversation;
 use App\Models\Message;
 use App\Models\Painting;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class MessageController extends Controller
@@ -12,6 +13,19 @@ class MessageController extends Controller
     public function index(Request $request)
     {
         $user = auth()->user();
+
+        $user = User::with([
+            'favorites.images', // to display painting images
+            'favorites.user',   // to show painting owner
+            'followers',
+            'following',
+        ])
+        ->withCount([
+            'followers',
+            'following',
+            'favorites',
+        ])
+        ->findOrFail($user->id);
 
         $conversations = Conversation::where('buyer_id', $user->id)
             ->orWhere('seller_id', $user->id)
@@ -29,7 +43,7 @@ class MessageController extends Controller
                 })->firstOrFail();
         }
 
-        return view('member.messages', compact('conversations', 'selectedConversation'));
+        return view('user.messages', compact('conversations', 'selectedConversation', 'user'));
     }
 
     public function show(Conversation $conversation)
