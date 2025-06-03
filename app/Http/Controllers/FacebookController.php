@@ -27,6 +27,7 @@ class FacebookController extends Controller
                 'facebook_id' => $facebookUser->getId(),
                 'email_verified_at' => now(),
                 'password' => bcrypt(Str::random(16)),
+                'user_type' => 2,
             ]
         );
 

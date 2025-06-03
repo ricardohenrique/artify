@@ -6,6 +6,7 @@ use App\Http\Requests\ProfileUpdateRequest;
 use App\Services\UserService;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\UserType;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Redirect;
 
@@ -85,8 +86,8 @@ class MemberController extends Controller
     public function privacy(string $id)
     {
         $user = User::with([
-            'favorites.images', // to display painting images
-            'favorites.user',   // to show painting owner
+            'favorites.images',
+            'favorites.user',
             'followers',
             'following',
         ])
@@ -97,7 +98,9 @@ class MemberController extends Controller
         ])
         ->findOrFail($id);
 
-        return view('user.privacy-center', compact('user'));
+        $userTypes = UserType::where('is_public', true)->get();
+
+        return view('user.privacy-center', compact('user', 'userTypes'));
     }
 
     public function update(Request $request, string $id): RedirectResponse
@@ -130,9 +133,18 @@ class MemberController extends Controller
             abort(403);
         }
 
-        $validated['is_public'] = $request->boolean('is_public');
+        $validated = $request->validate([
+            'is_public' => ['nullable', 'boolean'],
+            // 'show_email' => ['nullable', 'boolean'],
+            'user_type_id' => ['nullable', 'exists:user_types,id'],
+        ]);
 
-        $user->update($validated);
+        // $validated['is_public'] = $request->boolean('is_public');
+        $user->is_public = $request->boolean('is_public');
+        $user->user_type_id = $validated['user_type_id'] ?? null;
+        $user->save();
+
+        // $user->update($validated);
 
         return redirect()->route('member.privacy', $user->id)->with('status', 'Profile updated!');
     }

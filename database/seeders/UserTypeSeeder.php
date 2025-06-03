@@ -13,9 +13,18 @@ class UserTypeSeeder extends Seeder
      */
     public function run(): void
     {
-        $userTypes = ['admin', 'user', 'artist', 'collector'];
-        collect($userTypes)->each(function ($type) {
-            UserType::firstOrCreate(['name' => $type]);
-        });
+        $userTypes = [
+            ['name' => 'admin',     'is_public' => false],
+            ['name' => 'user',      'is_public' => true],
+            ['name' => 'artist',    'is_public' => true],
+            ['name' => 'collector', 'is_public' => true],
+            ['name' => 'other',     'is_public' => true],
+        ];
+        foreach ($userTypes as $type) {
+            UserType::updateOrCreate(
+                ['name' => $type['name']],
+                ['is_public' => $type['is_public']]
+            );
+        }
     }
 }
