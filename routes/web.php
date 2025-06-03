@@ -15,9 +15,9 @@ use App\Http\Controllers\MessageController;
 use App\Http\Controllers\ArtistController;
 use App\Http\Controllers\Paintings\PaintingController;
 
-Route::controller(PaintingController::class)->prefix('paintings')->group(function () {
-    Route::get('/', 'index');
-});
+// Route::controller(PaintingController::class)->prefix('paintings')->group(function () {
+//     Route::get('/', 'index');
+// });
 
 Route::get('/', [HomeController::class, 'index'])->name('index');
 Route::get('/about-us', [AboutUsController::class, 'index'])->name('about-us');
