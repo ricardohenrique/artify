@@ -37,9 +37,9 @@
                             {{ Auth::user()->name }}
                         </button>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userMenu">
-                            <li><a class="dropdown-item" href="{{ route('dashboard') }}">Dashboard</a></li>
+{{--                            <li><a class="dropdown-item" href="{{ route('dashboard') }}">Dashboard</a></li>--}}
                             <li><a class="dropdown-item" href="{{ route('member.profile', Auth::user()->id) }}">My Profile</a></li>
-                            <li><a class="dropdown-item" href="{{ route('member.edit', Auth::user()->id) }}">Account Settings</a></li>
+                            <li><a class="dropdown-item" href="{{ route('member.settings', Auth::user()->id) }}">Account Settings</a></li>
                             <li><hr class="dropdown-divider"></li>
                             <li>
                                 <form method="POST" action="{{ route('logout') }}">
