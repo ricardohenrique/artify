@@ -12,7 +12,7 @@
             <p class="lead">Born in {{ $artist->birth_year ?? '19XX' }} - {{ $artist->location ?? 'Unknown' }}</p>
 
             {{-- <x-follow-button :user="$artist" class="rounded-pill px-4 btn-outline-light" /> --}}
-            <livewire:follow-button :user="$artist" buttonClass="rounded-pill px-4 btn-outline-light" />
+            <livewire:follow-button :user="$artist" buttonClass="rounded-pill px-4 btn-outline-light btn-artist-follow" />
         </div>
     </div>
 </section>
@@ -112,6 +112,17 @@
     .dropdown-menu {
         font-size: 14px;
         border-radius: 8px;
+    }
+
+    .container-fluid .container .btn-artist-follow{
+        border-color: #f8f9fa;
+        color: #f8f9fa;
+    }
+    .container-fluid .container .btn-artist-follow:hover,
+    .container-fluid .container .btn-artist-follow.btn-active
+    {
+        background-color: #f8f9fa;
+        color:#000;
     }
 </style>
 @endsection
