@@ -4,8 +4,8 @@
         <!-- Top Row -->
         <div class="d-flex flex-wrap align-items-center justify-content-between">
             <a class="navbar-brand d-flex align-items-center me-3" href="/">
-                {{-- <img src="{{ asset('artify-logo-opt.png') }}" alt="Artify Logo" class="logo me-2" style="height: 40px;"> --}}
-                <img src="{{ asset('artify_navbar-04.png') }}" alt="Artify Logo" class="logo me-2" style="height: 40px;">
+{{--                <img src="{{ asset('artify-logo-opt.png') }}" alt="Artify Logo" class="logo me-2" style="height: 40px;">--}}
+                <img src="{{ asset('Artify - Fontes-03.png') }}" alt="Artify Logo" class="logo me-2" style="height: 55px;">
             </a>
 
             <!-- Search -->
