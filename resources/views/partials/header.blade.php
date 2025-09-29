@@ -69,32 +69,28 @@
 
         <!-- Mobile menu collapse -->
         <div class="collapse d-lg-none" id="mobileMenu">
-            <div class="py-3 border-top">
+            <div class="py-3 d-lg-none border-top mobile-menu-items">
+                <a href="{{ route('item.new') }}" class="d-block text-dark">Sell now</a>
                 @auth
-                    <a href="{{ route('member.profile', Auth::user()->id) }}" class="d-block mb-2 text-dark">My Profile</a>
-                    <a href="{{ route('member.settings', Auth::user()->id) }}" class="d-block mb-2 text-dark">Account Settings</a>
-                    <a href="{{ route('member.messages', Auth::user()->id) }}" class="d-block mb-2 text-dark">Messages</a>
-                    <a href="{{ route('member.favorites', Auth::user()->id) }}" class="d-block mb-2 text-dark">Favorites</a>
+                    <a href="{{ route('member.profile', Auth::user()->id) }}" class="d-block text-dark">My Profile</a>
+                    <a href="{{ route('member.settings', Auth::user()->id) }}" class="d-block text-dark">Account Settings</a>
+                    <a href="{{ route('member.messages', Auth::user()->id) }}" class="d-block text-dark">Messages</a>
+                    <a href="{{ route('member.favorites', Auth::user()->id) }}" class="d-block text-dark">Favorites</a>
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
-                        <button class="btn btn-sm btn-outline-danger w-100 mt-2">Logout</button>
+                        <button class="d-block text-dark">Logout</button>
                     </form>
                 @else
-                    <a href="{{ route('register') }}" class="btn btn-sm btn-outline-primary w-100 mb-2">Sign up</a>
-                    <a href="{{ route('login') }}" class="btn btn-sm btn-outline-secondary w-100 mb-2">Log in</a>
+                    <a href="{{ route('register') }}" class="d-block text-dark">Sign up</a>
+                    <a href="{{ route('login') }}" class="d-block text-dark">Log in</a>
                 @endauth
-                <a href="{{ route('item.new') }}" class="btn artify-btn w-100 mb-3">Sell now</a>
-
-                <!-- Vertical Categories (Mobile only) -->
-                <hr class="my-2">
-                <div class="d-lg-none mobile-menu-items">
-                    <a href="{{ route('paintings.explore') }}" class="d-block text-dark">Explore</a>
-                    @foreach ($headerCategories as $category)
-                        <a href="{{ route('paintings.list', $category->slug) }}" class="d-block text-dark">{{ $category->name }}</a>
-                    @endforeach
-                    <a href="{{ route('about-us') }}" class="d-block text-dark">About Us</a>
-                    <a href="{{ route('artist.index') }}" class="d-block text-dark">Artists</a>
-                </div>
+                <span class="d-block mt-3">Menu</span>
+                <a href="{{ route('paintings.explore') }}" class="d-block text-dark">Explore</a>
+                @foreach ($headerCategories as $category)
+                    <a href="{{ route('paintings.list', $category->slug) }}" class="d-block text-dark">{{ $category->name }}</a>
+                @endforeach
+                <a href="{{ route('about-us') }}" class="d-block text-dark">About Us</a>
+                <a href="{{ route('artist.index') }}" class="d-block text-dark">Artists</a>
             </div>
         </div>
     </div>
