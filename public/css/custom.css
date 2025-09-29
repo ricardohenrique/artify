@@ -32,7 +32,6 @@ body {
     font-weight: 400;
 }
 
-
 .logo {
     height: 40px;
 }
@@ -139,12 +138,12 @@ body {
 }
 
 .btn-icon-header {
-    width: 36px;
-    height: 36px;
+    padding: 5px 10px;
 }
 
 .btn-icon-header i {
-    font-size: 1rem;
+    /*font-size: 1rem;*/
+    font-size: 20px;
 }
 
 .btn-icon-header:hover {
@@ -203,6 +202,19 @@ body {
     .category-link {
         font-size: 14px;
         padding: 6px 10px;
+    }
+
+    .row-01-mobile-header{
+        margin-top: 2px;
+        margin-bottom: 2px;
+    }
+
+    .row-01-mobile-header .btn-mobile-menu{
+        border: 1px solid #c1c1c1;
+        padding: 3px 10px;
+    }
+    .row-01-mobile-header .logo{
+        height: 35px;
     }
 }
 

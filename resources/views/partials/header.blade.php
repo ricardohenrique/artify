@@ -19,8 +19,8 @@
             <!-- Desktop buttons -->
             <div class="d-flex align-items-center">
                 @auth
-                    <a href="{{ route('member.favorites', Auth::id()) }}" class="btn btn-light btn-icon btn-icon-header p-2 m-1" title="Favorites"><i class="bi bi-heart"></i></a>
-                    <a href="{{ route('member.messages', Auth::id()) }}" class="btn btn-light btn-icon btn-icon-header p-2 m-1" title="Messages"><i class="bi bi-chat"></i></a>
+                    <a href="{{ route('member.favorites', Auth::id()) }}" class="btn btn-light btn-icon btn-icon-header m-1" title="Favorites"><i class="bi bi-heart"></i></a>
+                    <a href="{{ route('member.messages', Auth::id()) }}" class="btn btn-light btn-icon btn-icon-header m-1" title="Messages"><i class="bi bi-chat"></i></a>
 
                     <div class="dropdown">
                         <button class="btn btn-outline-dark dropdown-toggle me-2" type="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -48,11 +48,11 @@
         </div>
 
         <!-- Mobile layout (Logo + burger) -->
-        <div class="d-flex d-lg-none align-items-center justify-content-between py-2">
+        <div class="d-flex d-lg-none align-items-center justify-content-between row-01-mobile-header">
             <a class="navbar-brand d-flex align-items-center" href="/">
-                <img src="{{ asset('Artify_web-new-version.png') }}" alt="Artify Logo" class="logo" style="height: 50px;">
+                <img src="{{ asset('Artify_web-new-version.png') }}" alt="Artify Logo" class="logo">
             </a>
-            <button class="btn" type="button" data-bs-toggle="collapse" data-bs-target="#mobileMenu" aria-controls="mobileMenu" aria-expanded="false">
+            <button class="btn btn-mobile-menu" type="button" data-bs-toggle="collapse" data-bs-target="#mobileMenu" aria-controls="mobileMenu" aria-expanded="false">
                 <i class="bi bi-list fs-2"></i>
             </button>
         </div>
