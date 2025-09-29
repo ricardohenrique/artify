@@ -5,6 +5,15 @@
     <title>Artify - @yield('title', 'Discover & Sell Art')</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="image/x-icon" href="{{ asset('artify_favicon-02.ico') }}">
+    <meta name="theme-color" content="#000000">
+    <link rel="manifest" href="{{ asset('manifest.json') }}">
+
+    <!-- iOS Home Screen Support -->
+    <link rel="apple-touch-icon" href="{{ asset('icon-192x192.png') }}">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="WeArtify">
+
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">

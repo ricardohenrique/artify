@@ -5,9 +5,6 @@
         <div class="d-flex flex-wrap align-items-center justify-content-between">
             <a class="navbar-brand d-flex align-items-center me-3" href="/">
                 <img src="{{ asset('Artify_web-new-version.png') }}" alt="Artify Logo" class="logo me-2" style="height: 65px;">
-{{--                <img src="{{ asset('Artify - Fontes-03.png') }}" alt="Artify Logo" class="logo me-2" style="height: 55px;">--}}
-{{--                <img src="{{ asset('Artify - Fontes-04 - small.png') }}" alt="Artify Logo" class="logo me-2" style="height: 55px;">--}}
-{{--                <img src="{{ asset('Artify - Fontes-05 - small.png') }}" alt="Artify Logo" class="logo me-2" style="height: 55px;">--}}
             </a>
 
             <!-- Search -->
