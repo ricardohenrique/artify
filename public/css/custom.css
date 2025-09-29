@@ -188,6 +188,16 @@ body {
     scrollbar-width: none;
 }
 
+/*MOBILE MENU LINKS*/
+#mobileMenu .mobile-menu-items a{
+    text-decoration: none;
+    padding: 15px 5px;
+    border-bottom: 1px solid #6c757d52;
+}
+#mobileMenu .mobile-menu-items a:hover{
+    background-color:#6c757d14;
+}
+
 /* On small screens: reduce padding, etc. */
 @media (max-width: 768px) {
     .menu-search-bar input {

@@ -83,14 +83,25 @@
                     <a href="{{ route('register') }}" class="btn btn-sm btn-outline-primary w-100 mb-2">Sign up</a>
                     <a href="{{ route('login') }}" class="btn btn-sm btn-outline-secondary w-100 mb-2">Log in</a>
                 @endauth
-                <a href="{{ route('item.new') }}" class="btn artify-btn w-100">Sell now</a>
+                <a href="{{ route('item.new') }}" class="btn artify-btn w-100 mb-3">Sell now</a>
+
+                <!-- Vertical Categories (Mobile only) -->
+                <hr class="my-2">
+                <div class="d-lg-none mobile-menu-items">
+                    <a href="{{ route('paintings.explore') }}" class="d-block text-dark">Explore</a>
+                    @foreach ($headerCategories as $category)
+                        <a href="{{ route('paintings.list', $category->slug) }}" class="d-block text-dark">{{ $category->name }}</a>
+                    @endforeach
+                    <a href="{{ route('about-us') }}" class="d-block text-dark">About Us</a>
+                    <a href="{{ route('artist.index') }}" class="d-block text-dark">Artists</a>
+                </div>
             </div>
         </div>
     </div>
 
     <!-- Scrollable Categories -->
     <div class="bg-light border-top menu-category overflow-auto">
-        <div class="container d-flex flex-nowrap overflow-auto px-3">
+        <div class="d-none container d-lg-flex flex-nowrap overflow-auto px-3">
             <a href="{{ route('paintings.explore') }}" class="me-4 py-3 category-link">Explore</a>
             @foreach ($headerCategories as $category)
                 <a href="{{ route('paintings.list', $category->slug) }}" class="me-4 py-3 category-link">{{ $category->name }}</a>
