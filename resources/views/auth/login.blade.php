@@ -63,11 +63,11 @@
                             <i class="bi bi-google me-2"></i> Log in with Google
                         </a>
                     </div>
-                    <div class="text-center mt-2">
-                        <a href="{{ route('facebook.redirect') }}" class="btn btn-outline-primary w-100">
-                            <i class="bi bi-facebook me-2"></i> Log in with Facebook
-                        </a>
-                    </div>
+{{--                    <div class="text-center mt-2">--}}
+{{--                        <a href="{{ route('facebook.redirect') }}" class="btn btn-outline-primary w-100">--}}
+{{--                            <i class="bi bi-facebook me-2"></i> Log in with Facebook--}}
+{{--                        </a>--}}
+{{--                    </div>--}}
                 </div>
             </div>
         </div>
