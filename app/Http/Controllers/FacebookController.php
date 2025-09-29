@@ -11,7 +11,7 @@ class FacebookController extends Controller
 {
     public function redirect()
     {
-        return Socialite::driver('facebook')->redirect();
+        return Socialite::driver('facebook')->scopes(['email'])->redirect();
     }
 
     public function callback()
