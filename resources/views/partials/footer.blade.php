@@ -6,7 +6,7 @@
             <div class="col-10 col-md-3">
                 <h6 class="fw-bold mb-3">Artify</h6>
                 <ul class="list-unstyled">
-                    <li><a href="#" class="footer-link">About Us</a></li>
+                    <li><a href="{{ route('about-us') }}" class="footer-link">About Us</a></li>
                     <li><a href="#" class="footer-link">Jobs</a></li>
                     <li><a href="#" class="footer-link">Press</a></li>
                     <li><a href="#" class="footer-link">Accessibility</a></li>
@@ -63,7 +63,7 @@
 
         <div class="row small text-muted text-center mb-4">
             <div class="col">
-                <a href="#" class="footer-link me-3">Privacy Policy</a>
+                <a href="{{ route('privacy-policy') }}" class="footer-link me-3">Privacy Policy</a>
                 <a href="#" class="footer-link me-3">Terms & Conditions</a>
                 <a href="#" class="footer-link">Cookie Policy</a>
             </div>

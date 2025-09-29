@@ -7,7 +7,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\PaintingImageController;
 use App\Http\Controllers\PaintingListController;
-use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\PrivacyPolicyController;
 use App\Http\Controllers\GoogleController;
 use App\Http\Controllers\FollowController;
 use App\Http\Controllers\FavoriteController;
@@ -21,6 +21,7 @@ use App\Http\Controllers\Paintings\PaintingController;
 
 Route::get('/', [HomeController::class, 'index'])->name('index');
 Route::get('/about-us', [AboutUsController::class, 'index'])->name('about-us');
+Route::get('/privacy-policy', [PrivacyPolicyController::class, 'index'])->name('privacy-policy');
 
 Route::get('/independent-artists-paintings/independent-artwork', [PaintingListController::class, 'explore'])->name('paintings.explore');
 Route::get('/independent-artists-paintings/search', [PaintingListController::class, 'search'])->name('paintings.search');
