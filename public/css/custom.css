@@ -172,6 +172,41 @@ body {
     box-shadow: none;
     border-color:#dee2e6;
 }
+
+/* Make categories scroll horizontally */
+.menu-category {
+    white-space: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Hide scrollbar but keep scroll */
+.menu-category::-webkit-scrollbar {
+    display: none;
+}
+.menu-category {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+/* On small screens: reduce padding, etc. */
+@media (max-width: 768px) {
+    .menu-search-bar input {
+        font-size: 16px;
+        padding: 10px;
+    }
+
+    .menu-search-bar span {
+        padding: 10px 15px;
+    }
+
+    .category-link {
+        font-size: 14px;
+        padding: 6px 10px;
+    }
+}
+
+
 /*-----------------------------------------------------------------*/
 
 /*----------------------------Hero Section----------------------------*/
