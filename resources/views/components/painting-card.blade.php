@@ -7,7 +7,7 @@
             ]) }}">
                 @php
                     $image = $painting->images->first();
-                    $imageUrl = $image ? asset('storage/' . $image->path) : asset('storage/placeholder.jpg');
+                    $imageUrl = $image ? Storage::url($image->path) : asset('storage/placeholder.jpg');
                 @endphp
                 <img src="{{ $imageUrl }}" class="card-img-top" alt="{{ $painting->title }}" style="aspect-ratio: 3/4; object-fit: cover;">
             </a>

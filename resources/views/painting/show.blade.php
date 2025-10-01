@@ -21,7 +21,7 @@
                     <div class="mb-3 position-relative">
                         <img
                             id="main-image"
-                            src="{{ asset('storage/' . $mainImage->path) }}"
+                            src="{{ Storage::url($mainImage->path) }}"
                             alt="{{ $painting->title }}"
                             class="img-fluid rounded border"
                             style="height: 500px; width: 100%; object-fit: contain; background-color: #f8f9fa;"
@@ -33,7 +33,7 @@
                     @if ($painting->images->count() > 1)
                         <div class="d-flex gap-2 flex-wrap">
                             @foreach ($painting->images as $img)
-                                <img src="{{ asset('storage/' . $img->path) }}"
+                                <img src="{{ Storage::url($img->path) }}"
                                      alt="Thumbnail"
                                      class="img-thumbnail thumb-image"
                                      style="height: 80px; width: 80px; object-fit: cover; cursor: pointer;">

@@ -15,7 +15,7 @@
                         <form action=""></form>
                         @foreach ($painting->images as $image)
                             <div class="position-relative existing-image-wrapper" data-image-id="{{ $image->id }}">
-                                <img src="{{ asset('storage/' . $image->path) }}" style="height: 120px; width: 120px; object-fit: cover;" class="rounded border" alt=""/>
+                                <img src="{{ Storage::url($image->path) }}" style="height: 120px; width: 120px; object-fit: cover;" class="rounded border" alt=""/>
                                 <form id="delete-image-{{ $image->id }}" action="{{ route('painting.image.delete', $image) }}" method="POST" class="position-absolute top-0 end-0 m-1 delete-existing-image-form">
                                     @csrf
                                     @method('DELETE')
