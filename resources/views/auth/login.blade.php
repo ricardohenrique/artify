@@ -69,6 +69,9 @@
 {{--                            <i class="bi bi-facebook me-2"></i> Log in with Facebook--}}
 {{--                        </a>--}}
 {{--                    </div>--}}
+                    <div class="text-center mt-3">
+                        <p class="small fw-lighter">New on Artify? <a href="{{ route('register') }}" class=""> Create an account</a></p>
+                    </div>
                 </div>
             </div>
         </div>
