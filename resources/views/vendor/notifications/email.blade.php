@@ -1,5 +1,11 @@
 <x-mail::message>
-{{-- Greeting --}}
+
+{{-- Artify Logo --}}
+<div style="text-align: center; margin-bottom: 20px;">
+    <img src="{{ asset('Artify_web-new-version.png') }}" alt="Artify Logo" style="height: 50px;">
+</div>
+
+    {{-- Greeting --}}
 @if (! empty($greeting))
 # {{ $greeting }}
 @else
@@ -24,7 +30,7 @@
         default => 'primary',
     };
 ?>
-<x-mail::button :url="$actionUrl" :color="$color">
+<x-mail::button :url="$actionUrl" :color="$color" style="background: linear-gradient(135deg, #ff7c5c, #ff4e9b); border: none; color: #fff; padding: 12px 24px; border-radius: 8px;">
 {{ $actionText }}
 </x-mail::button>
 @endisset
@@ -39,8 +45,8 @@
 @if (! empty($salutation))
 {{ $salutation }}
 @else
-@lang('Regards,')<br>
-{{ config('app.name') }}
+@lang('With creativity,')<br>
+**Artify Team**
 @endif
 
 {{-- Subcopy --}}
