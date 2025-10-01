@@ -62,7 +62,7 @@ class PaintingController extends Controller
                 return back()->withErrors(['images' => 'You can upload a maximum of 5 images in total.'])->withInput();
             }
             foreach ($request->file('images') as $image) {
-                $path = $image->store('paintings', 'public');
+                $path = $image->store('paintings', config('filesystems.default'));
                 $painting->images()->create(['path' => $path]);
             }
         }
@@ -98,7 +98,7 @@ class PaintingController extends Controller
         // If a new image is uploaded, store it
         if ($request->hasFile('images')) {
             foreach ($request->file('images') as $imageFile) {
-                $path = $imageFile->store('paintings', 'public');
+                $path = $imageFile->store('paintings', config('filesystems.default'));
                 $painting->images()->create(['path' => $path]);
             }
         }

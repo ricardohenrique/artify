@@ -15,7 +15,10 @@ class PaintingImageController extends Controller
         }
 
         // Delete image from storage
-        \Storage::disk('public')->delete($image->path);
+        $disk = config('filesystems.default');
+        if (\Storage::disk($disk)->exists($image->path)) {
+            \Storage::disk($disk)->delete($image->path);
+        }
 
         // Delete from DB
         $image->delete();
