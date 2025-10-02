@@ -44,7 +44,7 @@ class PaintingListController extends Controller
                 $query->latest();
                 break;
         }
-
+        $query->where('is_draft', false);
         $paintings = $query->paginate(8)->withQueryString();
 
         if (!isset($category)) {
@@ -66,11 +66,14 @@ class PaintingListController extends Controller
         $query = $request->input('q');
 
         $paintings = Painting::with(['images', 'category'])
-            ->withCount('favoritedBy')
-            ->where('title', 'like', '%' . $query . '%')
-            ->orWhere('description', 'like', '%' . $query . '%')
-            ->latest()
-            ->paginate(12);
+                    ->withCount('favoritedBy')
+                    ->where('is_draft', false)
+                    ->where(function ($queryBuilder) use ($query) {
+                        $queryBuilder->where('title', 'like', '%' . $query . '%')
+                                    ->orWhere('description', 'like', '%' . $query . '%');
+                    })
+                    ->latest()
+                    ->paginate(12);
 
         return view('painting.search', [
             'paintings' => $paintings,
