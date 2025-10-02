@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Start cookieyes banner -->
+    <script id="cookieyes" type="text/javascript" src="https://cdn-cookieyes.com/client_data/13d740f9d3f0db86cc64f0eb/script.js"></script>
+    <!-- End cookieyes banner -->
+
     <meta charset="UTF-8">
     <title>Artify - @yield('title', 'Discover & Sell Art')</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
