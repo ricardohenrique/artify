@@ -13,6 +13,7 @@ use App\Http\Controllers\FollowController;
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\ArtistController;
+use App\Http\Controllers\LinkController;
 use App\Http\Controllers\Paintings\PaintingController;
 
 // Route::controller(PaintingController::class)->prefix('paintings')->group(function () {
@@ -22,6 +23,7 @@ use App\Http\Controllers\Paintings\PaintingController;
 Route::get('/', [HomeController::class, 'index'])->name('index');
 Route::get('/about-us', [AboutUsController::class, 'index'])->name('about-us');
 Route::get('/privacy-policy', [PrivacyPolicyController::class, 'index'])->name('privacy-policy');
+Route::get('/go/{slug}', [LinkController::class, 'redirect'])->name('link.redirect');
 
 Route::get('/independent-artists-paintings/independent-artwork', [PaintingListController::class, 'explore'])->name('paintings.explore');
 Route::get('/independent-artists-paintings/search', [PaintingListController::class, 'search'])->name('paintings.search');
