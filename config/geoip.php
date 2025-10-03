@@ -36,7 +36,7 @@ return [
     |
     */
 
-    'service' => null,
+    'service' => 'ipapi',
 
     /*
     |--------------------------------------------------------------------------
@@ -82,6 +82,12 @@ return [
             'key' => env('IPFINDER_API_KEY'),
             'secure' => true,
             'locales' => ['en'],
+        ],
+        
+        'ipapi' => [
+            'class' => \Torann\GeoIP\Services\IPAPI::class,
+            'secure' => true,
+            'key' => null, // You can leave this null for now (uses free tier)
         ],
 
     ],

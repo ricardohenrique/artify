@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Link;
-// use GeoIP;
+use Jenssegers\Agent\Agent;
 
 class LinkController extends Controller
 {
@@ -14,24 +14,20 @@ class LinkController extends Controller
 
         $link->increment('clicks');
 
-        // $location = geoip('84.192.12.34');
-        $location = geoip()->getLocation('84.192.12.34', false); 
-        // $location = geoip();
-        dd($location);
-
-        $location->ip;        // "84.192.12.34"
-        $location->country;   // "Germany"
-        $location->city;      // "Berlin"
-        $location->iso_code;  // "DE"
-        $location->state;     // "BE"
-        $location->lat;       // 52.5244
-        $location->lon;       // 13.4105
-
+        $location = geoip(request()->ip());
+        $agent = new Agent();
+        // dd($location, $agent);
 
         $link->clicks()->create([
             'ip_address' => request()->ip(),
             'user_agent' => request()->userAgent(),
             'referrer' => request()->headers->get('referer'),
+            'country' => $location->country,
+            'city' => $location->city,
+            'browser' => $agent->browser(),
+            'platform' => $agent->platform(),
+            'device_type' => $agent->device(),
+            'language' => request()->header('Accept-Language'),
         ]);
 
         return redirect()->away($link->target_url);

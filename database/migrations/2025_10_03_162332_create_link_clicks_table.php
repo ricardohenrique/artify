@@ -15,8 +15,13 @@ return new class extends Migration
             $table->id();
             $table->foreignId('link_id')->constrained()->cascadeOnDelete();
             $table->ipAddress('ip_address')->nullable();
-            $table->string('user_agent', 1024)->nullable();
+            $table->string('country')->nullable();
+            $table->string('city')->nullable();
+            $table->string('browser')->nullable();
+            $table->string('platform')->nullable();
+            $table->string('device_type')->nullable();
             $table->string('referrer', 1024)->nullable();
+            $table->string('language', 20)->nullable();
             $table->timestamps();
         });
         
