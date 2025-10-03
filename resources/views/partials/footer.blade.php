@@ -65,7 +65,7 @@
             <div class="col">
                 <a href="{{ route('privacy-policy') }}" class="footer-link me-3">Privacy Policy</a>
                 <a href="#" class="footer-link me-3">Terms & Conditions</a>
-                <a href="#" class="cky-banner-element">Cookie Policy</a>
+                <a href="#" class="footer-link me-3 cky-banner-element">Cookie Policy</a>
             </div>
             <div class="col-12 mt-2">
                 <p class="mb-0">&copy; 2025 Artify. All rights reserved.</p>
