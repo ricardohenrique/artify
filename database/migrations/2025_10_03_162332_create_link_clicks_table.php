@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('platform')->nullable();
             $table->string('device_type')->nullable();
             $table->string('referrer', 1024)->nullable();
-            $table->string('language', 20)->nullable();
+            $table->string('language', 100)->nullable();
             $table->timestamps();
         });
         

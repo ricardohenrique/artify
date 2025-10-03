@@ -11,24 +11,36 @@ class LinkController extends Controller
     public function redirect($slug)
     {
         $link = Link::where('slug', $slug)->firstOrFail();
-
         $link->increment('clicks');
 
-        $location = geoip(request()->ip());
+        $ip = request()->ip();
         $agent = new Agent();
-        // dd($location, $agent);
+        $geo = null;
 
-        $link->clicks()->create([
-            'ip_address' => request()->ip(),
-            'user_agent' => request()->userAgent(),
-            'referrer' => request()->headers->get('referer'),
-            'country' => $location->country,
-            'city' => $location->city,
-            'browser' => $agent->browser(),
-            'platform' => $agent->platform(),
+        try {
+            $geo = geoip()->getLocation($ip, false);
+        } catch (\Exception $e) {
+            $geo = null;
+        }
+
+        $clickData = [
+            'ip_address'  => $ip,
+            'referrer'    => request()->headers->get('referer'),
+            'browser'     => $agent->browser(),
+            'platform'    => $agent->platform(),
             'device_type' => $agent->device(),
-            'language' => request()->header('Accept-Language'),
-        ]);
+            'language'    => request()->header('Accept-Language'),
+        ];
+
+        if ($geo && $geo->country) {
+            $clickData['country'] = $geo->country;
+        }
+
+        if ($geo && $geo->city) {
+            $clickData['city'] = $geo->city;
+        }
+
+        $link->clicks()->create($clickData);
 
         return redirect()->away($link->target_url);
     }

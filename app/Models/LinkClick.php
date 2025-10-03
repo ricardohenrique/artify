@@ -9,7 +9,16 @@ class LinkClick extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['ip_address', 'user_agent', 'referrer'];
+    protected $fillable = [
+        'ip_address',
+        'country',
+        'city',
+        'referrer',
+        'browser',
+        'platform',
+        'device_type',
+        'language',
+    ];
 
     public function link()
     {
