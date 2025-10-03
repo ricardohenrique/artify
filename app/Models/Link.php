@@ -10,4 +10,10 @@ class Link extends Model
     use HasFactory;
 
     protected $fillable = ['slug', 'target_url', 'clicks'];
+
+    public function clicks()
+    {
+        return $this->hasMany(LinkClick::class);
+    }
+
 }
