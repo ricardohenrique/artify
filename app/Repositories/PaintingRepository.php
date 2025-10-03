@@ -29,6 +29,7 @@ class PaintingRepository
     public function getMostLikedPaintings(int $quantity)
     {
         return Painting::with(['images', 'category', 'favoritedBy'])
+        ->where('is_draft', false)
         ->withCount('favoritedBy')
         ->orderByDesc('favorited_by_count')
         ->limit($quantity)
@@ -38,6 +39,7 @@ class PaintingRepository
     public function getMostRecentPaintings(int $quantity)
     {
         return Painting::with(['images', 'category', 'favoritedBy'])
+        ->where('is_draft', false)
         ->withCount('favoritedBy')
         ->latest()
         ->limit($quantity)
