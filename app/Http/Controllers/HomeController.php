@@ -21,9 +21,9 @@ class HomeController extends Controller
 
     public function index()
     {
-        $mostLiked = $this->paintingService->getMostLikedPaintings(4);
+        $mostLiked = $this->paintingService->getMostLikedPaintings(5);
 
-        $mostRecent = $this->paintingService->getMostRecentPaintings(4);
+        $mostRecent = $this->paintingService->getMostRecentPaintings(5);
 
         // Mock Featured Artists
         $featuredArtists = collect([

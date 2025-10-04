@@ -45,7 +45,7 @@ class PaintingListController extends Controller
                 break;
         }
         $query->where('is_draft', false);
-        $paintings = $query->paginate(8)->withQueryString();
+        $paintings = $query->paginate(10)->withQueryString();
 
         if (!isset($category)) {
             $category = new Category([
@@ -73,7 +73,7 @@ class PaintingListController extends Controller
                                     ->orWhere('description', 'like', '%' . $query . '%');
                     })
                     ->latest()
-                    ->paginate(12);
+                    ->paginate(10);
 
         return view('painting.search', [
             'paintings' => $paintings,

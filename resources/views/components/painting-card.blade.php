@@ -1,4 +1,4 @@
-<div class="col-6 col-sm-6 col-md-3">
+<div class="col-6 col-sm-6 col-md-4 col-lg-fifth">
     <div class="card border-0 shadow-sm h-100 position-relative">
         <div class="position-relative">
             <a href="{{ route('paintings.show', [
