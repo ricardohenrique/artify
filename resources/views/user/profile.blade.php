@@ -26,7 +26,7 @@
                                         <a href="{{ route('paintings.show', [$painting->category->slug, $painting->slug]) }}"
                                         class="d-block bg-light rounded overflow-hidden" style="aspect-ratio: 1 / 1;">
                                             @if($painting->images->first())
-                                                <img src="{{ asset('storage/' . $painting->images->first()->path) }}"
+                                                <img src="{{ Storage::url($painting->images->first()->path) }}"
                                                     alt="{{ $painting->title }}"
                                                     class="w-100 h-100 object-fit-cover">
                                             @endif
