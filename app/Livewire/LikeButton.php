@@ -16,14 +16,11 @@ class LikeButton extends Component
         'favorite-toggled' => 'handleExternalToggle',
     ];
 
-    public bool     $isFavorited    = false;
-    public bool     $hasLikes       = false;
-
-    public ?int     $favoriteCount  = 0;
-
-    public bool $positionTop = true;
-
-    public string $buttonType = 'icon';
+    public bool $isFavorited    = false;
+    public bool $hasLikes       = false;
+    public ?int $favoriteCount  = 0;
+    public bool $positionTop    = true;
+    public string $buttonType   = 'icon';
 
     public function mount(Painting $painting)
     {

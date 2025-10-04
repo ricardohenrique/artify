@@ -2,7 +2,7 @@
     @auth
         @if ($buttonType === 'icon')
         <button wire:click="toggleFavorite"
-                class="position-absolute end-0 m-2 bg-white px-2 py-1 rounded-pill d-flex align-items-center shadow-sm btn btn-sm p-0 border-0 {{ $positionTop ? 'top-0' : 'bottom-0' }}"
+                class="animate-on-click position-absolute end-0 m-2 bg-white px-2 py-1 rounded-pill d-flex align-items-center shadow-sm btn btn-sm p-0 border-0 {{ $positionTop ? 'top-0' : 'bottom-0' }}"
                 title="Toggle favorite">
             @if ($isFavorited)
                 <i class="bi bi-heart-fill text-danger {{ $hasLikes ? 'me-1' : '' }}"></i>
