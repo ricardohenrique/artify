@@ -3,7 +3,7 @@
 @section('title', 'About Us')
 
 @section('content')
-<section class="py-5 bg-white">
+<section class="py-5 bg-white about-us">
     <div class="container">
         <h1 class="display-5 fw-bold mb-4 text-center">
             Welcome to Artify
@@ -79,8 +79,8 @@
     </div>
 </section>
 @endsection
-<style>
-    i.bi {
+{{-- <style>
+    .about-us .container div i.bi {
         font-size: 30px;
     }
-</style>
+</style> --}}
