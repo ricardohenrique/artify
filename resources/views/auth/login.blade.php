@@ -1,6 +1,13 @@
 @extends('layouts.app')
 
-@section('title', 'Login')
+@section('meta')
+    <meta name="robots" content="index, follow">
+@endsection
+
+@section('title', 'Artify | Login')
+@section('description', 'Access your Artify account to explore, collect, and connect with independent artists around the world.')
+@section('keywords', 'artify login, user login, access account, art platform login, artist login, buyer login')
+
 
 @section('content')
 <section class="py-5 bg-light">
