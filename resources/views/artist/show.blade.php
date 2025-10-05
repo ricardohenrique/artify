@@ -1,6 +1,12 @@
 @extends('layouts.app')
 
-@section('title', $artist->name . ' - Independent Artist')
+@section('meta')
+    <meta name="robots" content="index, follow">
+@endsection
+
+@section('title', 'Artify | ' . $artist->name . ' Independent Artist')
+@section('description', 'Meet talented independent artists from around the world. Explore their profiles, discover their stories, and follow your favorite creators on Artify.')
+@section('keywords', 'independent artists, ' . $artist->name . ', artist profiles, meet artists, art creators, online artist community, emerging artists, discover art talent, artist gallery')
 
 @section('content')
 <section class="container-fluid p-0">

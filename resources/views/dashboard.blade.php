@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('meta')
+    <meta name="robots" content="noindex, nofollow">
+@endsection
+
 @section('title', 'Dashboard')
 
 @section('content')

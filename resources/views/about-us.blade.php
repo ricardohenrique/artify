@@ -1,6 +1,12 @@
 @extends('layouts.app')
 
-@section('title', 'About Us')
+@section('meta')
+    <meta name="robots" content="index, follow">
+@endsection
+
+@section('title', 'Artify | About Us')
+@section('description', 'Learn how Artify empowers independent artists and connects them with collectors worldwide. Discover our mission, values, and creative community.')
+@section('keywords', 'artify, about artify, independent artists, art marketplace, artist community, support artists, creative platform, buy original art, art mission, online art gallery')
 
 @section('content')
 <section class="py-5 bg-white about-us">

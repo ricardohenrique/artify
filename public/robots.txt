@@ -1,2 +1,10 @@
 User-agent: *
-Disallow:
+Disallow: /member/
+Disallow: /painting/
+Disallow: /dashboard/
+Allow: /independent-artists-paintings/
+Allow: /independent-artists/
+Allow: /login
+Allow: /register
+Allow: /about-us
+Allow: /explore

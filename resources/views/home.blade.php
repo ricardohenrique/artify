@@ -1,6 +1,13 @@
 @extends('layouts.app')
 
-@section('title', 'Home')
+@section('meta')
+    <meta name="robots" content="index, follow">
+@endsection
+
+@section('title', 'Artify | Buy Original Artworks from Independent Artists')
+@section('description', 'Discover and collect unique artworks from independent artists around the world. Join Artify')
+@section('keywords', 'artify, independent artists, original artwork marketplace, buy art online, artist community, support artists, creative platform, buy original art, online art gallery')
+
 
 @section('content')
 

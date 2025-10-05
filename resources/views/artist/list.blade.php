@@ -2,6 +2,16 @@
 
 @section('title', 'Meet the Artists')
 
+@section('meta')
+    <meta name="robots" content="index, follow">
+@endsection
+
+@section('title', 'Artify | Independent Artists')
+@section('description', 'Meet talented independent artists from around the world. Explore their profiles, discover their stories, and follow your favorite creators on Artify.')
+@section('keywords', 'independent artists, artist profiles, meet artists, art creators, online artist community, emerging artists, contemporary artists, follow artists, discover art talent, artist gallery
+')
+
+
 @section('content')
     <section class="container py-5">
         <h2 class="artist-list-heading">Independent Artists</h2>

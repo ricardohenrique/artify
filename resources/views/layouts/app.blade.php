@@ -13,7 +13,7 @@
     <!-- End cookieyes banner -->
 
     <meta charset="UTF-8">
-    <title>Artify - @yield('title', 'Discover & Sell Art')</title>
+    <title>Artify - @yield('title', 'Artify | Buy Original Artworks from Independent Artists')</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="image/x-icon" href="{{ asset('artify_favicon-02.ico') }}">
     <meta name="theme-color" content="#000000">
@@ -24,6 +24,11 @@
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="apple-mobile-web-app-title" content="WeArtify">
+
+    <!-- custom meta -->
+    <meta name="description" content="@yield('description', 'Discover and collect unique artworks from independent artists.')">
+    <meta name="keywords" content="@yield('keywords', 'artify, independent artists, art marketplace, creative community, buy art online, art platform, curated paintings, support artists')"">
+    @yield('meta')
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">

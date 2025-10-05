@@ -2,6 +2,15 @@
 
 @section('title', $category->name . ' Paintings')
 
+@section('meta')
+    <meta name="robots" content="index, follow">
+@endsection
+
+@section('title', 'Artify | ' . $category->name . ' Independent artists')
+@section('description', 'Discover unique original paintings from independent artists. Explore a curated collection of artwork across styles')
+@section('keywords', 'artify, ' . $category->name . ', original paintings, independent artists, buy artwork online, unique paintings, online art gallery, emerging artists, support independent artists')
+
+
 @section('content')
     <section class="container py-5">
         <x-page-heading

@@ -2,6 +2,14 @@
 
 @section('title', $painting->title)
 
+@section('meta')
+    <meta name="robots" content="index, follow">
+@endsection
+
+@section('title', 'Artify | ' . $painting->title)
+@section('description', 'Discover unique original paintings from independent artists. Explore a curated collection of artwork across styles')
+@section('keywords', 'artify, ' . $painting->title . ', original paintings, independent artists, buy artwork online, unique paintings, online art gallery, emerging artists, support independent artists')
+
 @section('style')
 <link href="{{ asset('css/painting-show.css') }}" rel="stylesheet">
 @endsection
