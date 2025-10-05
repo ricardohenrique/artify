@@ -134,7 +134,7 @@ button.animate-on-click:active i {
 }
 @media (max-width: 768px) {
     .custom-btn-heart i.bi {
-        font-size: 20px;
+        font-size: 18px;
     }
 }
 /*----------------------------------------------------------------------------------------*/
