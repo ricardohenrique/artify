@@ -114,6 +114,9 @@ body {
 .heart-pop {
     animation: pop 0.3s ease;
 }
+.custom-btn-heart:hover {
+    background-color: #ffe5e7 !important;
+}
 
 @keyframes pop {
     0% {
