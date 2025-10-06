@@ -8,8 +8,8 @@
                 <ul class="list-unstyled">
                     <li><a href="{{ route('about-us') }}" class="footer-link">About Us</a></li>
                     <li><a href="#" class="footer-link">Jobs</a></li>
-                    <li><a href="#" class="footer-link">Press</a></li>
-                    <li><a href="#" class="footer-link">Accessibility</a></li>
+                    <li><a href="{{ route('paintings.explore') }}" class="footer-link">Artify galery</a></li>
+                    <li><a href="{{ route('artist.index') }}" class="footer-link">Independent artists</a></li>
                 </ul>
             </div>
 
@@ -28,7 +28,7 @@
             <div class="col-10 col-md-3">
                 <h6 class="fw-bold mb-3">Support</h6>
                 <ul class="list-unstyled">
-                    <li><a href="#" class="footer-link">Help Center</a></li>
+                    <li><a href="{{ route('faq') }}" class="footer-link">Help Center</a></li>
                     <li><a href="#" class="footer-link">Selling Guide</a></li>
                     <li><a href="#" class="footer-link">Buying Tips</a></li>
                     <li><a href="#" class="footer-link">Trust & Safety</a></li>
