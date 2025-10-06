@@ -42,9 +42,9 @@
                 <div class="d-flex flex-column flex-md-row align-items-center justify-content-center gap-3">
                     <!-- Social Icons -->
                     <div class="social-icons">
-                        <a href="#" class="me-2"><i class="bi bi-facebook fs-3"></i></a>
-                        <a href="#" class="me-2"><i class="bi bi-instagram fs-3"></i></a>
-                        <a href="#"><i class="bi bi-linkedin fs-3"></i></a>
+                        <a href="https://www.instagram.com/join.artify/" target="_blank" class="me-2"><i class="bi bi-facebook fs-3"></i></a>
+                        <a href="https://www.instagram.com/join.artify/" target="_blank" class="me-2"><i class="bi bi-instagram fs-3"></i></a>
+                        <a href="linkedin.com/company/weartify/" target="_blank"><i class="bi bi-linkedin fs-3"></i></a>
                     </div>
 
                     <!-- Divider or spacing (optional) -->
