@@ -53,7 +53,8 @@
                     <!-- Developer Contact -->
                     <div class="developer-credit small">
                         <span class="text-muted">Like the platform?</span>
-                        <a href="/contact" class="footer-link fw-semibold ms-1">Contact Us</a>
+{{--                        <a href="/contact" class="footer-link fw-semibold ms-1">Contact Us</a>--}}
+                        <a href="mailto:webmaster@weartify.eu" class="footer-link fw-semibold ms-1">Contact Us</a>
                     </div>
                 </div>
             </div>
@@ -64,7 +65,7 @@
         <div class="row small text-muted text-center mb-4">
             <div class="col">
                 <a href="{{ route('privacy-policy') }}" class="footer-link me-3">Privacy Policy</a>
-                <a href="#" class="footer-link me-3">Terms & Conditions</a>
+                <a href="{{ route('terms-conditions') }}" class="footer-link me-3">Terms & Conditions</a>
                 <a href="#" class="footer-link me-3 cky-banner-element">Cookie Policy</a>
             </div>
             <div class="col-12 mt-2">

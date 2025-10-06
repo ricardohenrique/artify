@@ -8,6 +8,7 @@ use App\Http\Controllers\MemberController;
 use App\Http\Controllers\PaintingImageController;
 use App\Http\Controllers\PaintingListController;
 use App\Http\Controllers\PrivacyPolicyController;
+use App\Http\Controllers\TermsConditionsController;
 use App\Http\Controllers\GoogleController;
 use App\Http\Controllers\FollowController;
 use App\Http\Controllers\FavoriteController;
@@ -23,6 +24,7 @@ use App\Http\Controllers\Paintings\PaintingController;
 Route::get('/', [HomeController::class, 'index'])->name('index');
 Route::get('/about-us', [AboutUsController::class, 'index'])->name('about-us');
 Route::get('/privacy-policy', [PrivacyPolicyController::class, 'index'])->name('privacy-policy');
+Route::get('/terms-conditions', [TermsConditionsController::class, 'index'])->name('terms-conditions');
 Route::get('/go/{slug}', [LinkController::class, 'redirect'])->name('link.redirect');
 
 Route::get('/independent-artists-paintings/independent-artwork', [PaintingListController::class, 'explore'])->name('paintings.explore');
