@@ -1,4 +1,4 @@
-<div class="mt-5 text-center">
+<div class="mt-5 text-center custom-pagination">
     <div class="text-muted mb-2">
         Showing <strong>{{ $items->firstItem() }}</strong>
         to <strong>{{ $items->lastItem() }}</strong>

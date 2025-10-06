@@ -534,20 +534,45 @@ button.animate-on-click:active i {
 /*}*/
 
 /*----------------------------Paginator----------------------------*/
-.page-item.active .page-link {
-    background-color: #ff6a00;
-    border-color: #ff6a00;
+/* Artify Pagination */
+.custom-pagination nav > div:first-child {
+    display: none; /* Hide default Laravel "Showing x to y of z" if already custom above */
+}
+
+.custom-pagination .pagination {
+    gap: 8px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.custom-pagination .page-item .page-link {
+    padding: 0.6rem 1.2rem;
+    font-size: 1rem;
+    border-radius: 12px;
+    border: 1px solid #ddd;
+    background-color: #fff;
+    color: #333;
+    transition: all 0.2s ease-in-out;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.custom-pagination .page-item.active .page-link {
+    background: linear-gradient(135deg, #ff7c5c, #ff4e9b);
     color: #fff;
+    border: none;
+    font-weight: 600;
 }
 
-.page-link {
-    color: #ff6a00;
+.custom-pagination .page-item.disabled .page-link {
+    color: #bbb;
+    background-color: #f1f1f1;
+    pointer-events: none;
 }
 
-.page-link:hover {
-    background-color: #fff2e6;
-    border-color: #ff6a00;
-    color: #ff6a00;
+.custom-pagination .page-item .page-link:hover {
+    background-color: #fef3f8;
+    border-color: #ff4e9b;
+    color: #ff4e9b;
 }
 /*-----------------------------------------------------------------*/
 
