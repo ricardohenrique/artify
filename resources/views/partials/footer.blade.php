@@ -7,9 +7,10 @@
                 <h6 class="fw-bold mb-3">Artify</h6>
                 <ul class="list-unstyled">
                     <li><a href="{{ route('about-us') }}" class="footer-link">About Us</a></li>
-                    <li><a href="#" class="footer-link">Jobs</a></li>
-                    <li><a href="{{ route('paintings.explore') }}" class="footer-link">Artify galery</a></li>
-                    <li><a href="{{ route('artist.index') }}" class="footer-link">Independent artists</a></li>
+                    {{-- <li><a href="#" class="footer-link">Jobs</a></li> --}}
+                    <li><a href="{{ route('item.new') }}" class="footer-link">Sell Now</a></li>
+                    <li><a href="{{ route('register') }}" class="footer-link">Register Now</a></li>
+                    <li><a href="{{ route('artist.index') }}" class="footer-link">Independent Artists</a></li>
                 </ul>
             </div>
 
@@ -18,9 +19,10 @@
                 <h6 class="fw-bold mb-3">Discover</h6>
                 <ul class="list-unstyled">
                     <li><a href="#" class="footer-link">How It Works</a></li>
-                    <li><a href="#" class="footer-link">Mobile Apps</a></li>
-                    <li><a href="#" class="footer-link">Artist Directory</a></li>
-                    <li><a href="#" class="footer-link">Gift Cards</a></li>
+                    {{-- <li><a href="#" class="footer-link">Mobile Apps</a></li> --}}
+                    <li><a href="{{ route('artist.index') }}" class="footer-link">Artist Directory</a></li>
+                    <li><a href="{{ route('paintings.explore') }}" class="footer-link">Artify Galery</a></li>
+                    <li><a href="{{ route('about-us') }}" class="footer-link">Our Mission</a></li>
                 </ul>
             </div>
 
@@ -29,9 +31,13 @@
                 <h6 class="fw-bold mb-3">Support</h6>
                 <ul class="list-unstyled">
                     <li><a href="{{ route('faq') }}" class="footer-link">Help Center</a></li>
-                    <li><a href="#" class="footer-link">Selling Guide</a></li>
+                    <li><a href="{{ route('privacy-policy') }}" class="footer-link">Privacy Policy</a></li>
+                    <li><a href="{{ route('terms-conditions') }}" class="footer-link">Terms & Conditions</a></li>
+                    <li><a href="#" class="footer-link cky-banner-element">Cookie Policy</a></li>
+                    
+                    {{-- <li><a href="#" class="footer-link">Selling Guide</a></li>
                     <li><a href="#" class="footer-link">Buying Tips</a></li>
-                    <li><a href="#" class="footer-link">Trust & Safety</a></li>
+                    <li><a href="#" class="footer-link">Trust & Safety</a></li> --}}
                 </ul>
             </div>
         </div>
@@ -63,11 +69,11 @@
         <hr class="my-4">
 
         <div class="row small text-muted text-center mb-4">
-            <div class="col">
+            {{-- <div class="col">
                 <a href="{{ route('privacy-policy') }}" class="footer-link me-3">Privacy Policy</a>
                 <a href="{{ route('terms-conditions') }}" class="footer-link me-3">Terms & Conditions</a>
                 <a href="#" class="footer-link me-3 cky-banner-element">Cookie Policy</a>
-            </div>
+            </div> --}}
             <div class="col-12 mt-2">
                 <p class="mb-0">&copy; 2025 Artify. All rights reserved.</p>
             </div>
