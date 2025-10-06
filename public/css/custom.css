@@ -160,6 +160,7 @@ button.animate-on-click:active i {
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
 }
 
+
 .artify-image {
     aspect-ratio: 1 / 1;
     object-fit: cover;
@@ -174,6 +175,12 @@ button.animate-on-click:active i {
     top: 8px;
     right: 8px;
     z-index: 10;
+}
+
+@media (max-width: 768px) {
+    .artify-card .card-body {
+        padding: 10px 10px !important;
+    }
 }
 /*-----------------------------------------------------------------*/
 
