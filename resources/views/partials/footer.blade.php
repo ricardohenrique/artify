@@ -18,7 +18,7 @@
             <div class="col-10 col-md-3">
                 <h6 class="fw-bold mb-3">Discover</h6>
                 <ul class="list-unstyled">
-                    <li><a href="#" class="footer-link">How It Works</a></li>
+                    <li><a href="{{ route('how-artify-works') }}" class="footer-link">How It Works</a></li>
                     {{-- <li><a href="#" class="footer-link">Mobile Apps</a></li> --}}
                     <li><a href="{{ route('artist.index') }}" class="footer-link">Artist Directory</a></li>
                     <li><a href="{{ route('paintings.explore') }}" class="footer-link">Artify Galery</a></li>
@@ -34,7 +34,7 @@
                     <li><a href="{{ route('privacy-policy') }}" class="footer-link">Privacy Policy</a></li>
                     <li><a href="{{ route('terms-conditions') }}" class="footer-link">Terms & Conditions</a></li>
                     <li><a href="#" class="footer-link cky-banner-element">Cookie Policy</a></li>
-                    
+
                     {{-- <li><a href="#" class="footer-link">Selling Guide</a></li>
                     <li><a href="#" class="footer-link">Buying Tips</a></li>
                     <li><a href="#" class="footer-link">Trust & Safety</a></li> --}}

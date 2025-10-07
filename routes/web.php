@@ -10,6 +10,7 @@ use App\Http\Controllers\PaintingListController;
 use App\Http\Controllers\PrivacyPolicyController;
 use App\Http\Controllers\TermsConditionsController;
 use App\Http\Controllers\FAQController;
+use App\Http\Controllers\HowArtifyWorksController;
 use App\Http\Controllers\GoogleController;
 use App\Http\Controllers\FollowController;
 use App\Http\Controllers\FavoriteController;
@@ -27,6 +28,7 @@ Route::get('/about-us', [AboutUsController::class, 'index'])->name('about-us');
 Route::get('/privacy-policy', [PrivacyPolicyController::class, 'index'])->name('privacy-policy');
 Route::get('/terms-conditions', [TermsConditionsController::class, 'index'])->name('terms-conditions');
 Route::get('/frequently-asked-questions', [FAQController::class, 'index'])->name('faq');
+Route::get('/how-artify-works', [HowArtifyWorksController::class, 'index'])->name('how-artify-works');
 Route::get('/go/{slug}', [LinkController::class, 'redirect'])->name('link.redirect');
 
 Route::get('/independent-artists-paintings/independent-artwork', [PaintingListController::class, 'explore'])->name('paintings.explore');

@@ -21,7 +21,7 @@
                     <h2 class="fw-bold mb-4">Ready to share your art with the world?</h2>
                     <a href="{{ route('item.new') }}" class="btn hero-cta-btn w-100 mb-3">Sell now</a>
                     <div class="text-center">
-                        <a href="#" class="learn-link">Learn how it works</a>
+                        <a href="{{ route('how-artify-works') }}" class="learn-link">Learn how it works</a>
                     </div>
                 </div>
             </div>
