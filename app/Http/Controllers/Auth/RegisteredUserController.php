@@ -41,12 +41,23 @@ class RegisteredUserController extends Controller
             'slug' => Str::slug($request->name . '-' . uniqid()),
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'user_type' => 2,
         ]);
 
         event(new Registered($user));
 
         Auth::login($user);
 
-        return redirect(route('dashboard', absolute: false));
+        // Redirect logic based on user type
+        switch ($user->user_type_id ?? $user->user_type) {
+            case 1:
+                return redirect()->intended(route('member.profile', ['id' => $user->id]));
+            case 2:
+                return redirect()->intended(route('member.profile', ['id' => $user->id]));
+            case 3:
+                return redirect()->intended(route('dashboard'));
+            default:
+                return redirect()->intended(route('member.profile', ['id' => $user->id]));
+        }
     }
 }
