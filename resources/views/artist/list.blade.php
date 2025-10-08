@@ -1,7 +1,5 @@
 @extends('layouts.app')
 
-@section('title', 'Meet the Artists')
-
 @section('meta')
     <meta name="robots" content="index, follow">
 @endsection

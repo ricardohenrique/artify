@@ -11,10 +11,10 @@
     <div class="container">
 
         <!-- Welcome Box -->
-        <div class="p-5 bg-white shadow rounded mb-4">
+        {{-- <div class="p-5 bg-white shadow rounded mb-4">
             <h1 class="h3 mb-3">Welcome, {{ Auth::user()->name }}!</h1>
             <p class="mb-0">You're logged in to your dashboard.</p>
-        </div>
+        </div> --}}
 
         <!-- Published Paintings -->
         <div class="bg-white p-4 rounded shadow-sm mb-4">
