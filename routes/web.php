@@ -59,7 +59,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/member/{id}/messages', [MessageController::class, 'index'])->name('member.messages');
     Route::get('/dashboard', [MemberController::class, 'dashboard'])->name('dashboard');
     Route::get('/painting/new', [PaintingController::class, 'new'])->name('item.new');
+    Route::get('/painting/create', [PaintingController::class, 'create'])->name('item.create');
     Route::post('/painting/new', [PaintingController::class, 'store'])->name('item.store');
+    Route::post('/painting/add', [PaintingController::class, 'add'])->name('item.add');
     Route::get('/painting/{id}/edit', [PaintingController::class, 'edit'])->name('item.edit');
     Route::put('/painting/{painting}/edit', [PaintingController::class, 'update'])->name('item.update');
     Route::delete('/painting/image/{image}', [PaintingImageController::class, 'destroy'])->name('painting.image.delete');

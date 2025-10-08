@@ -32,6 +32,31 @@ class PaintingController extends Controller
         ]);
     }
 
+    public function create()
+    {
+        $user = Auth::user();
+        $categories = Category::orderBy('name')->get();
+
+        if ($user->id !== auth()->id()) {
+            return view('config.forbidden');
+        }
+
+        $user = User::with([
+            'favorites.images',
+            'favorites.user',
+            'followers',
+            'following',
+        ])
+        ->withCount([
+            'followers',
+            'following',
+            'favorites',
+        ])
+        ->findOrFail($user->id);
+
+        return view('user.create', compact('user'));
+    }
+
     public function store(Request $request)
     {
         $isDraft = $request->input('action') === 'draft';
@@ -150,5 +175,54 @@ class PaintingController extends Controller
             'painting' => $painting,
             'relatedPaintings' => $relatedPaintings,
         ]);
+    }
+
+
+    public function add(Request $request)
+    {
+        // Determine if this is a draft save
+        $isDraft = $request->input('save_type') === 'draft';
+
+        // Validation rules (relaxed if draft)
+        $rules = [
+            'title'       => $isDraft ? 'nullable|string|max:255' : 'required|string|max:255',
+            'images'      => 'nullable|array|max:3',
+            'images.*'    => 'image|mimes:jpg,jpeg,png,webp|max:4096',
+        ];
+
+        $validated = $request->validate($rules);
+
+        // Create the painting
+        $painting = Painting::create([
+            'title'       => $validated['title'] ?? null,
+            'slug'        => isset($validated['title'])
+                ? Str::slug($validated['title'] . '-' . uniqid())
+                : 'draft-' . uniqid(),
+            'user_id'     => auth()->id(),
+            'is_draft'    => $isDraft,
+        ]);
+
+        // Handle image uploads
+        if ($request->hasFile('images')) {
+            // Limit total to 3 uploads
+            if (($painting->images()->count() + count($request->file('images'))) > 3) {
+                return back()->withErrors([
+                    'images' => 'You can upload a maximum of 3 images.'
+                ])->withInput();
+            }
+
+            foreach ($request->file('images') as $image) {
+                $path = $image->store('paintings', config('filesystems.default'));
+                $painting->images()->create(['path' => $path]);
+            }
+        }
+
+        // Redirect user accordingly
+        $message = $isDraft ? 'Draft saved successfully!' : 'Painting published!';
+        $redirect = $isDraft
+            ? route('member.profile', ['id' => auth()->id()])
+            : route('dashboard');
+
+        return redirect($redirect)->with('status', $message);
     }
 }

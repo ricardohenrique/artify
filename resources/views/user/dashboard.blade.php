@@ -14,7 +14,7 @@
             <div class="col-md-9">
                 <div class="bg-white rounded shadow-sm p-4 mb-4">
                     <div class="text-center mb-5">
-                        <a href="{{ route('item.new') }}" class="btn btn-primary btn-lg px-5 py-3 fs-5">
+                        <a href="{{ route('item.create') }}" class="btn btn-primary btn-lg px-5 py-3 fs-5">
                             + Add New Painting
                         </a>
                     </div>
