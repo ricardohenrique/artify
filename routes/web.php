@@ -51,6 +51,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/member/{id}/profile', [MemberController::class, 'profile'])->name('member.profile');
     Route::get('/member/{id}/account-settings', [MemberController::class, 'settings'])->name('member.settings');
     Route::get('/member/{id}/privacy-center', [MemberController::class, 'privacy'])->name('member.privacy');
+    Route::get('/member/{id}/dashboard', [MemberController::class, 'memberDashboard'])->name('member.dashboard');
     Route::get('/member/{id}/orders', [MemberController::class, 'orders'])->name('member.orders');
     Route::put('/member/{id}', [MemberController::class, 'update'])->name('member.update');
     Route::put('/member/{id}/updatePrivacy', [MemberController::class, 'updatePrivacy'])->name('member.updatePrivacy');

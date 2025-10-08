@@ -186,4 +186,30 @@ class MemberController extends Controller
 
         return view('user.orders', compact('user'));
     }
+
+    public function memberDashboard(string $id)
+    {
+        $user = $this->userService->getUserById($id);
+        if ($user->id !== auth()->id()) {
+            return view('config.forbidden');
+        }
+
+        $user = User::with([
+            'favorites.images',
+            'favorites.user',
+            'followers',
+            'following',
+        ])
+        ->withCount([
+            'followers',
+            'following',
+            'favorites',
+        ])
+        ->findOrFail($id);
+
+        $paintings = $user->paintings()->where('is_draft', false)->latest()->get();
+        $drafts = $user->paintings()->where('is_draft', true)->latest()->get();
+
+        return view('user.dashboard', compact('user', 'paintings', 'drafts'));
+    }
 }
