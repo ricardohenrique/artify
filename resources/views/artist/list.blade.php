@@ -23,7 +23,7 @@
                         <a href="{{ route('artist.show', $artist->slug) }}" class="text-decoration-none text-dark">
                             <img src="{{ $artist->avatar_url ?? 'https://ui-avatars.com/api/?name=' . urlencode($artist->name) }}"
                                 alt="{{ $artist->name }}">
-                
+
                             <div class="artist-card-body">
                                 <h5>{{ $artist->name }}</h5>
                                 <div class="text-muted">{{ $artist->location ?? 'Unknown location' }}</div>
@@ -47,9 +47,9 @@
             @endforelse
         </div>
 
-        <div class="mt-5 text-center">
-            {{ $artists->links() }}
-        </div>
+        @if ($artists->hasPages())
+            <x-pagination-custom :items="$artists" />
+        @endif
     </section>
 
     <style>
