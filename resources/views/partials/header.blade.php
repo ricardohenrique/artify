@@ -28,7 +28,11 @@
                         </button>
                         <ul class="dropdown-menu dropdown-menu-end">
                             <li><a class="dropdown-item" href="{{ route('member.profile', Auth::user()->id) }}">My Profile</a></li>
-                            <li><a class="dropdown-item" href="{{ route('member.settings', Auth::user()->id) }}">Account Settings</a></li>
+                            @if (Auth::user()->user_type_id === 3)
+                                <li><a class="dropdown-item" href="{{ route('member.settings', Auth::user()->id) }}">Dashboard</a></li>
+                            @else
+                                <li><a class="dropdown-item" href="{{ route('member.settings', Auth::user()->id) }}">Account Settings</a></li>
+                            @endif
                             <li><hr class="dropdown-divider"></li>
                             <li>
                                 <form method="POST" action="{{ route('logout') }}">
