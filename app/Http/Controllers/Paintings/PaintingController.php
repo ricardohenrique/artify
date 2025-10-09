@@ -178,6 +178,21 @@ class PaintingController extends Controller
     }
 
 
+    public function editPainting(string $id)
+    {
+        $user = auth()->user();
+        $painting = Painting::with('images')->where('id', $id)->where('user_id', $user->id)->firstOrFail();
+        $categories = Category::orderBy('name')->get();
+
+        // Optional: Restrict access if needed
+        if ($painting->user_id !== $user->id) {
+            return view('config.forbidden');
+        }
+
+        return view('user.edit', compact('painting', 'categories', 'user'));
+    }
+
+
     public function add(Request $request)
     {
         // Determine if this is a draft save

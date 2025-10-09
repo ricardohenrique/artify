@@ -63,6 +63,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/painting/new', [PaintingController::class, 'store'])->name('item.store');
     Route::post('/painting/add', [PaintingController::class, 'add'])->name('item.add');
     Route::get('/painting/{id}/edit', [PaintingController::class, 'edit'])->name('item.edit');
+    Route::get('/painting/{id}/update', [PaintingController::class, 'editPainting'])->name('item.editPainting');
     Route::put('/painting/{painting}/edit', [PaintingController::class, 'update'])->name('item.update');
     Route::delete('/painting/image/{image}', [PaintingImageController::class, 'destroy'])->name('painting.image.delete');
 

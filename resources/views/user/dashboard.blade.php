@@ -29,7 +29,7 @@
                             <div class="row g-4">
                                 @foreach($paintings as $painting)
                                     <div class="col-md-4 col-sm-6">
-                                        <a href="{{ route('item.edit', $painting->id) }}" class="text-decoration-none text-dark">
+                                        <a href="{{ route('item.editPainting', $painting->id) }}" class="text-decoration-none text-dark">
                                             <div class="product-card p-3 h-100 border rounded">
                                                 <h5 class="mb-1">{{ $painting->title }}</h5>
                                                 <p class="text-muted mb-0">${{ number_format($painting->price, 2) }}</p>
@@ -53,7 +53,7 @@
                             <div class="row g-4">
                                 @foreach($drafts as $draft)
                                     <div class="col-md-4 col-sm-6">
-                                        <a href="{{ route('item.edit', $draft->id) }}" class="text-decoration-none text-dark">
+                                        <a href="{{ route('item.editPainting', $draft->id) }}" class="text-decoration-none text-dark">
                                             <div class="product-card p-3 h-100 border border-warning rounded">
                                                 <h5 class="mb-1">{{ $draft->title ?? '(Untitled)' }}</h5>
                                                 <p class="text-muted mb-0">
