@@ -96,7 +96,7 @@
     <style>
     .upload-area {
         transition: 0.3s!important;
-        border: 5px dashed #00d129 !important;
+        border: 5px dashed #f66c6a !important;
     }
     .upload-area div span{
         font-size: 20px;
@@ -106,7 +106,7 @@
         display: block;
     }
     .upload-area:hover {
-        border-color: #28f050 !important;
+        border-color: #feaa53 !important;
         background-color: #dbdddf !important;
     }
     .image-preview img {
@@ -116,7 +116,7 @@
     }
 
     .existing-img {
-        border: 5px dashed #00d129 !important;
+        border: 5px dashed #f66c6a !important;
     }
     .existing-img button{
         position: absolute;
