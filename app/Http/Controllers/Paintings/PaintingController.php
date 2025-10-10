@@ -235,7 +235,7 @@ class PaintingController extends Controller
         // Redirect user accordingly
         $message = $isDraft ? 'Draft saved successfully!' : 'Painting published!';
         $redirect = $isDraft
-            ? route('member.profile', ['id' => auth()->id()])
+            ? route('member.dashboard', ['id' => auth()->id()])
             : route('member.dashboard', ['id' => auth()->id()]);
 
         return redirect($redirect)->with('status', $message);

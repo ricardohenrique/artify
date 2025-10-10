@@ -48,12 +48,12 @@
                                     <!-- Existing Images -->
                                     @foreach ($painting->images as $image)
                                         <div class="col-md-4">
-                                            <div class="border rounded p-2 position-relative h-100 d-flex flex-column">
+                                            <div class="border rounded p-2 position-relative h-100 d-flex flex-column existing-img">
                                                 <div class="image-preview flex-grow-1 d-flex align-items-center justify-content-center" style="height: 200px;">
                                                     <img src="{{ \Storage::disk(config('filesystems.default'))->url($image->path) }}" class="img-fluid rounded" alt="Painting image">
                                                 </div>
                                                 <div class="mt-2">
-                                                    <button type="submit" form="delete-image-{{ $image->id }}" class="btn btn-outline-danger w-100">Delete</button>
+                                                    <button type="submit" form="delete-image-{{ $image->id }}" class="btn btn-outline-danger"><i class="bi bi-x-lg"></i></button>
                                                 </div>
                                             </div>
                                         </div>
@@ -112,6 +112,17 @@
         max-height: 100%;
         max-width: 100%;
         object-fit: contain;
+    }
+
+    .existing-img {
+        border: 5px dashed #00d129 !important;
+    }
+    .existing-img button{
+        position: absolute;
+        top: 3px;
+        right: 3px;
+        border-radius: 15px;
+        border: 1px solid red;
     }
     </style>
 
