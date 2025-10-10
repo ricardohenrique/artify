@@ -65,6 +65,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/painting/{id}/edit', [PaintingController::class, 'edit'])->name('item.edit');
     Route::get('/painting/{id}/update', [PaintingController::class, 'editPainting'])->name('item.editPainting');
     Route::put('/painting/{painting}/edit', [PaintingController::class, 'update'])->name('item.update');
+    Route::put('/painting/{painting}/update', [PaintingController::class, 'updatePainting'])->name('item.updatePainting');
     Route::delete('/painting/image/{image}', [PaintingImageController::class, 'destroy'])->name('painting.image.delete');
 
     Route::post('/users/{user}/follow', [FollowController::class, 'toggle'])->name('users.follow');

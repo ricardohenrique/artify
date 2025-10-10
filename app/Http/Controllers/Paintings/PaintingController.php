@@ -240,4 +240,52 @@ class PaintingController extends Controller
 
         return redirect($redirect)->with('status', $message);
     }
+
+    public function updatePainting(Request $request, Painting $painting)
+    {
+        if ($painting->user_id !== auth()->id()) {
+            abort(403, 'Unauthorized action.');
+        }
+
+        $isDraft = $request->input('save_type') === 'draft';
+
+        $rules = [
+            'title'       => $isDraft ? 'nullable|string|max:255' : 'required|string|max:255',
+            'images'      => 'nullable|array',
+            'images.*'    => 'image|mimes:jpg,jpeg,png,webp|max:4096',
+        ];
+
+        $validated = $request->validate($rules);
+
+        // Enforce max 3 images in total
+        $currentImageCount = $painting->images()->count();
+        $newImageCount = $request->hasFile('images') ? count($request->file('images')) : 0;
+        if (($currentImageCount + $newImageCount) > 3) {
+            return back()->withErrors([
+                'images' => 'You can upload a maximum of 3 images in total.'
+            ])->withInput();
+        }
+
+        // Upload new images
+        if ($request->hasFile('images')) {
+            foreach ($request->file('images') as $image) {
+                $path = $image->store('paintings', config('filesystems.default'));
+                $painting->images()->create(['path' => $path]);
+            }
+        }
+
+        // Update fields
+        if (array_key_exists('title', $validated)) {
+            $painting->title = $validated['title'];
+            if (!empty($validated['title'])) {
+                $painting->slug = Str::slug($validated['title'] . '-' . uniqid());
+            }
+        }
+        $painting->is_draft = $isDraft;
+
+        $painting->save();
+
+        $message = $isDraft ? 'Draft updated successfully!' : 'Painting updated!';
+        return redirect()->route('dashboard')->with('status', $message);
+    }
 }
