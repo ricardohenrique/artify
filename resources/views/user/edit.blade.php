@@ -14,35 +14,18 @@
                     <div class="bg-white rounded shadow-sm p-4 mb-4">
                         <h5 class="mb-3 fw-semibold">Edit Painting</h5>
 
-                        <!-- Existing Images (outside of the main form to avoid nested forms) -->
-                        <div class="mb-4">
-                            <label class="form-label d-block">Existing Images</label>
-                            <div class="row g-4">
-                                @forelse ($painting->images as $image)
-                                    <div class="col-md-4">
-                                        <div class="border rounded p-2 position-relative h-100 d-flex flex-column">
-                                            <div class="image-preview flex-grow-1 d-flex align-items-center justify-content-center" style="height: 200px;">
-                                                <img src="{{ \Storage::disk(config('filesystems.default'))->url($image->path) }}" class="img-fluid rounded" alt="Painting image">
-                                            </div>
-                                            <div class="mt-2">
-                                                <form method="POST" action="{{ route('painting.image.delete', $image) }}">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-outline-danger w-100">Delete</button>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
-                                @empty
-                                    <div class="col-12 text-muted">No images uploaded yet.</div>
-                                @endforelse
-                            </div>
-                        </div>
-
                         @php
                             $existingCount = $painting->images->count();
                             $remaining = max(0, 3 - $existingCount);
                         @endphp
+
+                        <!-- Hidden delete forms placed outside the main form to avoid nesting -->
+                        @foreach ($painting->images as $img)
+                            <form id="delete-image-{{ $img->id }}" method="POST" action="{{ route('painting.image.delete', $img) }}" class="d-none">
+                                @csrf
+                                @method('DELETE')
+                            </form>
+                        @endforeach
 
                         <form method="POST" action="{{ route('item.updatePainting', $painting) }}" enctype="multipart/form-data">
                             @csrf
@@ -57,30 +40,46 @@
                                 @enderror
                             </div>
 
-                            <!-- New Image Uploads (up to remaining slots) -->
-                            @if ($remaining > 0)
-                                <div class="mb-4">
-                                    <label class="form-label d-block">Add Images ({{ $remaining }} remaining, max 3 total)</label>
-                                    <div class="row g-4">
-                                        @for ($i = 1; $i <= $remaining; $i++)
-                                            <div class="col-md-4 text-center">
-                                                <label class="d-block border rounded p-3 bg-light position-relative upload-area" style="cursor: pointer;">
-                                                    <input type="file" name="images[]" accept="image/*" class="d-none image-input" data-index="{{ $i }}">
-                                                    <div class="image-preview d-flex justify-content-center align-items-center" style="height: 200px;">
-                                                        <span class="text-muted"><i class="bi bi-plus-circle-dotted"></i> Image {{ $existingCount + $i }}</span>
-                                                    </div>
-                                                </label>
+                            <!-- Combined Image Row -->
+                            <div class="mb-4">
+                                <label class="form-label d-block">Images</label>
+                                <div class="row g-4">
+
+                                    <!-- Existing Images -->
+                                    @foreach ($painting->images as $image)
+                                        <div class="col-md-4">
+                                            <div class="border rounded p-2 position-relative h-100 d-flex flex-column">
+                                                <div class="image-preview flex-grow-1 d-flex align-items-center justify-content-center" style="height: 200px;">
+                                                    <img src="{{ \Storage::disk(config('filesystems.default'))->url($image->path) }}" class="img-fluid rounded" alt="Painting image">
+                                                </div>
+                                                <div class="mt-2">
+                                                    <button type="submit" form="delete-image-{{ $image->id }}" class="btn btn-outline-danger w-100">Delete</button>
+                                                </div>
                                             </div>
-                                        @endfor
-                                    </div>
-                                    @error('images')
-                                        <div class="text-danger small mt-2">{{ $message }}</div>
-                                    @enderror
-                                    @error('images.*')
-                                        <div class="text-danger small mt-2">{{ $message }}</div>
-                                    @enderror
+                                        </div>
+                                    @endforeach
+
+                                    <!-- Remaining Upload Slots -->
+                                    @for ($i = 1; $i <= $remaining; $i++)
+                                        <div class="col-md-4 text-center">
+                                            <label class="d-block border rounded p-3 bg-light position-relative upload-area" style="cursor: pointer;">
+                                                <input type="file" name="images[]" accept="image/*" class="d-none image-input" data-index="{{ $i }}">
+                                                <div class="image-preview d-flex justify-content-center align-items-center" style="height: 200px;">
+                                                    <span class="text-muted"><i class="bi bi-plus-circle-dotted"></i> Image {{ $existingCount + $i }}</span>
+                                                </div>
+                                            </label>
+                                        </div>
+                                    @endfor
+
                                 </div>
-                            @endif
+                                @error('images')
+                                <div class="text-danger small mt-2">{{ $message }}</div>
+                                @enderror
+                                @error('images.*')
+                                <div class="text-danger small mt-2">{{ $message }}</div>
+                                @enderror
+                            </div>
+
 
                             <!-- Save Buttons -->
                             <div class="d-flex gap-3">
