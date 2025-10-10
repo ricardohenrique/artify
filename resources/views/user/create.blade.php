@@ -65,7 +65,7 @@
 }
 .upload-area:hover {
     border-color: #28f050 !important;
-    /*background-color: #dbdddf !important;*/
+    background-color: #dbdddf !important;
 }
 .image-preview img {
     max-height: 100%;
