@@ -9,7 +9,7 @@
 
         <div class="row">
             @include('partials.profile.sidebar')
-            
+
             <!-- Profile Edit Form -->
             <div class="col-md-9">
                 <div class="bg-white rounded shadow-sm p-4 mb-4">
@@ -31,7 +31,7 @@
                                     <label class="d-block border rounded p-3 bg-light position-relative upload-area" style="cursor: pointer;">
                                         <input type="file" name="images[]" accept="image/*" class="d-none image-input" data-index="{{ $i }}">
                                         <div class="image-preview d-flex justify-content-center align-items-center" style="height: 200px;">
-                                            <span class="text-muted">+ Upload Image {{ $i }}</span>
+                                            <span class="text-muted"><i class="bi bi-plus-circle-dotted"></i> Image {{ $i }}</span>
                                         </div>
                                     </label>
                                 </div>
@@ -53,10 +53,19 @@
 
 <style>
 .upload-area {
-    transition: border 0.3s;
+    transition: 0.3s!important;
+    border: 5px dashed #00d129 !important;
+}
+.upload-area div span{
+    font-size: 20px;
+}
+.upload-area div span i{
+    font-size: 40px;
+    display: block;
 }
 .upload-area:hover {
-    border-color: #0d6efd;
+    border-color: #28f050 !important;
+    /*background-color: #dbdddf !important;*/
 }
 .image-preview img {
     max-height: 100%;
