@@ -153,10 +153,6 @@
                     input.dispatchEvent(new Event('change'));
                 }
             });
-            area.addEventListener('click', function () {
-                const input = area.querySelector('.image-input');
-                if (input) input.click();
-            });
         });
     });
     </script>

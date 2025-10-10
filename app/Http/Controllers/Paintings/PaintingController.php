@@ -236,7 +236,7 @@ class PaintingController extends Controller
         $message = $isDraft ? 'Draft saved successfully!' : 'Painting published!';
         $redirect = $isDraft
             ? route('member.profile', ['id' => auth()->id()])
-            : route('dashboard');
+            : route('member.dashboard', ['id' => auth()->id()]);
 
         return redirect($redirect)->with('status', $message);
     }
@@ -286,6 +286,11 @@ class PaintingController extends Controller
         $painting->save();
 
         $message = $isDraft ? 'Draft updated successfully!' : 'Painting updated!';
-        return redirect()->route('dashboard')->with('status', $message);
+
+        $redirect = $isDraft
+            ? route('member.dashboard', ['id' => auth()->id()])
+            : route('member.dashboard', ['id' => auth()->id()]);
+
+        return redirect($redirect)->with('status', $message);
     }
 }

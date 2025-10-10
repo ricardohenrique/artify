@@ -33,7 +33,7 @@
                                             <div class="product-card p-3 h-100 border rounded">
                                                 <h5 class="mb-1">{{ $painting->title }}</h5>
                                                 <p class="text-muted mb-0">${{ number_format($painting->price, 2) }}</p>
-                                                <small class="text-muted">{{ ucfirst($painting->category->name) }}</small>
+                                                <small class="text-muted">{{ ucfirst($painting->category?->name ?? 'No category') }}</small>
                                                 <span class="badge text-bg-info mt-2">Published</span>
                                             </div>
                                         </a>
@@ -60,7 +60,7 @@
                                                     {{ $draft->price ? '$' . number_format($draft->price, 2) : 'No price set' }}
                                                 </p>
                                                 <small class="text-muted">
-                                                    {{ $draft->category->name ?? 'No category' }}
+                                                    {{ $draft->category?->name ?? 'No category' }}
                                                 </small>
                                                 <span class="badge bg-warning text-dark mt-2">Draft</span>
                                             </div>
