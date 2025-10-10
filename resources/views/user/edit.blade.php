@@ -121,7 +121,7 @@
         position: absolute;
         top: 3px;
         right: 3px;
-        border-radius: 15px;
+        border-radius: 5px;
         border: 1px solid red;
     }
     </style>
