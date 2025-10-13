@@ -19,9 +19,8 @@
                         </a>
                     </div>
 
-                    <!-- 🎨 Published Paintings -->
                     <div class="mb-5">
-                        <h4 class="mb-4">🎨 Your Published Paintings</h4>
+                        <h4 class="mb-4"><i class="bi bi-brush"></i> Your Published Paintings</h4>
 
                         @if($paintings->isEmpty())
                             <p class="text-muted">You haven't published any paintings yet.</p>
@@ -43,9 +42,8 @@
                         @endif
                     </div>
 
-                    <!-- 📝 Draft Paintings -->
                     <div>
-                        <h4 class="mb-4">📝 Drafts</h4>
+                        <h4 class="mb-4"><i class="bi bi-journal"></i> Drafts</h4>
 
                         @if($drafts->isEmpty())
                             <p class="text-muted">No drafts saved yet.</p>
