@@ -253,6 +253,7 @@ class PaintingController extends Controller
             'title'       => $isDraft ? 'nullable|string|max:255' : 'required|string|max:255',
             'images'      => 'nullable|array',
             'images.*'    => 'image|mimes:jpg,jpeg,png,webp|max:4096',
+            'category_id'   => $isDraft ? 'nullable|exists:categories,id' : 'required|exists:categories,id',
         ];
 
         $validated = $request->validate($rules);
@@ -282,6 +283,7 @@ class PaintingController extends Controller
             }
         }
         $painting->is_draft = $isDraft;
+        $painting->category_id  = $validated['category_id'] ?? $painting->category_id;
 
         $painting->save();
 

@@ -93,18 +93,23 @@
                                                 @enderror
                                             </div>
                         
-                                            <!-- Category -->
+                                            <!-- CATEGORY -->
                                             <div class="mb-4">
-                                                <label for="category_id" class="form-label">Category</label>
-                                                <select name="category_id" id="category_id" class="form-select">
+                                                <label for="category_id" class="form-label fw-semibold">Category</label>
+                                                <select name="category_id" class="form-select @error('category_id') is-invalid @enderror">
                                                     <option value="">Select a category</option>
                                                     @foreach ($categories as $category)
-                                                        <option value="{{ $category->id }}" {{ old('category_id', $painting->category_id) == $category->id ? 'selected' : '' }}>
+                                                        <option value="{{ $category->id }}"
+                                                            {{ old('category_id', $painting->category_id) == $category->id ? 'selected' : '' }}>
                                                             {{ $category->name }}
                                                         </option>
                                                     @endforeach
                                                 </select>
+                                                @error('category_id')
+                                                <div class="text-danger mt-2 small">{{ $message }}</div>
+                                                @enderror
                                             </div>
+
                                         </div>
                                     </div>
                                 </div>
