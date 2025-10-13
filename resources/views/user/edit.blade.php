@@ -89,7 +89,7 @@
                                                 <label for="title" class="form-label">Title</label>
                                                 <input type="text" name="title" id="title" class="form-control" value="{{ old('title', $painting->title) }}">
                                                 @error('title')
-                                                <div class="text-danger small mt-1">{{ $message }}</div>
+                                                    <div class="text-danger small mt-1">{{ $message }}</div>
                                                 @enderror
                                             </div>
                         
@@ -106,7 +106,16 @@
                                                     @endforeach
                                                 </select>
                                                 @error('category_id')
-                                                <div class="text-danger mt-2 small">{{ $message }}</div>
+                                                    <div class="text-danger mt-2 small">{{ $message }}</div>
+                                                @enderror
+                                            </div>
+
+                                            <div class="mb-4">
+                                                <label for="description" class="form-label fw-semibold">Description</label>
+                                                <textarea name="description" rows="4" class="form-control @error('description') is-invalid @enderror"
+                                                          placeholder="e.g. Large acrylic on canvas, signed by the artist">{{ old('description', $painting->description) }}</textarea>
+                                                @error('description')
+                                                    <div class="text-danger mt-2 small">{{ $message }}</div>
                                                 @enderror
                                             </div>
 

@@ -250,10 +250,12 @@ class PaintingController extends Controller
         $isDraft = $request->input('save_type') === 'draft';
 
         $rules = [
-            'title'       => $isDraft ? 'nullable|string|max:255' : 'required|string|max:255',
-            'images'      => 'nullable|array',
-            'images.*'    => 'image|mimes:jpg,jpeg,png,webp|max:4096',
+            'title'         => $isDraft ? 'nullable|string|max:255' : 'required|string|max:255',
+            'images'        => 'nullable|array',
+            'images.*'      => 'image|mimes:jpg,jpeg,png,webp|max:4096',
             'category_id'   => $isDraft ? 'nullable|exists:categories,id' : 'required|exists:categories,id',
+            'description'   => $isDraft ? 'nullable|string' : 'required|string',
+            'price'         => $isDraft ? 'nullable|numeric|min:0' : 'required|numeric|min:0',
         ];
 
         $validated = $request->validate($rules);
@@ -282,8 +284,10 @@ class PaintingController extends Controller
                 $painting->slug = Str::slug($validated['title'] . '-' . uniqid());
             }
         }
-        $painting->is_draft = $isDraft;
+        $painting->is_draft     = $isDraft;
         $painting->category_id  = $validated['category_id'] ?? $painting->category_id;
+        $painting->description  = $validated['description'] ?? $painting->description;
+        $painting->price        = $validated['price']       ?? $painting->price;
 
         $painting->save();
 
