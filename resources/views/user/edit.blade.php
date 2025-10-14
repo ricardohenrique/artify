@@ -37,23 +37,23 @@
                         <form method="POST" action="{{ route('item.updatePainting', $painting) }}" enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
-                        
+
                             <!-- Save Buttons on Top -->
                             <div class="d-flex justify-content-end gap-3 mb-4">
                                 <button type="submit" name="save_type" value="draft" class="btn btn-outline-secondary px-4 py-2">Save as Draft</button>
                                 <button type="submit" name="save_type" value="published" class="btn btn-primary px-4 py-2">Save</button>
                             </div>
-                        
+
                             <div class="accordion" id="paintingAccordion">
                                 <!-- Basic Info -->
-                                <div class="accordion-item">
+                                <div class="accordion-item shadow-sm">
                                     <h2 class="accordion-header" id="headingBasic">
                                         <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseBasic" aria-expanded="true">
                                             <i class="bi bi-pencil"></i> Basic Info
                                         </button>
                                     </h2>
                                     <div id="collapseBasic" class="accordion-collapse collapse show" data-bs-parent="#paintingAccordion">
-                                        <div class="accordion-body">
+                                        <div class="accordion-body ">
                                             <!-- Images -->
                                             <div class="mb-4">
                                                 <label class="form-label d-block">Images</label>
@@ -70,7 +70,7 @@
                                                             </div>
                                                         </div>
                                                     @endforeach
-                        
+
                                                     @for ($i = 1; $i <= $remaining; $i++)
                                                         <div class="col-md-4 text-center">
                                                             <label class="d-block border rounded p-3 bg-light position-relative upload-area" style="cursor: pointer;">
@@ -83,7 +83,7 @@
                                                     @endfor
                                                 </div>
                                             </div>
-                        
+
                                             <!-- Title -->
                                             <div class="mb-4">
                                                 <label for="title" class="form-label">Title</label>
@@ -92,7 +92,7 @@
                                                     <div class="text-danger small mt-1">{{ $message }}</div>
                                                 @enderror
                                             </div>
-                        
+
                                             <!-- CATEGORY -->
                                             <div class="mb-4">
                                                 <label for="category_id" class="form-label fw-semibold">Category</label>
@@ -122,9 +122,9 @@
                                         </div>
                                     </div>
                                 </div>
-                        
+
                                 <!-- Extra Info -->
-                                <div class="accordion-item">
+                                <div class="accordion-item shadow-sm">
                                     <h2 class="accordion-header" id="headingExtra">
                                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExtra">
                                             <i class="bi bi-rocket"></i> Extra Info
@@ -136,12 +136,12 @@
                                                 <label for="price" class="form-label">Price ($)</label>
                                                 <input type="number" name="price" step="0.01" class="form-control" value="{{ old('price', $painting->price) }}">
                                             </div>
-                        
+
                                             <div class="mb-4">
                                                 <label for="material" class="form-label">Material</label>
                                                 <input type="text" name="material" class="form-control" value="{{ old('material', $painting->material) }}">
                                             </div>
-                        
+
                                             <div class="mb-4">
                                                 <label for="year" class="form-label">Year of Creation</label>
                                                 <input type="number" name="year" class="form-control" value="{{ old('year', $painting->year) }}">
@@ -149,9 +149,9 @@
                                         </div>
                                     </div>
                                 </div>
-                        
+
                                 <!-- Refined Info -->
-                                <div class="accordion-item">
+                                <div class="accordion-item shadow-sm">
                                     <h2 class="accordion-header" id="headingRefined">
                                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseRefined">
                                             <i class="bi bi-star"></i> Refined Info
@@ -163,7 +163,7 @@
                                                 <label for="dimensions" class="form-label">Dimensions</label>
                                                 <input type="text" name="dimensions" class="form-control" value="{{ old('dimensions', $painting->dimensions) }}">
                                             </div>
-                        
+
                                             <div class="mb-4">
                                                 <label for="framed" class="form-label">Framed?</label>
                                                 <select name="framed" class="form-select">
@@ -172,7 +172,7 @@
                                                     <option value="0" {{ old('framed', $painting->framed) === 0 ? 'selected' : '' }}>No</option>
                                                 </select>
                                             </div>
-                        
+
                                             <div class="mb-4">
                                                 <label for="orientation" class="form-label">Orientation</label>
                                                 <select name="orientation" class="form-select">
@@ -187,7 +187,7 @@
                                 </div>
                             </div>
                         </form>
-                        
+
                     </div>
                 </div>
 
@@ -225,6 +225,52 @@
         right: 3px;
         border-radius: 5px;
         border: 1px solid red;
+    }
+
+
+    /*--accordion*/
+    .accordion-button {
+        background-color: #f8f9fa;
+        color: #333;
+        font-weight: 600;
+        border: none;
+        border-radius: 12px;
+        padding: 1rem 1.25rem;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+        transition: all 0.3s ease;
+    }
+
+    .accordion-button:not(.collapsed) {
+        background: linear-gradient(135deg, #ff7c5c, #ff4e9b);
+        color: #fff;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .accordion-button::after {
+        filter: invert(0.3);
+        transition: transform 0.3s ease;
+    }
+
+    .accordion-button:not(.collapsed)::after {
+        filter: invert(1);
+        transform: rotate(180deg);
+    }
+
+    .accordion-item {
+        border: none;
+        border-radius: 12px;
+        margin-bottom: 1rem;
+        background-color: #fff;
+        overflow: hidden;
+    }
+
+    .accordion-body {
+        padding: 1.25rem 1.5rem;
+        font-size: 15px;
+        color: #555;
+        background-color: #fdfdfd;
+        border-top: 1px solid #eee;
+        border-radius: 0 0 12px 12px;
     }
     </style>
 
