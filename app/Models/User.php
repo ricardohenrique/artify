@@ -30,6 +30,8 @@ class User extends Authenticatable
         'profile_image',
         'website_url',
         'user_type_id',
+        'gender',
+        'date_of_birth',
     ];
 
     /**
@@ -52,6 +54,7 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'date_of_birth' => 'date',
         ];
     }
 

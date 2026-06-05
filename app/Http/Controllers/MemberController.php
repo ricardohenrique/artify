@@ -117,6 +117,8 @@ class MemberController extends Controller
             'bio' => 'nullable|string|max:1000',
             'location' => 'nullable|string|max:255',
             'website_url' => 'nullable|url|max:255',
+            'gender'        => 'nullable|string|in:male,female,non_binary,prefer_not_to_say',
+            'date_of_birth' => 'nullable|date|before:today',
         ]);
         // $validated['is_public'] = $request->boolean('is_public');
 

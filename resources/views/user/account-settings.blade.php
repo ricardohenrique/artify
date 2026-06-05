@@ -53,6 +53,25 @@
                                    value="{{ old('website_url', $user->website_url) }}">
                             @error('website_url') <div class="text-danger small">{{ $message }}</div> @enderror
                         </div>
+
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold" for="gender">Gender</label>
+                            <select name="gender" id="gender" class="form-select">
+                                <option value="">Select Gender</option>
+                                <option value="male"              {{ old('gender', $user->gender) === 'male'              ? 'selected' : '' }}>Male</option>
+                                <option value="female"            {{ old('gender', $user->gender) === 'female'            ? 'selected' : '' }}>Female</option>
+                                <option value="non_binary"        {{ old('gender', $user->gender) === 'non_binary'        ? 'selected' : '' }}>Non-binary</option>
+                                <option value="prefer_not_to_say" {{ old('gender', $user->gender) === 'prefer_not_to_say' ? 'selected' : '' }}>Prefer not to say</option>
+                            </select>
+                            @error('gender') <div class="text-danger small">{{ $message }}</div> @enderror
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold" for="date_of_birth">Date of Birth</label>
+                            <input type="date" name="date_of_birth" id="date_of_birth" class="form-control"
+                                   value="{{ old('date_of_birth', $user->date_of_birth?->format('Y-m-d')) }}">
+                            @error('date_of_birth') <div class="text-danger small">{{ $message }}</div> @enderror
+                        </div>
                     </div>
 
                     {{-- Section: Address Info --}}
