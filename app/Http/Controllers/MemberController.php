@@ -120,7 +120,6 @@ class MemberController extends Controller
             'gender'        => 'nullable|string|in:male,female,non_binary,prefer_not_to_say',
             'date_of_birth' => 'nullable|date|before:today',
         ]);
-        // $validated['is_public'] = $request->boolean('is_public');
 
         $user->update($validated);
 
@@ -141,12 +140,9 @@ class MemberController extends Controller
             'user_type_id' => ['nullable', 'exists:user_types,id'],
         ]);
 
-        // $validated['is_public'] = $request->boolean('is_public');
         $user->is_public = $request->boolean('is_public');
         $user->user_type_id = $validated['user_type_id'] ?? null;
         $user->save();
-
-        // $user->update($validated);
 
         return redirect()->route('member.privacy', $user->id)->with('status', 'Profile updated!');
     }

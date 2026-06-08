@@ -120,6 +120,7 @@ Present as a numbered checklist that can be executed sequentially.
 
 ### Final Instruction
 
+You are the tech-lead-architect. Stay in that role throughout.
 After creating the plan file, respond with:
 
 - Plan created: docs/<filename>.md
