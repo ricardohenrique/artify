@@ -1,56 +1,43 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers;
 
 use App\Models\Category;
-use App\Models\Painting;
+use App\Services\CategoryService;
+use App\Services\PaintingService;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class PaintingListController extends Controller
 {
-    public function explore(Request $request, string $categorySlug = null)
+    public function __construct(
+        private readonly PaintingService $paintingService,
+        private readonly CategoryService $categoryService,
+    ) {}
+
+    public function explore(Request $request, string $categorySlug = null): View
     {
-        $categories = Category::withCount('paintings')
-            ->orderByDesc('paintings_count')
-            ->get();
+        $categories = $this->categoryService->getAllOrderedByPaintingCount();
 
         $sort = $request->input('sort', 'newest');
         $price = $request->input('price');
 
-        // Use all paintings if no category is selected
-        $query = Painting::with(['images', 'category'])
-            ->withCount('favoritedBy');
+        $category = null;
 
         if ($categorySlug) {
-            $category = Category::where('slug', $categorySlug)->firstOrFail();
-            $query->where('category_id', $category->id);
+            $category = $this->categoryService->findBySlug($categorySlug);
+
+            if (!$category) {
+                abort(404);
+            }
         }
 
-        // Apply price filter if present
-        if ($price && str_starts_with($price, 'between-')) {
-            [$from, $to] = explode('-', str_replace('between-', '', $price));
-            $query->whereBetween('price', [(float)$from, (float)$to]);
-        }
+        $paintings = $this->paintingService->getExplorePaintings($category?->id, $price, $sort);
 
-        switch ($sort) {
-            case 'liked':
-                $query->orderByDesc('favorited_by_count');
-                break;
-            case 'cheap':
-                $query->orderBy('price');
-                break;
-            case 'newest':
-            default:
-                $query->latest();
-                break;
-        }
-        $query->where('is_draft', false);
-        $paintings = $query->paginate(10)->withQueryString();
-
-        if (!isset($category)) {
-            $category = new Category([
-                'name' => 'independent artwork',
-            ]);
+        if (!$category) {
+            $category = new Category(['name' => 'independent artwork']);
         }
 
         return view('painting.list', [
@@ -61,19 +48,11 @@ class PaintingListController extends Controller
         ]);
     }
 
-    public function search(Request $request)
+    public function search(Request $request): View
     {
-        $query = $request->input('q');
+        $query = $request->input('q', '');
 
-        $paintings = Painting::with(['images', 'category'])
-                    ->withCount('favoritedBy')
-                    ->where('is_draft', false)
-                    ->where(function ($queryBuilder) use ($query) {
-                        $queryBuilder->where('title', 'like', '%' . $query . '%')
-                                    ->orWhere('description', 'like', '%' . $query . '%');
-                    })
-                    ->latest()
-                    ->paginate(10);
+        $paintings = $this->paintingService->searchPaintings($query);
 
         return view('painting.search', [
             'paintings' => $paintings,
