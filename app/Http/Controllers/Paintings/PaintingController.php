@@ -26,7 +26,7 @@ class PaintingController extends Controller
             'user' => $user,
             'painting' => new Painting(),
             'categories' => $categories,
-            'route' => route('item.store'),
+            'route' => route('painting.store'),
             'method' => 'POST',
             'isEdit' => false,
         ]);
@@ -151,7 +151,7 @@ class PaintingController extends Controller
         return view('painting.form', [
             'painting' => $painting,
             'categories' => $categories,
-            'route' => route('item.update', $painting),
+            'route' => route('painting.update', $painting),
             'method' => 'PUT',
             'isEdit' => true,
         ]);
@@ -235,7 +235,7 @@ class PaintingController extends Controller
         // Redirect user accordingly
         $message = $isDraft ? 'Draft saved successfully!' : 'Painting published!';
         $redirect = $isDraft
-            ? route('item.editPainting', ['id' => $painting])
+            ? route('painting.edit-details', ['id' => $painting])
             : route('member.dashboard', ['id' => auth()->id()]);
 
         return redirect($redirect)->with('status', $message);
@@ -294,7 +294,7 @@ class PaintingController extends Controller
         $message = $isDraft ? 'Draft updated successfully!' : 'Painting updated!';
 
         $redirect = $isDraft
-            ? route('item.editPainting', ['id' => $painting])
+            ? route('painting.edit-details', ['id' => $painting])
             : route('member.dashboard', ['id' => auth()->id()]);
 
         return redirect($redirect)->with('status', $message);

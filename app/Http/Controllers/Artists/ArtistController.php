@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Artists;
 
+use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Models\Painting;
 use App\Repositories\PaintingRepository;

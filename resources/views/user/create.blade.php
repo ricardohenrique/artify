@@ -15,7 +15,7 @@
                 <div class="bg-white rounded shadow-sm p-4 mb-4">
                     <h5 class="mb-3 fw-semibold">New Painting</h5>
 
-                    <form method="POST" action="{{ route('item.add') }}" enctype="multipart/form-data">
+                    <form method="POST" action="{{ route('painting.add') }}" enctype="multipart/form-data">
                         @csrf
 
                         <!-- Title Input -->

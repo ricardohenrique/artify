@@ -42,11 +42,11 @@
                             </li>
                         </ul>
                     </div>
-                    <a href="{{ route('item.new') }}" class="btn artify-btn">Sell now</a>
+                    <a href="{{ route('painting.create') }}" class="btn artify-btn">Sell now</a>
                 @else
                     <a href="{{ route('register') }}" class="btn artify-btn-outline me-2">Sign up</a>
                     <a href="{{ route('login') }}" class="btn artify-btn-outline me-2">Log in</a>
-                    <a href="{{ route('item.new') }}" class="btn artify-btn">Sell now</a>
+                    <a href="{{ route('painting.create') }}" class="btn artify-btn">Sell now</a>
                 @endauth
             </div>
         </div>
@@ -74,7 +74,7 @@
         <!-- Mobile menu collapse -->
         <div class="collapse d-lg-none" id="mobileMenu">
             <div class="py-3 d-lg-none border-top mobile-menu-items">
-                <a href="{{ route('item.new') }}" class="d-block text-dark">Sell now</a>
+                <a href="{{ route('painting.new') }}" class="d-block text-dark">Sell now</a>
                 @auth
                     <a href="{{ route('member.profile', Auth::user()->id) }}" class="d-block text-dark">My Profile</a>
                     <a href="{{ route('member.settings', Auth::user()->id) }}" class="d-block text-dark">Account Settings</a>

@@ -19,7 +19,7 @@
             <div class="col-md-6">
                 <div class="hero-callout-box p-5 rounded-4 shadow-lg">
                     <h2 class="fw-bold mb-4">Ready to share your art with the world?</h2>
-                    <a href="{{ route('item.new') }}" class="btn hero-cta-btn w-100 mb-3">Sell now</a>
+                    <a href="{{ route('painting.new') }}" class="btn hero-cta-btn w-100 mb-3">Sell now</a>
                     <div class="text-center">
                         <a href="{{ route('how-artify-works') }}" class="learn-link">Learn how it works</a>
                     </div>
@@ -132,7 +132,7 @@
     <div class="container">
         <h2 class="fw-bold mb-3">Are You an Artist?</h2>
         <p class="lead mb-4">Join Artify and showcase your work to thousands of art lovers.</p>
-        <a href="{{ route('item.new') }}" class="btn btn-light btn-lg fw-semibold">Start Selling</a>
+        <a href="{{ route('painting.new') }}" class="btn btn-light btn-lg fw-semibold">Start Selling</a>
     </div>
 </section>
 

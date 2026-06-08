@@ -34,7 +34,7 @@
                             </form>
                         @endforeach
 
-                        <form method="POST" action="{{ route('item.updatePainting', $painting) }}" enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('painting.update-details', $painting) }}" enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
 

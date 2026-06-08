@@ -8,7 +8,7 @@
                 <ul class="list-unstyled">
                     <li><a href="{{ route('about-us') }}" class="footer-link">About Us</a></li>
                     {{-- <li><a href="#" class="footer-link">Jobs</a></li> --}}
-                    <li><a href="{{ route('item.new') }}" class="footer-link">Sell Now</a></li>
+                    <li><a href="{{ route('painting.new') }}" class="footer-link">Sell Now</a></li>
                     <li><a href="{{ route('register') }}" class="footer-link">Register Now</a></li>
                     <li><a href="{{ route('artist.index') }}" class="footer-link">Independent Artists</a></li>
                 </ul>

@@ -19,7 +19,7 @@
                     </div>
                 @endif
 
-                <form action="{{ route('member.updatePrivacy', $user->id) }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('member.privacy.update', $user->id) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
 

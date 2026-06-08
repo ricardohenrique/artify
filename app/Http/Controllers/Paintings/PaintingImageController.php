@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Paintings;
 
+use App\Http\Controllers\Controller;
 use App\Models\PaintingImage;
 use Illuminate\Http\Request;
 

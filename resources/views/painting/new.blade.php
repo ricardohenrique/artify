@@ -8,7 +8,7 @@
 
         <h2 class="mb-4 fw-semibold">🎨 Sell an item</h2>
 
-        <form action="{{ route('item.store') }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('painting.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
 
             <!-- IMAGE UPLOAD -->
