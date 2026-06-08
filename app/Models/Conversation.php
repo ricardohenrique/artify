@@ -2,10 +2,13 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Conversation extends Model
 {
+    use HasFactory;
+
     protected $fillable = ['painting_id', 'buyer_id', 'seller_id'];
 
     public function painting()

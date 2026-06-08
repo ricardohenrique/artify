@@ -1,106 +1,73 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreMessageRequest;
 use App\Models\Conversation;
-use App\Models\Message;
 use App\Models\Painting;
-use App\Models\User;
+use App\Services\MessageService;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class MessageController extends Controller
 {
-    public function index(Request $request)
+    public function __construct(private readonly MessageService $messageService) {}
+
+    public function index(Request $request): View
     {
-        $user = auth()->user();
+        /** @var \App\Models\User $authUser */
+        $authUser = auth()->user();
 
-        $user = User::with([
-            'favorites.images', // to display painting images
-            'favorites.user',   // to show painting owner
-            'followers',
-            'following',
-        ])
-        ->withCount([
-            'followers',
-            'following',
-            'favorites',
-        ])
-        ->findOrFail($user->id);
+        $data = $this->messageService->getInboxData($authUser);
 
-        $conversations = Conversation::where('buyer_id', $user->id)
-            ->orWhere('seller_id', $user->id)
-            ->with(['painting', 'messages' => fn ($q) => $q->latest()->limit(1)])
-            ->latest('updated_at')
-            ->get();
+        $user          = $data['fullUser'];
+        $conversations = $data['conversations'];
 
         $selectedConversation = null;
 
         if ($request->has('conversation')) {
-            $selectedConversation = Conversation::with(['messages.sender', 'painting'])
-                ->where('id', $request->conversation)
-                ->where(function ($q) use ($user) {
-                    $q->where('buyer_id', $user->id)->orWhere('seller_id', $user->id);
-                })->firstOrFail();
+            $selectedConversation = $this->messageService->getSelectedConversation(
+                (int) $request->conversation,
+                $authUser
+            );
         }
 
         return view('user.messages', compact('conversations', 'selectedConversation', 'user'));
     }
 
-    public function show(Conversation $conversation)
+    public function show(Conversation $conversation): View
     {
-        $user = auth()->user();
+        /** @var \App\Models\User $authUser */
+        $authUser = auth()->user();
 
-        // Authorization: buyer or seller only
-        if ($conversation->buyer_id !== $user->id && $conversation->seller_id !== $user->id) {
-            abort(403);
-        }
-
-        $conversation->load(['messages.sender', 'painting']);
+        $conversation = $this->messageService->getConversationForUser($conversation, $authUser);
 
         return view('messages.show', compact('conversation'));
     }
 
-    public function store(Request $request)
+    public function store(StoreMessageRequest $request): RedirectResponse
     {
-        $request->validate([
-            'conversation_id' => 'required|exists:conversations,id',
-            'content' => 'required|string|max:2000',
-        ]);
+        /** @var \App\Models\User $authUser */
+        $authUser = auth()->user();
 
-        $conversation = Conversation::with(['buyer', 'seller'])->findOrFail($request->conversation_id);
-        $user = auth()->user();
+        $message = $this->messageService->sendMessage(
+            (int) $request->validated('conversation_id'),
+            $authUser,
+            (string) $request->validated('content')
+        );
 
-        // Only participants can send messages
-        if (!in_array($user->id, [$conversation->buyer_id, $conversation->seller_id])) {
-            abort(403);
-        }
-
-        // Save message
-        $message = new Message([
-            'content' => $request->input('content'),
-            'sender_id' => $user->id,
-        ]);
-
-        $conversation->messages()->save($message);
-
-        return redirect()->route('messages.index', ['conversation' => $conversation->id]);
+        return redirect()->route('messages.index', ['conversation' => $message->conversation_id]);
     }
 
-    public function ask(Painting $painting)
+    public function ask(Painting $painting): RedirectResponse
     {
-        $user = auth()->user();
-        $seller = $painting->user;
+        /** @var \App\Models\User $authUser */
+        $authUser = auth()->user();
 
-        // Prevent asking oneself
-        if ($user->id === $seller->id) {
-            return redirect()->back()->with('error', 'You cannot message yourself.');
-        }
-
-        $conversation = Conversation::firstOrCreate([
-            'painting_id' => $painting->id,
-            'buyer_id' => $user->id,
-            'seller_id' => $seller->id,
-        ]);
+        $conversation = $this->messageService->startConversation($painting, $authUser);
 
         return redirect()->route('messages.index', ['conversation' => $conversation->id]);
     }

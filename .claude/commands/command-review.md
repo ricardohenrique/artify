@@ -2,7 +2,7 @@
 agent: code-reviewer
 ---
 
-# Review Command
+# Subagent: code-reviewer Review Command
 
 Review the implementation of a plan against project architecture rules, SOLID principles, and coding conventions.
 

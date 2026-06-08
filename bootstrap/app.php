@@ -1,5 +1,7 @@
 <?php
 
+use App\Exceptions\CannotMessageSelfException;
+use App\Exceptions\NotConversationParticipantException;
 use App\Http\Middleware\HandleAppearance;
 use App\Http\Middleware\HandleInertiaRequests;
 use Illuminate\Foundation\Application;
@@ -23,5 +25,11 @@ return Application::configure(basePath: dirname(__DIR__))
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
-        //
+        $exceptions->render(function (NotConversationParticipantException $e) {
+            abort(403, $e->getMessage());
+        });
+
+        $exceptions->render(function (CannotMessageSelfException $e) {
+            return redirect()->back()->with('error', $e->getMessage());
+        });
     })->create();

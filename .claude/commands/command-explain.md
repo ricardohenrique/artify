@@ -6,7 +6,7 @@ argument-hint: <path|route|command> [mode] [-- instructions]
 agent: tech-lead-architect
 ---
 
-# Code Explain Command
+# Subagent: tech-lead-architect Code Explain Command
 
 Explain code structure, business logic, data flows, and architecture patterns for any scope — from a single file to an entire project, HTTP route, or console command.
 

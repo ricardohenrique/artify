@@ -1,8 +1,4 @@
----
-agent: code-executer
----
-
-# Implement Command
+# Subagent: code-executer Implement Command
 
 Execute an existing implementation plan.
 The command must locate and execute a plan file from the `docs/` directory.

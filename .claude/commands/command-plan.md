@@ -1,10 +1,5 @@
----
-agent: tech-lead-architect
----
+# Subagent: tech-lead-architect Plan Command
 
-# Plan Command
-
-You are the **tech-lead-architect** agent.
 Create a structured implementation plan for the requested feature or change.
 The plan must be saved inside the `docs/` folder as a Markdown file.
 
@@ -120,7 +115,6 @@ Present as a numbered checklist that can be executed sequentially.
 
 ### Final Instruction
 
-You are the agent tech-lead-architect. Stay in that role throughout.
 After creating the plan file, respond with:
 
 - Plan created: docs/<filename>.md

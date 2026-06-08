@@ -1,10 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Repositories;
 
-use App\Models\Painting;
 use App\Models\User;
-use Illuminate\Pagination\LengthAwarePaginator;
 
 class UserRepository
 {
@@ -17,8 +17,24 @@ class UserRepository
         }
     }
 
-    public function getUserById(string $id)
+    public function getUserById(string $id): User
     {
         return User::withCount(['followers', 'following'])->findOrFail($id);
+    }
+
+    public function getUserWithInboxRelations(int $id): User
+    {
+        return User::with([
+            'favorites.images',
+            'favorites.user',
+            'followers',
+            'following',
+        ])
+        ->withCount([
+            'followers',
+            'following',
+            'favorites',
+        ])
+        ->findOrFail($id);
     }
 }
