@@ -56,25 +56,13 @@ If meta-instructions provided, adjust analysis to:
 
 ## Instructions
 
-Use the `acc:refactor-coordinator` agent to perform guided refactoring:
+Execute the guided refactoring analysis directly:
 
-```
-Task tool with subagent_type="acc:refactor-coordinator"
-prompt: "Perform refactoring analysis on [PATH]. [META-INSTRUCTIONS if provided]
-
-Analysis scope:
-1. CODE SMELLS — God Class, Long Method, Primitive Obsession, Feature Envy, Data Clump
-2. SOLID VIOLATIONS — SRP, OCP, LSP, ISP, DIP
-3. READABILITY — Naming, complexity, nesting, magic values
-4. TESTABILITY — DI issues, side effects, coverage gaps
-
-Provide:
-- Prioritized issue list (Critical/High/Medium)
-- Refactoring techniques for each issue
-- Generator commands for automated fixes
-- Safety warnings and prerequisites
-- Interactive prompts for execution"
-```
+1. Read the target file(s) at the provided path.
+2. Analyze against the four categories: Code Smells, SOLID Violations, Readability, Testability.
+3. Prioritize findings as Critical, High, or Medium.
+4. Produce the structured output described in the Expected Output section below.
+5. Apply meta-instructions if provided after `--`.
 
 ## Analysis Categories
 

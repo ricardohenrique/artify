@@ -97,29 +97,15 @@ Before path validation, detect input type from the parsed input:
 2. Auto-detect mode as `quick` (unless user overrides)
 3. Skip PHP file existence check — coordinator will resolve handler
 
-## Delegation
+## Execution
 
-Delegate to the `acc:explain-coordinator` agent with all parsed parameters:
+Execute the full explanation workflow directly using the following phases:
 
-```
-Task: acc:explain-coordinator
-prompt: |
-  Explain the code for the following input:
-
-  Input: [detected input]
-  Input type: [route|command|file|directory|project]
-  Mode: [detected or auto-detected mode]
-  Meta-instructions: [if provided after --]
-
-  Execute the full explanation workflow:
-  0. Resolve — if route/command, resolve to handler file (Phase 0)
-  1. Navigate — scan structure, find entry points, detect patterns
-  2. Analyze — extract business logic, trace data flows (+ auditors for deep/onboarding)
-  3. Visualize — generate diagrams (for deep/onboarding/business modes)
-  4. Present — aggregate results using the appropriate output template
-
-  End with documentation suggestion.
-```
+1. **Resolve** — if route/command input, identify the handler file by reading `routes/web.php` or searching for the command class.
+2. **Navigate** — scan the file or directory structure, find entry points, identify patterns.
+3. **Analyze** — extract business logic, trace data flows. For `deep` and `onboarding` modes, trace across all relevant layers.
+4. **Visualize** — generate Mermaid diagrams for `deep`, `onboarding`, and `business` modes.
+5. **Present** — output the result using the appropriate template for the detected mode.
 
 ## Modes
 

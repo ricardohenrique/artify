@@ -54,6 +54,19 @@ declare(strict_types=1);
 
 ---
 
+## 3. Naming Conventions
+
+* Classes: `PascalCase` (e.g. `UserRepository`, `CreateOrderService`)
+* Methods and variables: `camelCase` (e.g. `findById`, `$orderId`)
+* Database columns and table names: `snake_case` (e.g. `created_at`, `user_orders`)
+* Constants: `UPPER_SNAKE_CASE` (e.g. `MAX_RETRY_COUNT`)
+* Interfaces: suffix with `Interface` or use a contract-style name (e.g. `UserRepositoryInterface`)
+* Exceptions: suffix with `Exception` (e.g. `InsufficientStockException`)
+* Form Requests: suffix with `Request` (e.g. `StoreArtworkRequest`)
+* Services: suffix with `Service` (e.g. `ArtworkPublishingService`)
+
+---
+
 ## 4. Architecture Rules
 
 * Keep controllers thin.
