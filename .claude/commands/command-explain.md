@@ -3,6 +3,7 @@ description: "Explain code — structure, business logic, data flows, architectu
 allowed-tools: Read, Grep, Glob, Bash, Task
 model: opus
 argument-hint: <path|route|command> [mode] [-- instructions]
+agent: tech-lead-architect
 ---
 
 # Code Explain Command

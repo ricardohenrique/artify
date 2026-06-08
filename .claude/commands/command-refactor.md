@@ -3,6 +3,7 @@ description: "Guided refactoring with analysis and pattern application. Analyzes
 allowed-tools: Read, Write, Edit, Grep, Glob, Task
 model: opus
 argument-hint: <path> [-- additional instructions]
+agent: code-executer
 ---
 
 # Guided Refactoring

@@ -1,3 +1,7 @@
+---
+agent: tech-lead-architect
+---
+
 # Plan Command
 
 Create a structured implementation plan for the requested feature or change.
