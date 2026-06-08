@@ -12,4 +12,5 @@ require __DIR__.'/paintings.php';
 require __DIR__.'/artists.php';
 require __DIR__.'/oauth.php';
 require __DIR__.'/member.php';
+require __DIR__.'/profile.php';
 require __DIR__.'/auth.php';
